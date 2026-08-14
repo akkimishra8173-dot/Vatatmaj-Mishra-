@@ -1,166 +1,1670 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akshat Study Tracker</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akshat Study Tracker</title>
 
-    <link rel="stylesheet" href="style.css">
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f5f7fb;
+  color:#172033;
+  padding-bottom:40px;
+}
+
+header{
+  background:linear-gradient(135deg,#062b63,#0b4c9c);
+  color:white;
+  padding:18px 15px;
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+.header-inner{
+  max-width:900px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width:58px;
+  height:58px;
+  border-radius:14px;
+  object-fit:cover;
+  background:white;
+}
+
+.header-title h1{
+  font-size:21px;
+}
+
+.header-title p{
+  font-size:12px;
+  opacity:.85;
+  margin-top:4px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:16px;
+}
+
+.card{
+  background:white;
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 3px 15px rgba(0,0,0,.07);
+}
+
+.card h2{
+  font-size:19px;
+  margin-bottom:14px;
+}
+
+.card h3{
+  font-size:16px;
+  margin-bottom:10px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  font-size:14px;
+  margin:12px 0 6px;
+}
+
+input,select,button{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #d5dbea;
+  font-size:15px;
+}
+
+button{
+  background:#0b4c9c;
+  color:white;
+  border:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+.btn-orange{
+  background:#f26b21;
+}
+
+.btn-green{
+  background:#16834b;
+}
+
+.btn-red{
+  background:#d94141;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.stat{
+  background:#f5f8ff;
+  border-radius:13px;
+  padding:15px;
+  text-align:center;
+}
+
+.stat .number{
+  font-size:25px;
+  font-weight:bold;
+  color:#0b4c9c;
+}
+
+.stat small{
+  color:#667085;
+}
+
+.exam-box{
+  background:linear-gradient(135deg,#0b4c9c,#062b63);
+  color:white;
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:16px;
+}
+
+.exam-box .exam-name{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.countdown{
+  font-size:30px;
+  font-weight:bold;
+  margin:8px 0;
+}
+
+.progress-bg{
+  height:12px;
+  background:#e4e8ef;
+  border-radius:20px;
+  overflow:hidden;
+  margin:8px 0 14px;
+}
+
+.progress{
+  height:100%;
+  width:0%;
+  background:#16834b;
+  border-radius:20px;
+  transition:.3s;
+}
+
+.progress.orange{
+  background:#f26b21;
+}
+
+.subject-card{
+  border:1px solid #e0e5ee;
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:12px;
+}
+
+.subject-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.subject-title{
+  font-weight:bold;
+  font-size:17px;
+}
+
+.chapter{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px;
+  border-radius:9px;
+  background:#f8f9fc;
+  margin:6px 0;
+}
+
+.chapter input{
+  width:20px;
+  height:20px;
+}
+
+.chapter.done{
+  background:#eaf8f0;
+  text-decoration:line-through;
+  color:#587060;
+}
+
+.target{
+  border-left:5px solid #f26b21;
+  background:#fff7f1;
+  padding:13px;
+  border-radius:10px;
+  margin:8px 0;
+}
+
+.target strong{
+  color:#c94e0b;
+}
+
+.streak{
+  text-align:center;
+  background:#fff4e8;
+  border-radius:14px;
+  padding:18px;
+}
+
+.streak-fire{
+  font-size:40px;
+}
+
+.streak-number{
+  font-size:30px;
+  font-weight:bold;
+  color:#e45b16;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.muted{
+  color:#667085;
+  font-size:13px;
+}
+
+.warning{
+  background:#fff3cd;
+  color:#795b00;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:12px;
+}
+
+.success{
+  background:#e9f8ef;
+  color:#126a3b;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:12px;
+}
+
+.small-btn{
+  width:auto;
+  padding:8px 12px;
+  font-size:12px;
+}
+
+.footer{
+  text-align:center;
+  color:#777;
+  font-size:12px;
+  margin-top:25px;
+}
+
+@media(max-width:600px){
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .header-title h1{
+    font-size:18px;
+  }
+
+  .logo{
+    width:50px;
+    height:50px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-    <header class="topbar">
-        <div>
-            <h1>Akshat Study Tracker</h1>
-            <p>Classes 6–12 • Track your progress</p>
+<header>
+  <div class="header-inner">
+
+    <!-- IMPORTANT:
+         Make sure your uploaded logo file has this exact name.
+    -->
+    <img
+      class="logo"
+      src="IMG_20260615_092503.jpg"
+      alt="Akshat Study Tracker Logo"
+      onerror="this.style.display='none'"
+    >
+
+    <div class="header-title">
+      <h1>Akshat Study Tracker</h1>
+      <p>Plan • Track • Complete • Improve</p>
+    </div>
+
+  </div>
+</header>
+
+<div class="container">
+
+<!-- SETUP -->
+<section id="setupSection" class="card">
+
+  <h2>🎯 Setup Your Exam</h2>
+
+  <p class="muted">
+    Pehle apni class, upcoming exam aur exam date select karo.
+  </p>
+
+  <label>Your Class</label>
+
+  <select id="classSelect">
+    <option value="">Select Class</option>
+    <option>Class 6</option>
+    <option>Class 7</option>
+    <option>Class 8</option>
+    <option>Class 9</option>
+    <option>Class 10</option>
+    <option>Class 11</option>
+    <option>Class 12</option>
+  </select>
+
+  <label>Upcoming Exam</label>
+
+  <select id="examSelect">
+    <option value="">Select Exam</option>
+    <option>UT - 1</option>
+    <option>Mid Term</option>
+    <option>UT - 2</option>
+    <option>Pre-Annual</option>
+    <option>Annual Exam</option>
+  </select>
+
+  <label>Exam Date</label>
+
+  <input type="date" id="examDate">
+
+  <label>Daily Study Time (hours)</label>
+
+  <input
+    type="number"
+    id="dailyHours"
+    min="1"
+    max="15"
+    step="0.5"
+    value="3"
+  >
+
+  <br><br>
+
+  <button onclick="saveSetup()">
+    Continue to Syllabus →
+  </button>
+
+</section>
+
+
+<!-- SYLLABUS -->
+<section id="syllabusSection" class="card hidden">
+
+  <h2>📚 Select Your Syllabus</h2>
+
+  <p class="muted">
+    Jo chapters exam mein hain unko tick karo.
+    Baad mein complete chapters ko bhi tick kar sakte ho.
+  </p>
+
+  <div id="subjectsContainer"></div>
+
+  <button class="btn-green" onclick="saveSyllabus()">
+    Save Syllabus & Open Dashboard
+  </button>
+
+</section>
+
+
+<!-- DASHBOARD -->
+<section id="dashboardSection" class="hidden">
+
+  <div class="exam-box">
+
+    <div class="exam-name" id="dashboardExam">
+      Upcoming Exam
+    </div>
+
+    <div id="dashboardClass"></div>
+
+    <div class="countdown" id="countdown">
+      --
+    </div>
+
+    <div class="muted" style="color:#dce8fa;">
+      days remaining
+    </div>
+
+  </div>
+
+
+  <!-- STATS -->
+
+  <div class="grid">
+
+    <div class="stat">
+      <div class="number" id="totalChapters">0</div>
+      <small>Syllabus Chapters</small>
+    </div>
+
+    <div class="stat">
+      <div class="number" id="completedChapters">0</div>
+      <small>Completed</small>
+    </div>
+
+    <div class="stat">
+      <div class="number" id="overallPercent">0%</div>
+      <small>Overall Progress</small>
+    </div>
+
+    <div class="stat">
+      <div class="number" id="daysLeft">0</div>
+      <small>Days Left</small>
+    </div>
+
+  </div>
+
+
+  <!-- STREAK -->
+
+  <div class="card streak">
+
+    <div class="streak-fire">🔥</div>
+
+    <div class="streak-number" id="streakNumber">
+      0
+    </div>
+
+    <div>
+      Day Streak
+    </div>
+
+    <br>
+
+    <div class="muted">
+      Last study activity:
+      <span id="lastActivity">Not started</span>
+    </div>
+
+  </div>
+
+
+  <!-- TODAY -->
+
+  <div class="card">
+
+    <h2>📅 Aaj Ka Target</h2>
+
+    <div id="todayTarget"></div>
+
+  </div>
+
+
+  <!-- PROGRESS -->
+
+  <div class="card">
+
+    <h2>📊 Overall Progress</h2>
+
+    <div class="progress-bg">
+      <div id="overallProgressBar" class="progress"></div>
+    </div>
+
+    <div id="overallText" class="muted">
+      0 of 0 chapters completed
+    </div>
+
+  </div>
+
+
+  <!-- SUBJECT PROGRESS -->
+
+  <div class="card">
+
+    <h2>📚 Subject-wise Progress</h2>
+
+    <div id="subjectProgress"></div>
+
+  </div>
+
+
+  <!-- ACTIONS -->
+
+  <div class="card">
+
+    <h2>⚙️ Tracker</h2>
+
+    <button onclick="openSyllabusEditor()">
+      ✏️ Edit Syllabus
+    </button>
+
+    <br><br>
+
+    <button class="btn-orange" onclick="resetPlanner()">
+      🔄 Reset & Create New Exam
+    </button>
+
+  </div>
+
+</section>
+
+
+<div class="footer">
+  Akshat Study Tracker • Made for focused study
+</div>
+
+</div>
+
+
+<script>
+
+const SUBJECTS = [
+  "Mathematics",
+  "Science",
+  "English",
+  "Hindi",
+  "Sanskrit",
+  "Urdu",
+  "SST"
+];
+
+
+/*
+  Generic chapter list.
+
+  You can later replace these with exact NCERT chapters
+  for each class.
+*/
+
+const CHAPTERS = {
+
+  "Mathematics":[
+    "Chapter 1",
+    "Chapter 2",
+    "Chapter 3",
+    "Chapter 4",
+    "Chapter 5",
+    "Chapter 6",
+    "Chapter 7",
+    "Chapter 8",
+    "Chapter 9",
+    "Chapter 10",
+    "Chapter 11",
+    "Chapter 12",
+    "Chapter 13",
+    "Chapter 14",
+    "Chapter 15"
+  ],
+
+  "Science":[
+    "Chapter 1",
+    "Chapter 2",
+    "Chapter 3",
+    "Chapter 4",
+    "Chapter 5",
+    "Chapter 6",
+    "Chapter 7",
+    "Chapter 8",
+    "Chapter 9",
+    "Chapter 10",
+    "Chapter 11",
+    "Chapter 12",
+    "Chapter 13",
+    "Chapter 14",
+    "Chapter 15"
+  ],
+
+  "English":[
+    "Chapter 1",
+    "Chapter 2",
+    "Chapter 3",
+    "Chapter 4",
+    "Chapter 5",
+    "Chapter 6",
+    "Chapter 7",
+    "Chapter 8",
+    "Chapter 9",
+    "Chapter 10",
+    "Chapter 11",
+    "Chapter 12"
+  ],
+
+  "Hindi":[
+    "Chapter 1",
+    "Chapter 2",
+    "Chapter 3",
+    "Chapter 4",
+    "Chapter 5",
+    "Chapter 6",
+    "Chapter 7",
+    "Chapter 8",
+    "Chapter 9",
+    "Chapter 10",
+    "Chapter 11",
+    "Chapter 12"
+  ],
+
+  "Sanskrit":[
+    "Chapter 1",
+    "Chapter 2",
+    "Chapter 3",
+    "Chapter 4",
+    "Chapter 5",
+    "Chapter 6",
+    "Chapter 7",
+    "Chapter 8",
+    "Chapter 9",
+    "Chapter 10"
+  ],
+
+  "Urdu":[
+    "Chapter 1",
+    "Chapter 2",
+    "Chapter 3",
+    "Chapter 4",
+    "Chapter 5",
+    "Chapter 6",
+    "Chapter 7",
+    "Chapter 8",
+    "Chapter 9",
+    "Chapter 10"
+  ],
+
+  "SST":[
+    "History Chapter 1",
+    "History Chapter 2",
+    "History Chapter 3",
+    "Geography Chapter 1",
+    "Geography Chapter 2",
+    "Geography Chapter 3",
+    "Civics Chapter 1",
+    "Civics Chapter 2",
+    "Civics Chapter 3",
+    "Economics Chapter 1",
+    "Economics Chapter 2",
+    "Economics Chapter 3"
+  ]
+
+};
+
+
+let data = JSON.parse(
+  localStorage.getItem("akshatStudyTracker")
+) || {
+
+  setup:null,
+
+  syllabus:{},
+
+  completed:{},
+
+  studyDates:[]
+
+};
+
+
+function saveData(){
+
+  localStorage.setItem(
+    "akshatStudyTracker",
+    JSON.stringify(data)
+  );
+
+}
+
+
+function todayString(){
+
+  const d = new Date();
+
+  return d.toISOString().split("T")[0];
+
+}
+
+
+function daysBetween(date1,date2){
+
+  const a = new Date(date1);
+  const b = new Date(date2);
+
+  const diff =
+    b.getTime() - a.getTime();
+
+  return Math.ceil(
+    diff / (1000*60*60*24)
+  );
+
+}
+
+
+/* SETUP */
+
+function saveSetup(){
+
+  const cls =
+    document.getElementById("classSelect").value;
+
+  const exam =
+    document.getElementById("examSelect").value;
+
+  const date =
+    document.getElementById("examDate").value;
+
+  const hours =
+    Number(
+      document.getElementById("dailyHours").value
+    );
+
+  if(!cls || !exam || !date){
+
+    alert(
+      "Please class, exam aur exam date select karo."
+    );
+
+    return;
+
+  }
+
+  if(new Date(date) < new Date(todayString())){
+
+    alert(
+      "Exam date future ki honi chahiye."
+    );
+
+    return;
+
+  }
+
+  data.setup = {
+
+    class:cls,
+
+    exam:exam,
+
+    examDate:date,
+
+    dailyHours:hours || 3
+
+  };
+
+  saveData();
+
+  renderSyllabus();
+
+}
+
+
+/* SYLLABUS */
+
+function renderSyllabus(){
+
+  document
+    .getElementById("setupSection")
+    .classList.add("hidden");
+
+  document
+    .getElementById("syllabusSection")
+    .classList.remove("hidden");
+
+  const container =
+    document.getElementById(
+      "subjectsContainer"
+    );
+
+  container.innerHTML = "";
+
+  SUBJECTS.forEach(subject=>{
+
+    const selected =
+      data.syllabus[subject] || [];
+
+    const card =
+      document.createElement("div");
+
+    card.className = "subject-card";
+
+    let html = `
+
+      <div class="subject-header">
+
+        <div class="subject-title">
+          ${subject}
         </div>
 
-        <button id="themeBtn">🌙</button>
-    </header>
+        <button
+          class="small-btn"
+          onclick="toggleSubject('${subject}')"
+        >
+          Select All
+        </button>
 
-    <main>
+      </div>
 
-        <!-- CLASS SELECT -->
-        <section class="card">
-            <h2>🎓 Select Your Class</h2>
+    `;
 
-            <select id="classSelect">
-                <option value="6">Class 6</option>
-                <option value="7">Class 7</option>
-                <option value="8">Class 8</option>
-                <option value="9" selected>Class 9</option>
-                <option value="10">Class 10</option>
-                <option value="11">Class 11</option>
-                <option value="12">Class 12</option>
-            </select>
-        </section>
+    CHAPTERS[subject].forEach((chapter,index)=>{
 
+      const id =
+        "syllabus_" +
+        subject.replace(/\s/g,"_") +
+        "_" +
+        index;
 
-        <!-- STATS -->
-        <section class="stats">
+      const checked =
+        selected.includes(chapter)
+          ? "checked"
+          : "";
 
-            <div class="statCard">
-                <span>🔥</span>
-                <h3 id="currentStreak">0</h3>
-                <p>Current Streak</p>
-            </div>
+      html += `
 
-            <div class="statCard">
-                <span>🏆</span>
-                <h3 id="longestStreak">0</h3>
-                <p>Longest Streak</p>
-            </div>
+        <label class="chapter">
 
-            <div class="statCard">
-                <span>📅</span>
-                <h3 id="studyDays">0</h3>
-                <p>Study Days</p>
-            </div>
+          <input
+            type="checkbox"
+            id="${id}"
+            data-subject="${subject}"
+            value="${chapter}"
+            ${checked}
+          >
 
-            <div class="statCard">
-                <span>📊</span>
-                <h3 id="overallProgress">0%</h3>
-                <p>Overall Progress</p>
-            </div>
+          <span>
+            ${chapter}
+          </span>
 
-        </section>
+        </label>
 
+      `;
 
-        <!-- TODAY -->
-        <section class="card">
+    });
 
-            <div class="sectionTitle">
-                <div>
-                    <h2>📚 Today's Study</h2>
-                    <p id="todayDate"></p>
-                </div>
+    card.innerHTML = html;
 
-                <div class="goalBox">
-                    <span id="completedCount">0</span>/<span id="totalCount">0</span>
-                </div>
-            </div>
+    container.appendChild(card);
 
-            <div id="taskList"></div>
+  });
 
-            <button class="addBtn" id="addTaskBtn">
-                + Add Study Task
-            </button>
-
-        </section>
+}
 
 
-        <!-- PROGRESS -->
-        <section class="card">
+function toggleSubject(subject){
 
-            <h2>📈 Progress</h2>
+  const inputs =
+    document.querySelectorAll(
+      `input[data-subject="${subject}"]`
+    );
 
-            <div class="progressContainer">
-                <div class="progressBar">
-                    <div id="progressFill"></div>
-                </div>
+  const allChecked =
+    [...inputs].every(i=>i.checked);
 
-                <strong id="progressText">0%</strong>
-            </div>
+  inputs.forEach(i=>{
+    i.checked = !allChecked;
+  });
 
-        </section>
-
-
-        <!-- SUBJECTS -->
-        <section class="card">
-
-            <h2>📚 Subject Progress</h2>
-
-            <div id="subjectProgress"></div>
-
-        </section>
+}
 
 
-        <!-- CALENDAR -->
-        <section class="card">
+function saveSyllabus(){
 
-            <h2>🗓️ Study Calendar</h2>
+  data.syllabus = {};
 
-            <div id="calendar"></div>
+  data.completed = data.completed || {};
 
-        </section>
+  SUBJECTS.forEach(subject=>{
 
-    </main>
+    const inputs =
+      document.querySelectorAll(
+        `input[data-subject="${subject}"]`
+      );
+
+    data.syllabus[subject] =
+      [...inputs]
+      .filter(i=>i.checked)
+      .map(i=>i.value);
+
+  });
 
 
-    <!-- ADD TASK POPUP -->
-    <div id="taskModal" class="modal">
+  const total =
+    Object.values(data.syllabus)
+    .reduce(
+      (sum,arr)=>sum+arr.length,
+      0
+    );
 
-        <div class="modalBox">
 
-            <h2>➕ Add Study Task</h2>
+  if(total === 0){
 
-            <input
-                id="taskInput"
-                type="text"
-                placeholder="Enter chapter / task"
-            >
+    alert(
+      "Kam se kam ek chapter select karo."
+    );
 
-            <select id="subjectInput">
-                <option>Maths</option>
-                <option>Science</option>
-                <option>English</option>
-                <option>Hindi</option>
-                <option>SST</option>
-                <option>Other</option>
-            </select>
+    return;
 
-            <div class="modalButtons">
-                <button id="saveTask">Save</button>
-                <button id="closeModal">Cancel</button>
-            </div>
+  }
 
-        </div>
+
+  saveData();
+
+  showDashboard();
+
+}
+
+
+/* DASHBOARD */
+
+function showDashboard(){
+
+  document
+    .getElementById("setupSection")
+    .classList.add("hidden");
+
+  document
+    .getElementById("syllabusSection")
+    .classList.add("hidden");
+
+  document
+    .getElementById("dashboardSection")
+    .classList.remove("hidden");
+
+  renderDashboard();
+
+}
+
+
+function renderDashboard(){
+
+  if(!data.setup) return;
+
+  document.getElementById(
+    "dashboardExam"
+  ).textContent =
+    data.setup.exam;
+
+  document.getElementById(
+    "dashboardClass"
+  ).textContent =
+    data.setup.class;
+
+
+  updateCountdown();
+
+  updateStats();
+
+  updateTodayTarget();
+
+  updateSubjectProgress();
+
+  updateStreak();
+
+}
+
+
+/* COUNTDOWN */
+
+function updateCountdown(){
+
+  const today =
+    new Date(todayString());
+
+  const exam =
+    new Date(data.setup.examDate);
+
+  const diff =
+    Math.ceil(
+      (exam-today) /
+      (1000*60*60*24)
+    );
+
+  const days =
+    Math.max(0,diff);
+
+  document.getElementById(
+    "countdown"
+  ).textContent =
+    days;
+
+  document.getElementById(
+    "daysLeft"
+  ).textContent =
+    days;
+
+}
+
+
+/* STATS */
+
+function getAllSelected(){
+
+  let result=[];
+
+  SUBJECTS.forEach(subject=>{
+
+    const chapters =
+      data.syllabus[subject] || [];
+
+    chapters.forEach(chapter=>{
+
+      result.push({
+        subject,
+        chapter
+      });
+
+    });
+
+  });
+
+  return result;
+
+}
+
+
+function isCompleted(subject,chapter){
+
+  return (
+    data.completed?.[subject]?.includes(chapter)
+  );
+
+}
+
+
+function updateStats(){
+
+  const all =
+    getAllSelected();
+
+  const total =
+    all.length;
+
+  const completed =
+    all.filter(x=>
+      isCompleted(
+        x.subject,
+        x.chapter
+      )
+    ).length;
+
+  const percent =
+    total === 0
+      ? 0
+      : Math.round(
+          completed / total * 100
+        );
+
+  document.getElementById(
+    "totalChapters"
+  ).textContent = total;
+
+  document.getElementById(
+    "completedChapters"
+  ).textContent = completed;
+
+  document.getElementById(
+    "overallPercent"
+  ).textContent =
+    percent + "%";
+
+  document.getElementById(
+    "overallProgressBar"
+  ).style.width =
+    percent + "%";
+
+  document.getElementById(
+    "overallText"
+  ).textContent =
+    `${completed} of ${total} chapters completed`;
+
+}
+
+
+/* TODAY TARGET */
+
+function updateTodayTarget(){
+
+  const box =
+    document.getElementById(
+      "todayTarget"
+    );
+
+  const all =
+    getAllSelected();
+
+  const remaining =
+    all.filter(x=>
+      !isCompleted(
+        x.subject,
+        x.chapter
+      )
+    );
+
+
+  if(remaining.length === 0){
+
+    box.innerHTML = `
+
+      <div class="success">
+        🎉 Excellent! Exam syllabus complete!
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const today =
+    new Date(todayString());
+
+  const exam =
+    new Date(data.setup.examDate);
+
+  let days =
+    Math.ceil(
+      (exam-today) /
+      (1000*60*60*24)
+    );
+
+  days =
+    Math.max(1,days);
+
+
+  const dailyHours =
+    Number(
+      data.setup.dailyHours
+    ) || 3;
+
+  const dailyMinutes =
+    Math.round(
+      dailyHours * 60
+    );
+
+
+  /*
+    Calculate chapters required per day.
+  */
+
+  const chaptersToday =
+    Math.max(
+      1,
+      Math.ceil(
+        remaining.length / days
+      )
+    );
+
+
+  /*
+    Pick chapters from different subjects
+    as much as possible.
+  */
+
+  const selected = [];
+
+  const subjectQueues = {};
+
+  SUBJECTS.forEach(subject=>{
+
+    subjectQueues[subject] =
+      remaining.filter(
+        x=>x.subject===subject
+      );
+
+  });
+
+
+  let safety=0;
+
+  while(
+    selected.length < chaptersToday &&
+    safety < 1000
+  ){
+
+    let added=false;
+
+    for(const subject of SUBJECTS){
+
+      const item =
+        subjectQueues[subject].shift();
+
+      if(item){
+
+        selected.push(item);
+
+        added=true;
+
+      }
+
+      if(
+        selected.length >=
+        chaptersToday
+      ) break;
+
+    }
+
+    if(!added) break;
+
+    safety++;
+
+  }
+
+
+  const minutesPerChapter =
+    Math.max(
+      20,
+      Math.floor(
+        dailyMinutes /
+        selected.length
+      )
+    );
+
+
+  let html = `
+
+    <div class="warning">
+
+      📌 <strong>${selected.length}</strong>
+      chapter(s) planned today.
+
+      <br>
+
+      ⏱️ Around
+      <strong>${dailyMinutes} minutes</strong>
+      available today.
 
     </div>
 
+  `;
 
-    <script src="script.js"></script>
+
+  selected.forEach(item=>{
+
+    html += `
+
+      <div class="target">
+
+        <strong>
+          ${item.subject}
+        </strong>
+
+        <br>
+
+        📖 ${item.chapter}
+
+        <br>
+
+        ⏱️ Target:
+        ${minutesPerChapter} minutes
+
+      </div>
+
+    `;
+
+  });
+
+
+  html += `
+
+    <button
+      class="btn-green"
+      onclick="markTodayActivity()"
+    >
+      ✅ Today's Study Done
+    </button>
+
+  `;
+
+
+  box.innerHTML = html;
+
+}
+
+
+/* COMPLETE CHAPTER */
+
+function toggleComplete(subject,chapter){
+
+  if(!data.completed[subject]){
+
+    data.completed[subject]=[];
+
+  }
+
+
+  const arr =
+    data.completed[subject];
+
+  const index =
+    arr.indexOf(chapter);
+
+
+  if(index >= 0){
+
+    arr.splice(index,1);
+
+  }else{
+
+    arr.push(chapter);
+
+    markStudyDate();
+
+  }
+
+
+  saveData();
+
+  renderDashboard();
+
+}
+
+
+/* SUBJECT PROGRESS */
+
+function updateSubjectProgress(){
+
+  const container =
+    document.getElementById(
+      "subjectProgress"
+    );
+
+  container.innerHTML = "";
+
+
+  SUBJECTS.forEach(subject=>{
+
+    const chapters =
+      data.syllabus[subject] || [];
+
+    if(chapters.length === 0)
+      return;
+
+
+    const completed =
+      chapters.filter(
+        c=>isCompleted(subject,c)
+      ).length;
+
+
+    const percent =
+      Math.round(
+        completed /
+        chapters.length *
+        100
+      );
+
+
+    const div =
+      document.createElement("div");
+
+    div.className =
+      "subject-card";
+
+
+    let html = `
+
+      <div class="subject-header">
+
+        <div class="subject-title">
+          ${subject}
+        </div>
+
+        <div>
+          ${completed}/${chapters.length}
+        </div>
+
+      </div>
+
+      <div class="progress-bg">
+
+        <div
+          class="progress"
+          style="width:${percent}%"
+        ></div>
+
+      </div>
+
+    `;
+
+
+    chapters.forEach(chapter=>{
+
+      const done =
+        isCompleted(
+          subject,
+          chapter
+        );
+
+
+      html += `
+
+        <label
+          class="chapter ${done ? "done" : ""}"
+        >
+
+          <input
+            type="checkbox"
+            ${done ? "checked" : ""}
+            onchange="
+              toggleComplete(
+                '${escapeQuote(subject)}',
+                '${escapeQuote(chapter)}'
+              )
+            "
+          >
+
+          <span>
+            ${chapter}
+          </span>
+
+        </label>
+
+      `;
+
+    });
+
+
+    div.innerHTML=html;
+
+    container.appendChild(div);
+
+  });
+
+}
+
+
+function escapeQuote(text){
+
+  return text
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
+
+}
+
+
+/* STREAK */
+
+function markStudyDate(){
+
+  const today =
+    todayString();
+
+  if(!data.studyDates)
+    data.studyDates=[];
+
+
+  if(
+    !data.studyDates.includes(today)
+  ){
+
+    data.studyDates.push(today);
+
+  }
+
+
+  saveData();
+
+}
+
+
+function markTodayActivity(){
+
+  markStudyDate();
+
+  alert(
+    "🔥 Today's study activity saved!"
+  );
+
+  updateStreak();
+
+}
+
+
+function updateStreak(){
+
+  const dates =
+    (data.studyDates || [])
+    .slice()
+    .sort()
+    .reverse();
+
+
+  if(dates.length === 0){
+
+    document.getElementById(
+      "streakNumber"
+    ).textContent=0;
+
+    document.getElementById(
+      "lastActivity"
+    ).textContent="Not started";
+
+    return;
+
+  }
+
+
+  let streak=0;
+
+  let checkDate =
+    new Date(todayString());
+
+
+  /*
+    If today isn't completed,
+    start checking from yesterday.
+  */
+
+  if(
+    !dates.includes(
+      todayString()
+    )
+  ){
+
+    checkDate.setDate(
+      checkDate.getDate()-1
+    );
+
+  }
+
+
+  while(true){
+
+    const key =
+      checkDate
+      .toISOString()
+      .split("T")[0];
+
+
+    if(
+      dates.includes(key)
+    ){
+
+      streak++;
+
+      checkDate.setDate(
+        checkDate.getDate()-1
+      );
+
+    }else{
+
+      break;
+
+    }
+
+  }
+
+
+  document.getElementById(
+    "streakNumber"
+  ).textContent =
+    streak;
+
+
+  document.getElementById(
+    "lastActivity"
+  ).textContent =
+    dates[0];
+
+}
+
+
+/* EDIT SYLLABUS */
+
+function openSyllabusEditor(){
+
+  document
+    .getElementById(
+      "dashboardSection"
+    )
+    .classList.add("hidden");
+
+  renderSyllabus();
+
+}
+
+
+function resetPlanner(){
+
+  const yes =
+    confirm(
+      "Reset karne par current exam planner delete ho jayega. Continue?"
+    );
+
+  if(!yes) return;
+
+  localStorage.removeItem(
+    "akshatStudyTracker"
+  );
+
+  location.reload();
+
+}
+
+
+/* INITIAL LOAD */
+
+function loadApp(){
+
+  if(!data.setup){
+
+    document
+      .getElementById(
+        "setupSection"
+      )
+      .classList.remove("hidden");
+
+    return;
+
+  }
+
+
+  const total =
+    getAllSelected().length;
+
+
+  if(total === 0){
+
+    renderSyllabus();
+
+  }else{
+
+    showDashboard();
+
+  }
+
+}
+
+
+loadApp();
+
+</script>
 
 </body>
-            </html>
+</html>
