@@ -1,10 +1,364 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f7fb;
+* {
+    box-sizing: border-box;
 }
 
-h1 {
-    text-align: center;
-    margin-top: 50px;
+:root {
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --text: #172033;
+    --muted: #697386;
+    --primary: #5b5ce2;
+    --border: #e7eaf1;
+    --shadow: 0 8px 25px rgba(25, 35, 60, 0.08);
 }
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.topbar {
+    background: linear-gradient(135deg, #5b5ce2, #7a4de8);
+    color: white;
+    padding: 22px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 23px;
+}
+
+.topbar p {
+    margin: 6px 0 0;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+#themeBtn {
+    border: 0;
+    background: rgba(255,255,255,0.18);
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-size: 19px;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 18px;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+}
+
+.card h2 {
+    margin: 0 0 14px;
+    font-size: 19px;
+}
+
+.card p {
+    color: var(--muted);
+}
+
+select,
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card);
+    color: var(--text);
+    font-size: 15px;
+    outline: none;
+}
+
+select:focus,
+input:focus {
+    border-color: var(--primary);
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.statCard {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 15px 10px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.statCard span {
+    font-size: 24px;
+}
+
+.statCard h3 {
+    margin: 7px 0 2px;
+    font-size: 22px;
+}
+
+.statCard p {
+    margin: 0;
+    font-size: 11px;
+}
+
+.sectionTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sectionTitle h2 {
+    margin-bottom: 4px;
+}
+
+.goalBox {
+    background: #eeeefe;
+    color: var(--primary);
+    padding: 9px 13px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    margin-bottom: 9px;
+}
+
+.task input {
+    width: 20px;
+    height: 20px;
+}
+
+.taskText {
+    flex: 1;
+}
+
+.taskText strong {
+    display: block;
+    font-size: 14px;
+}
+
+.taskText small {
+    color: var(--muted);
+}
+
+.completed strong {
+    text-decoration: line-through;
+    opacity: 0.55;
+}
+
+.addBtn,
+.modalButtons button {
+    border: 0;
+    border-radius: 12px;
+    padding: 12px 16px;
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+}
+
+.addBtn {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.progressContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.progressBar {
+    height: 13px;
+    background: #e9ebf2;
+    border-radius: 20px;
+    overflow: hidden;
+    flex: 1;
+}
+
+#progressFill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #5b5ce2, #7a4de8);
+    border-radius: 20px;
+    transition: width 0.4s;
+}
+
+#subjectProgress > div {
+    margin-bottom: 15px;
+}
+
+.subjectHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.subjectBar {
+    height: 9px;
+    background: #e9ebf2;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.subjectFill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 20px;
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.day {
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9px;
+    background: #f0f2f6;
+    font-size: 12px;
+}
+
+.day.active {
+    background: #5b5ce2;
+    color: white;
+}
+
+.day.today {
+    border: 2px solid var(--primary);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10;
+}
+
+.modalBox {
+    background: var(--card);
+    width: 100%;
+    max-width: 400px;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.modalBox h2 {
+    margin-top: 0;
+}
+
+.modalBox input,
+.modalBox select {
+    margin-bottom: 12px;
+}
+
+.modalButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.modalButtons button {
+    flex: 1;
+}
+
+#closeModal {
+    background: #777;
+}
+
+body.dark {
+    --bg: #10121a;
+    --card: #191c27;
+    --text: #f4f5fa;
+    --muted: #a6adbd;
+    --border: #2b3040;
+    --shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+body.dark .goalBox {
+    background: #272754;
+}
+
+body.dark .day {
+    background: #242936;
+}
+
+body.dark .progressBar,
+body.dark .subjectBar {
+    background: #2b3040;
+}
+
+@media (max-width: 650px) {
+
+    main {
+        padding: 12px;
+    }
+
+    .topbar {
+        padding: 18px 14px;
+    }
+
+    .topbar h1 {
+        font-size: 20px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 9px;
+    }
+
+    .statCard {
+        padding: 13px 8px;
+    }
+
+    .statCard h3 {
+        font-size: 20px;
+    }
+
+    .card {
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    #calendar {
+        gap: 4px;
+    }
+
+    .day {
+        min-height: 35px;
+        font-size: 11px;
+    }
+    }
