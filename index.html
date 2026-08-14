@@ -1,9 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akshat Study Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Akshat Study Tracker</h1>
+
+    <header class="topbar">
+        <div>
+            <h1>Akshat Study Tracker</h1>
+            <p>Classes 6–12 • Track your progress</p>
+        </div>
+
+        <button id="themeBtn">🌙</button>
+    </header>
+
+    <main>
+
+        <!-- CLASS SELECT -->
+        <section class="card">
+            <h2>🎓 Select Your Class</h2>
+
+            <select id="classSelect">
+                <option value="6">Class 6</option>
+                <option value="7">Class 7</option>
+                <option value="8">Class 8</option>
+                <option value="9" selected>Class 9</option>
+                <option value="10">Class 10</option>
+                <option value="11">Class 11</option>
+                <option value="12">Class 12</option>
+            </select>
+        </section>
+
+
+        <!-- STATS -->
+        <section class="stats">
+
+            <div class="statCard">
+                <span>🔥</span>
+                <h3 id="currentStreak">0</h3>
+                <p>Current Streak</p>
+            </div>
+
+            <div class="statCard">
+                <span>🏆</span>
+                <h3 id="longestStreak">0</h3>
+                <p>Longest Streak</p>
+            </div>
+
+            <div class="statCard">
+                <span>📅</span>
+                <h3 id="studyDays">0</h3>
+                <p>Study Days</p>
+            </div>
+
+            <div class="statCard">
+                <span>📊</span>
+                <h3 id="overallProgress">0%</h3>
+                <p>Overall Progress</p>
+            </div>
+
+        </section>
+
+
+        <!-- TODAY -->
+        <section class="card">
+
+            <div class="sectionTitle">
+                <div>
+                    <h2>📚 Today's Study</h2>
+                    <p id="todayDate"></p>
+                </div>
+
+                <div class="goalBox">
+                    <span id="completedCount">0</span>/<span id="totalCount">0</span>
+                </div>
+            </div>
+
+            <div id="taskList"></div>
+
+            <button class="addBtn" id="addTaskBtn">
+                + Add Study Task
+            </button>
+
+        </section>
+
+
+        <!-- PROGRESS -->
+        <section class="card">
+
+            <h2>📈 Progress</h2>
+
+            <div class="progressContainer">
+                <div class="progressBar">
+                    <div id="progressFill"></div>
+                </div>
+
+                <strong id="progressText">0%</strong>
+            </div>
+
+        </section>
+
+
+        <!-- SUBJECTS -->
+        <section class="card">
+
+            <h2>📚 Subject Progress</h2>
+
+            <div id="subjectProgress"></div>
+
+        </section>
+
+
+        <!-- CALENDAR -->
+        <section class="card">
+
+            <h2>🗓️ Study Calendar</h2>
+
+            <div id="calendar"></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ADD TASK POPUP -->
+    <div id="taskModal" class="modal">
+
+        <div class="modalBox">
+
+            <h2>➕ Add Study Task</h2>
+
+            <input
+                id="taskInput"
+                type="text"
+                placeholder="Enter chapter / task"
+            >
+
+            <select id="subjectInput">
+                <option>Maths</option>
+                <option>Science</option>
+                <option>English</option>
+                <option>Hindi</option>
+                <option>SST</option>
+                <option>Other</option>
+            </select>
+
+            <div class="modalButtons">
+                <button id="saveTask">Save</button>
+                <button id="closeModal">Cancel</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
 </body>
-</html>
+            </html>
