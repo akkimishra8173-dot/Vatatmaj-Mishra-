@@ -3,543 +3,702 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Akshat Study Tracker</title>
+<meta name="theme-color" content="#0b7fab">
+<title>Akshnat Study Tracker</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+:root{
+--bg:#f4f6f8;--card:#fff;--text:#101a2c;--muted:#667085;
+--blue:#087fb2;--green:#16a673;--red:#d83c3c;--line:#d7dde5
 }
+*{box-sizing:border-box}
 
 body{
-  font-family:Arial,sans-serif;
-  background:#f5f7fb;
-  color:#172033;
-  padding-bottom:40px;
+margin:0;background:var(--bg);color:var(--text);
+font-family:Arial,Helvetica,sans-serif;font-weight:600
+}
+
+button,select,input{font:inherit}
+button{cursor:pointer}
+
+.app{
+max-width:760px;margin:auto;min-height:100vh;
+padding-bottom:82px
 }
 
 header{
-  background:linear-gradient(135deg,#062b63,#0b4c9c);
-  color:white;
-  padding:18px 15px;
-  position:sticky;
-  top:0;
-  z-index:10;
-  box-shadow:0 3px 12px rgba(0,0,0,.15);
+position:sticky;top:0;z-index:10;
+background:rgba(255,255,255,.97);
+border-bottom:1px solid var(--line);
+padding:12px 14px;display:flex;gap:10px;
+align-items:center
 }
 
-.header-inner{
-  max-width:900px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  gap:12px;
+.brand{
+display:flex;align-items:center;gap:9px;
+min-width:150px
 }
 
-.logo{
-  width:58px;
-  height:58px;
-  border-radius:14px;
-  object-fit:cover;
-  background:white;
+.brand b{
+font-size:18px;line-height:1.05
 }
 
-.header-title h1{
-  font-size:21px;
+.pill,.select{
+border:1px solid var(--line);
+background:#fff;border-radius:14px;padding:12px
 }
 
-.header-title p{
-  font-size:12px;
-  opacity:.85;
-  margin-top:4px;
+.select{
+flex:1;min-width:0
 }
 
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:16px;
-}
+main{padding:18px 14px}
+
+.screen{display:none}
+.screen.active{display:block}
 
 .card{
-  background:white;
-  border-radius:16px;
-  padding:18px;
-  margin-bottom:16px;
-  box-shadow:0 3px 15px rgba(0,0,0,.07);
+background:var(--card);
+border:1px solid var(--line);
+border-radius:22px;padding:18px;margin-bottom:16px;
+box-shadow:0 2px 10px rgba(15,30,50,.04)
 }
 
-.card h2{
-  font-size:19px;
-  margin-bottom:14px;
+h1{font-size:30px;margin:6px 0 8px}
+h2{font-size:24px;margin:8px 0 14px}
+h3{margin:0 0 8px}
+
+.sub{
+color:var(--muted);
+font-weight:500;
+line-height:1.45
 }
 
-.card h3{
-  font-size:16px;
-  margin-bottom:10px;
+.badge{
+display:inline-block;
+border:1px solid #8dd9bc;
+color:var(--green);
+background:#effbf6;
+border-radius:18px;
+padding:8px 13px
 }
 
-label{
-  display:block;
-  font-weight:bold;
-  font-size:14px;
-  margin:12px 0 6px;
-}
-
-input,select,button{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #d5dbea;
-  font-size:15px;
-}
-
-button{
-  background:#0b4c9c;
-  color:white;
-  border:none;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-button:active{
-  transform:scale(.98);
-}
-
-.btn-orange{
-  background:#f26b21;
-}
-
-.btn-green{
-  background:#16834b;
-}
-
-.btn-red{
-  background:#d94141;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.stat{
-  background:#f5f8ff;
-  border-radius:13px;
-  padding:15px;
-  text-align:center;
-}
-
-.stat .number{
-  font-size:25px;
-  font-weight:bold;
-  color:#0b4c9c;
-}
-
-.stat small{
-  color:#667085;
-}
-
-.exam-box{
-  background:linear-gradient(135deg,#0b4c9c,#062b63);
-  color:white;
-  border-radius:16px;
-  padding:18px;
-  margin-bottom:16px;
-}
-
-.exam-box .exam-name{
-  font-size:22px;
-  font-weight:bold;
-}
-
-.countdown{
-  font-size:30px;
-  font-weight:bold;
-  margin:8px 0;
-}
-
-.progress-bg{
-  height:12px;
-  background:#e4e8ef;
-  border-radius:20px;
-  overflow:hidden;
-  margin:8px 0 14px;
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px
 }
 
 .progress{
-  height:100%;
-  width:0%;
-  background:#16834b;
-  border-radius:20px;
-  transition:.3s;
+height:13px;
+background:#dfe5ec;
+border-radius:20px;
+overflow:hidden
 }
 
-.progress.orange{
-  background:#f26b21;
+.bar{
+height:100%;
+background:var(--blue);
+border-radius:20px
 }
 
-.subject-card{
-  border:1px solid #e0e5ee;
-  border-radius:14px;
-  padding:14px;
-  margin-bottom:12px;
+.circle{
+width:118px;height:118px;
+border-radius:50%;
+display:grid;place-items:center;
+margin:12px auto;
+background:conic-gradient(
+var(--blue) var(--p),
+#dce3eb 0
+);
+position:relative
 }
 
-.subject-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
+.circle:after{
+content:"";
+position:absolute;
+width:88px;height:88px;
+background:white;
+border-radius:50%
 }
 
-.subject-title{
-  font-weight:bold;
-  font-size:17px;
+.circle span{
+z-index:1;
+font-size:25px
 }
 
-.chapter{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:9px;
-  border-radius:9px;
-  background:#f8f9fc;
-  margin:6px 0;
+.focus-item,.chapter{
+border:1px solid var(--line);
+border-radius:17px;
+padding:15px;
+margin-top:10px;
+background:#f8fafc
 }
 
-.chapter input{
-  width:20px;
-  height:20px;
+.focus-item small,.chapter small{
+display:block;
+color:var(--muted);
+font-weight:500;
+margin-top:4px
 }
 
-.chapter.done{
-  background:#eaf8f0;
-  text-decoration:line-through;
-  color:#587060;
+.check{
+width:27px;height:27px;
+border-radius:50%;
+border:2px solid #c8d1dc;
+background:#edf1f5;
+display:grid;
+place-items:center;
+flex:none
 }
 
-.target{
-  border-left:5px solid #f26b21;
-  background:#fff7f1;
-  padding:13px;
-  border-radius:10px;
-  margin:8px 0;
+.check.done{
+background:var(--green);
+border-color:#0d8f64;
+color:white
 }
 
-.target strong{
-  color:#c94e0b;
+.check.done:after{
+content:"✓"
 }
 
-.streak{
-  text-align:center;
-  background:#fff4e8;
-  border-radius:14px;
-  padding:18px;
+.tabs{
+display:flex;
+gap:8px;
+margin-bottom:14px
 }
 
-.streak-fire{
-  font-size:40px;
+.tabs button{
+flex:1;
+padding:12px 7px;
+border-radius:15px;
+border:1px solid var(--line);
+background:#f4f6f8
 }
 
-.streak-number{
-  font-size:30px;
-  font-weight:bold;
-  color:#e45b16;
+.tabs button.on{
+background:var(--blue);
+color:#fff
 }
 
-.hidden{
-  display:none!important;
+.subjects{
+display:flex;
+gap:8px;
+overflow:auto
 }
 
-.muted{
-  color:#667085;
-  font-size:13px;
+.subjects button{
+white-space:nowrap;
+padding:11px 15px;
+border-radius:14px;
+border:1px solid var(--line);
+background:#f2f4f7
 }
 
-.warning{
-  background:#fff3cd;
-  color:#795b00;
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:12px;
+.subjects button.on{
+background:var(--blue);
+color:#fff
 }
 
-.success{
-  background:#e9f8ef;
-  color:#126a3b;
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:12px;
+.form-row{
+margin:12px 0
 }
 
-.small-btn{
-  width:auto;
-  padding:8px 12px;
-  font-size:12px;
+.form-row label{
+display:block;
+margin-bottom:7px
 }
 
-.footer{
-  text-align:center;
-  color:#777;
-  font-size:12px;
-  margin-top:25px;
+.form-row input,
+.form-row select{
+width:100%;
+padding:13px;
+border:1px solid var(--line);
+border-radius:13px;
+background:#fff
 }
 
-@media(max-width:600px){
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
+.primary{
+background:var(--blue);
+color:#fff;
+border:0;
+border-radius:13px;
+padding:13px 18px
+}
 
-  .header-title h1{
-    font-size:18px;
-  }
+.danger{
+background:var(--red);
+color:#fff;
+border:0;
+border-radius:13px;
+padding:13px 18px
+}
 
-  .logo{
-    width:50px;
-    height:50px;
-  }
+.bottom{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:min(760px,100%);
+background:#fff;
+border-top:1px solid var(--line);
+display:flex;
+z-index:20
+}
+
+.bottom button{
+flex:1;
+border:0;
+background:#fff;
+padding:10px 3px;
+color:#667085
+}
+
+.bottom button.on{
+color:var(--blue)
+}
+
+.bottom .ico{
+font-size:22px;
+display:block
+}
+
+.bottom small{
+font-size:12px
+}
+
+.statgrid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px
+}
+
+.stat{
+background:#f7f9fb;
+border-radius:15px;
+padding:13px
+}
+
+.checklist .chapter{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.42);
+display:none;
+align-items:flex-end;
+z-index:30
+}
+
+.modal.show{
+display:flex
+}
+
+.sheet{
+background:#fff;
+width:100%;
+max-width:760px;
+margin:auto;
+padding:20px;
+border-radius:24px 24px 0 0;
+max-height:90vh;
+overflow:auto
+}
+
+.notice{
+padding:13px;
+border:1px solid #ead88d;
+background:#fffbea;
+border-radius:15px;
+margin-bottom:15px
+}
+
+@media(min-width:700px){
+main{padding:24px}
+.bottom{
+border-radius:20px 20px 0 0
+}
 }
 </style>
 </head>
 
 <body>
 
+<div class="app">
+
 <header>
-  <div class="header-inner">
 
-    <!-- IMPORTANT:
-         Make sure your uploaded logo file has this exact name.
-    -->
-    <img
-      class="logo"
-      src="IMG_20260615_092503.jpg"
-      alt="Akshat Study Tracker Logo"
-      onerror="this.style.display='none'"
-    >
+<div class="brand">
+<b>📈 Akshnat<br>Study Tracker</b>
+</div>
 
-    <div class="header-title">
-      <h1>Akshat Study Tracker</h1>
-      <p>Plan • Track • Complete • Improve</p>
-    </div>
+<button class="pill" onclick="toggleDark()">🌙</button>
 
-  </div>
+<select id="profile" class="select" onchange="renderAll()">
+<option>Akshnat (Class 9)</option>
+</select>
+
 </header>
 
-<div class="container">
+<main>
 
-<!-- SETUP -->
-<section id="setupSection" class="card">
+<!-- HOME -->
 
-  <h2>🎯 Setup Your Exam</h2>
+<section id="home" class="screen active">
 
-  <p class="muted">
-    Pehle apni class, upcoming exam aur exam date select karo.
-  </p>
+<div class="notice">
+💾 Your progress is saved automatically on this device.
+</div>
 
-  <label>Your Class</label>
+<div class="card">
 
-  <select id="classSelect">
-    <option value="">Select Class</option>
-    <option>Class 6</option>
-    <option>Class 7</option>
-    <option>Class 8</option>
-    <option>Class 9</option>
-    <option>Class 10</option>
-    <option>Class 11</option>
-    <option>Class 12</option>
-  </select>
+<div class="row">
 
-  <label>Upcoming Exam</label>
+<div>
 
-  <select id="examSelect">
-    <option value="">Select Exam</option>
-    <option>UT - 1</option>
-    <option>Mid Term</option>
-    <option>UT - 2</option>
-    <option>Pre-Annual</option>
-    <option>Annual Exam</option>
-  </select>
+<h1 id="hello">Hi, Akshnat!</h1>
 
-  <label>Exam Date</label>
+<div class="sub">
+Class 9 Exam Preparation
+</div>
 
-  <input type="date" id="examDate">
+</div>
 
-  <label>Daily Study Time (hours)</label>
+<span class="badge" id="examBadge">
+Choose Exam
+</span>
 
-  <input
-    type="number"
-    id="dailyHours"
-    min="1"
-    max="15"
-    step="0.5"
-    value="3"
-  >
+</div>
 
-  <br><br>
+<p>🔥 <b id="streak">0 Day Streak</b></p>
 
-  <button onclick="saveSetup()">
-    Continue to Syllabus →
-  </button>
+</div>
+
+
+<div class="card">
+
+<h2>Upcoming Exam</h2>
+
+<div class="form-row">
+
+<label>Which exam is upcoming?</label>
+
+<select id="exam" onchange="setExam(this.value)">
+
+<option value="">Select exam</option>
+
+<option>UT - 1</option>
+
+<option>MID TERM</option>
+
+<option>ANNUAL EXAM</option>
+
+</select>
+
+</div>
+
+
+<div class="form-row">
+
+<label>Exam date</label>
+
+<input
+id="examDate"
+type="date"
+onchange="saveState()">
+
+</div>
+
+
+<button
+class="primary"
+onclick="openChecklist()">
+
+Select Syllabus Chapters →
+
+</button>
+
+</div>
+
+
+<h2>Subject Preparation Status</h2>
+
+<div id="subjectStatus"></div>
+
+
+<div class="card">
+
+<h2>🎯 Today's Focus</h2>
+
+<div id="todayFocus"></div>
+
+</div>
 
 </section>
 
 
-<!-- SYLLABUS -->
-<section id="syllabusSection" class="card hidden">
+<!-- CHAPTERS -->
 
-  <h2>📚 Select Your Syllabus</h2>
+<section id="chapters" class="screen">
 
-  <p class="muted">
-    Jo chapters exam mein hain unko tick karo.
-    Baad mein complete chapters ko bhi tick kar sakte ho.
-  </p>
+<h1>Chapters</h1>
 
-  <div id="subjectsContainer"></div>
+<div class="card">
 
-  <button class="btn-green" onclick="saveSyllabus()">
-    Save Syllabus & Open Dashboard
-  </button>
+<div class="subjects" id="subjectTabs"></div>
 
-</section>
+<div class="tabs" style="margin-top:12px">
 
+<button
+class="on"
+onclick="filterMode='all';renderChapters()">
 
-<!-- DASHBOARD -->
-<section id="dashboardSection" class="hidden">
+All Chapters
 
-  <div class="exam-box">
+</button>
 
-    <div class="exam-name" id="dashboardExam">
-      Upcoming Exam
-    </div>
+<button
+onclick="filterMode='incomplete';renderChapters()">
 
-    <div id="dashboardClass"></div>
+Incomplete
 
-    <div class="countdown" id="countdown">
-      --
-    </div>
+</button>
 
-    <div class="muted" style="color:#dce8fa;">
-      days remaining
-    </div>
+<button
+onclick="filterMode='completed';renderChapters()">
 
-  </div>
+Completed
 
+</button>
 
-  <!-- STATS -->
+</div>
 
-  <div class="grid">
+<div id="chapterList"></div>
 
-    <div class="stat">
-      <div class="number" id="totalChapters">0</div>
-      <small>Syllabus Chapters</small>
-    </div>
-
-    <div class="stat">
-      <div class="number" id="completedChapters">0</div>
-      <small>Completed</small>
-    </div>
-
-    <div class="stat">
-      <div class="number" id="overallPercent">0%</div>
-      <small>Overall Progress</small>
-    </div>
-
-    <div class="stat">
-      <div class="number" id="daysLeft">0</div>
-      <small>Days Left</small>
-    </div>
-
-  </div>
-
-
-  <!-- STREAK -->
-
-  <div class="card streak">
-
-    <div class="streak-fire">🔥</div>
-
-    <div class="streak-number" id="streakNumber">
-      0
-    </div>
-
-    <div>
-      Day Streak
-    </div>
-
-    <br>
-
-    <div class="muted">
-      Last study activity:
-      <span id="lastActivity">Not started</span>
-    </div>
-
-  </div>
-
-
-  <!-- TODAY -->
-
-  <div class="card">
-
-    <h2>📅 Aaj Ka Target</h2>
-
-    <div id="todayTarget"></div>
-
-  </div>
-
-
-  <!-- PROGRESS -->
-
-  <div class="card">
-
-    <h2>📊 Overall Progress</h2>
-
-    <div class="progress-bg">
-      <div id="overallProgressBar" class="progress"></div>
-    </div>
-
-    <div id="overallText" class="muted">
-      0 of 0 chapters completed
-    </div>
-
-  </div>
-
-
-  <!-- SUBJECT PROGRESS -->
-
-  <div class="card">
-
-    <h2>📚 Subject-wise Progress</h2>
-
-    <div id="subjectProgress"></div>
-
-  </div>
-
-
-  <!-- ACTIONS -->
-
-  <div class="card">
-
-    <h2>⚙️ Tracker</h2>
-
-    <button onclick="openSyllabusEditor()">
-      ✏️ Edit Syllabus
-    </button>
-
-    <br><br>
-
-    <button class="btn-orange" onclick="resetPlanner()">
-      🔄 Reset & Create New Exam
-    </button>
-
-  </div>
+</div>
 
 </section>
 
 
-<div class="footer">
-  Akshat Study Tracker • Made for focused study
+<!-- INSIGHTS -->
+
+<section id="insights" class="screen">
+
+<h1>Study Insights & Analytics</h1>
+
+<div class="sub">
+Visual analytics and preparation progress for Class 9.
+</div>
+
+
+<div class="card">
+
+<h2>📊 7-Day Activity Trend</h2>
+
+<p>
+🔥 <span id="insightStreak">
+0 Day Streak
+</span>
+</p>
+
+<div id="trend"></div>
+
+</div>
+
+<div id="analytics"></div>
+
+</section>
+
+
+<!-- SETTINGS -->
+
+<section id="settings" class="screen">
+
+<h1>Settings & Profile Management</h1>
+
+
+<div class="card">
+
+<h2>📚 Exam Syllabus Selection</h2>
+
+<div class="sub">
+Select the chapters included in your current exam to calculate your daily pace.
+</div>
+
+<button
+class="primary"
+style="margin-top:12px"
+onclick="openChecklist()">
+
+Edit Exam Syllabus Checklist
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>📅 Exam Datesheet</h2>
+
+<div id="dates"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🎨 Appearance</h2>
+
+<button
+class="pill"
+onclick="toggleDark()">
+
+🌙 Switch Dark Mode
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>👤 Profiles</h2>
+
+<b>Akshnat (Class 9)</b>
+
+<p class="sub">
+[Active]
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2 style="color:var(--red)">
+⚠️ Danger Zone
+</h2>
+
+<div class="sub">
+Clear all local data and reset app state.
+</div>
+
+<br>
+
+<button
+class="danger"
+onclick="resetApp()">
+
+Reset All App Data
+
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom">
+
+<button
+class="on"
+onclick="go('home',this)">
+
+<span class="ico">▦</span>
+
+<small>Home</small>
+
+</button>
+
+
+<button
+onclick="go('chapters',this)">
+
+<span class="ico">☰</span>
+
+<small>Chapters</small>
+
+</button>
+
+
+<button
+onclick="go('insights',this)">
+
+<span class="ico">▥</span>
+
+<small>Insights</small>
+
+</button>
+
+
+<button
+onclick="go('settings',this)">
+
+<span class="ico">⚙</span>
+
+<small>Settings</small>
+
+</button>
+
+</nav>
+
+</div>
+
+
+<!-- SYLLABUS MODAL -->
+
+<div class="modal" id="modal">
+
+<div class="sheet">
+
+<div class="row">
+
+<h2>Select Exam Syllabus</h2>
+
+<button
+class="pill"
+onclick="closeChecklist()">
+
+✕
+
+</button>
+
+</div>
+
+
+<p class="sub">
+Tick only the chapters that are in your selected exam.
+</p>
+
+
+<div class="subjects" id="modalSubjects"></div>
+
+<div
+class="checklist"
+id="checklist">
+</div>
+
+
+<button
+class="primary"
+style="width:100%;margin-top:14px"
+onclick="closeChecklist()">
+
+Save Syllabus
+
+</button>
+
 </div>
 
 </div>
@@ -547,1122 +706,835 @@ button:active{
 
 <script>
 
-const SUBJECTS = [
-  "Mathematics",
-  "Science",
-  "English",
-  "Hindi",
-  "Sanskrit",
-  "Urdu",
-  "SST"
-];
+const SYLLABUS={
 
+"Science":[
 
-/*
-  Generic chapter list.
+"Exploration: Entering the World of Secondary Science",
 
-  You can later replace these with exact NCERT chapters
-  for each class.
-*/
+"Cell: The Building Block of Life",
 
-const CHAPTERS = {
+"Tissues in Action",
 
-  "Mathematics":[
-    "Chapter 1",
-    "Chapter 2",
-    "Chapter 3",
-    "Chapter 4",
-    "Chapter 5",
-    "Chapter 6",
-    "Chapter 7",
-    "Chapter 8",
-    "Chapter 9",
-    "Chapter 10",
-    "Chapter 11",
-    "Chapter 12",
-    "Chapter 13",
-    "Chapter 14",
-    "Chapter 15"
-  ],
+"Describing Motion Around Us",
 
-  "Science":[
-    "Chapter 1",
-    "Chapter 2",
-    "Chapter 3",
-    "Chapter 4",
-    "Chapter 5",
-    "Chapter 6",
-    "Chapter 7",
-    "Chapter 8",
-    "Chapter 9",
-    "Chapter 10",
-    "Chapter 11",
-    "Chapter 12",
-    "Chapter 13",
-    "Chapter 14",
-    "Chapter 15"
-  ],
+"Exploring Mixtures and their Separation",
 
-  "English":[
-    "Chapter 1",
-    "Chapter 2",
-    "Chapter 3",
-    "Chapter 4",
-    "Chapter 5",
-    "Chapter 6",
-    "Chapter 7",
-    "Chapter 8",
-    "Chapter 9",
-    "Chapter 10",
-    "Chapter 11",
-    "Chapter 12"
-  ],
+"How Forces Affect Motion",
 
-  "Hindi":[
-    "Chapter 1",
-    "Chapter 2",
-    "Chapter 3",
-    "Chapter 4",
-    "Chapter 5",
-    "Chapter 6",
-    "Chapter 7",
-    "Chapter 8",
-    "Chapter 9",
-    "Chapter 10",
-    "Chapter 11",
-    "Chapter 12"
-  ],
+"Work, Energy, and Simple Machines",
 
-  "Sanskrit":[
-    "Chapter 1",
-    "Chapter 2",
-    "Chapter 3",
-    "Chapter 4",
-    "Chapter 5",
-    "Chapter 6",
-    "Chapter 7",
-    "Chapter 8",
-    "Chapter 9",
-    "Chapter 10"
-  ],
+"Journey Inside the Atom",
 
-  "Urdu":[
-    "Chapter 1",
-    "Chapter 2",
-    "Chapter 3",
-    "Chapter 4",
-    "Chapter 5",
-    "Chapter 6",
-    "Chapter 7",
-    "Chapter 8",
-    "Chapter 9",
-    "Chapter 10"
-  ],
+"Atomic Foundations of Matter",
 
-  "SST":[
-    "History Chapter 1",
-    "History Chapter 2",
-    "History Chapter 3",
-    "Geography Chapter 1",
-    "Geography Chapter 2",
-    "Geography Chapter 3",
-    "Civics Chapter 1",
-    "Civics Chapter 2",
-    "Civics Chapter 3",
-    "Economics Chapter 1",
-    "Economics Chapter 2",
-    "Economics Chapter 3"
-  ]
+"Sound Waves: Characteristics and Applications"
+
+],
+
+"Mathematics":[
+
+"The World of Numbers",
+
+"Introduction to Linear Polynomials",
+
+"Coordinate Geometry",
+
+"Linear Equations in Two Variables",
+
+"Lines and Angles",
+
+"Triangles and their Properties",
+
+"Quadrilaterals",
+
+"Circles"
+
+],
+
+"Social Science":[
+
+"India and the Contemporary World",
+
+"Democratic Politics",
+
+"Understanding Economic Life",
+
+"Contemporary India",
+
+"Map Skills and Geographical Concepts",
+
+"Constitutional Values",
+
+"People and Communities",
+
+"Our Environment"
+
+],
+
+"English":[
+
+"Beehive / Main Reader",
+
+"Poems",
+
+"Moments / Supplementary Reader",
+
+"Grammar",
+
+"Writing Skills"
+
+],
+
+"Hindi":[
+
+"क्षितिज / पाठ",
+
+"कृतिका / पाठ",
+
+"व्याकरण",
+
+"लेखन कौशल"
+
+]
 
 };
 
 
-let data = JSON.parse(
-  localStorage.getItem("akshatStudyTracker")
-) || {
+let state=JSON.parse(
+localStorage.getItem("akshnatTracker")||"null"
+)||{
 
-  setup:null,
+exam:"",
 
-  syllabus:{},
+examDate:"",
 
-  completed:{},
+selected:{
+Science:[],
+Mathematics:[],
+"Social Science":[],
+English:[],
+Hindi:[]
+},
 
-  studyDates:[]
+done:{},
+
+dates:{
+Science:"",
+Mathematics:"",
+"Social Science":""
+},
+
+activity:{}
 
 };
 
 
-function saveData(){
+let currentSubject="Science";
 
-  localStorage.setItem(
-    "akshatStudyTracker",
-    JSON.stringify(data)
-  );
-
-}
+let filterMode="all";
 
 
-function todayString(){
+function saveState(){
 
-  const d = new Date();
+localStorage.setItem(
+"akshnatTracker",
+JSON.stringify(state)
+);
 
-  return d.toISOString().split("T")[0];
+renderAll();
 
 }
 
 
-function daysBetween(date1,date2){
+function setExam(v){
 
-  const a = new Date(date1);
-  const b = new Date(date2);
+state.exam=v;
 
-  const diff =
-    b.getTime() - a.getTime();
-
-  return Math.ceil(
-    diff / (1000*60*60*24)
-  );
+saveState();
 
 }
 
 
-/* SETUP */
+function totalSelected(sub){
 
-function saveSetup(){
-
-  const cls =
-    document.getElementById("classSelect").value;
-
-  const exam =
-    document.getElementById("examSelect").value;
-
-  const date =
-    document.getElementById("examDate").value;
-
-  const hours =
-    Number(
-      document.getElementById("dailyHours").value
-    );
-
-  if(!cls || !exam || !date){
-
-    alert(
-      "Please class, exam aur exam date select karo."
-    );
-
-    return;
-
-  }
-
-  if(new Date(date) < new Date(todayString())){
-
-    alert(
-      "Exam date future ki honi chahiye."
-    );
-
-    return;
-
-  }
-
-  data.setup = {
-
-    class:cls,
-
-    exam:exam,
-
-    examDate:date,
-
-    dailyHours:hours || 3
-
-  };
-
-  saveData();
-
-  renderSyllabus();
+return (state.selected[sub]||[]).length;
 
 }
 
 
-/* SYLLABUS */
+function doneCount(sub){
 
-function renderSyllabus(){
-
-  document
-    .getElementById("setupSection")
-    .classList.add("hidden");
-
-  document
-    .getElementById("syllabusSection")
-    .classList.remove("hidden");
-
-  const container =
-    document.getElementById(
-      "subjectsContainer"
-    );
-
-  container.innerHTML = "";
-
-  SUBJECTS.forEach(subject=>{
-
-    const selected =
-      data.syllabus[subject] || [];
-
-    const card =
-      document.createElement("div");
-
-    card.className = "subject-card";
-
-    let html = `
-
-      <div class="subject-header">
-
-        <div class="subject-title">
-          ${subject}
-        </div>
-
-        <button
-          class="small-btn"
-          onclick="toggleSubject('${subject}')"
-        >
-          Select All
-        </button>
-
-      </div>
-
-    `;
-
-    CHAPTERS[subject].forEach((chapter,index)=>{
-
-      const id =
-        "syllabus_" +
-        subject.replace(/\s/g,"_") +
-        "_" +
-        index;
-
-      const checked =
-        selected.includes(chapter)
-          ? "checked"
-          : "";
-
-      html += `
-
-        <label class="chapter">
-
-          <input
-            type="checkbox"
-            id="${id}"
-            data-subject="${subject}"
-            value="${chapter}"
-            ${checked}
-          >
-
-          <span>
-            ${chapter}
-          </span>
-
-        </label>
-
-      `;
-
-    });
-
-    card.innerHTML = html;
-
-    container.appendChild(card);
-
-  });
+return (state.selected[sub]||[])
+.filter(c=>state.done[sub+"|"+c]).length;
 
 }
 
 
-function toggleSubject(subject){
+function pct(sub){
 
-  const inputs =
-    document.querySelectorAll(
-      `input[data-subject="${subject}"]`
-    );
+let n=totalSelected(sub);
 
-  const allChecked =
-    [...inputs].every(i=>i.checked);
-
-  inputs.forEach(i=>{
-    i.checked = !allChecked;
-  });
+return n
+?Math.round(doneCount(sub)/n*100)
+:0;
 
 }
 
 
-function saveSyllabus(){
+function go(id,btn){
 
-  data.syllabus = {};
+document
+.querySelectorAll(".screen")
+.forEach(x=>x.classList.remove("active"));
 
-  data.completed = data.completed || {};
+document
+.getElementById(id)
+.classList.add("active");
 
-  SUBJECTS.forEach(subject=>{
+document
+.querySelectorAll(".bottom button")
+.forEach(x=>x.classList.remove("on"));
 
-    const inputs =
-      document.querySelectorAll(
-        `input[data-subject="${subject}"]`
-      );
+btn.classList.add("on");
 
-    data.syllabus[subject] =
-      [...inputs]
-      .filter(i=>i.checked)
-      .map(i=>i.value);
+renderAll();
 
-  });
-
-
-  const total =
-    Object.values(data.syllabus)
-    .reduce(
-      (sum,arr)=>sum+arr.length,
-      0
-    );
-
-
-  if(total === 0){
-
-    alert(
-      "Kam se kam ek chapter select karo."
-    );
-
-    return;
-
-  }
-
-
-  saveData();
-
-  showDashboard();
+scrollTo(0,0);
 
 }
 
 
-/* DASHBOARD */
+function renderAll(){
 
-function showDashboard(){
+document.getElementById("exam").value=
+state.exam||"";
 
-  document
-    .getElementById("setupSection")
-    .classList.add("hidden");
+document.getElementById("examDate").value=
+state.examDate||"";
 
-  document
-    .getElementById("syllabusSection")
-    .classList.add("hidden");
+document.getElementById("examBadge").textContent=
+state.exam||"Choose Exam";
 
-  document
-    .getElementById("dashboardSection")
-    .classList.remove("hidden");
+renderStatus();
 
-  renderDashboard();
+renderFocus();
 
-}
+renderChapters();
 
+renderInsights();
 
-function renderDashboard(){
+renderDates();
 
-  if(!data.setup) return;
-
-  document.getElementById(
-    "dashboardExam"
-  ).textContent =
-    data.setup.exam;
-
-  document.getElementById(
-    "dashboardClass"
-  ).textContent =
-    data.setup.class;
-
-
-  updateCountdown();
-
-  updateStats();
-
-  updateTodayTarget();
-
-  updateSubjectProgress();
-
-  updateStreak();
+renderModal();
 
 }
 
 
-/* COUNTDOWN */
+function renderStatus(){
 
-function updateCountdown(){
+let box=
+document.getElementById("subjectStatus");
 
-  const today =
-    new Date(todayString());
+box.innerHTML="";
 
-  const exam =
-    new Date(data.setup.examDate);
 
-  const diff =
-    Math.ceil(
-      (exam-today) /
-      (1000*60*60*24)
-    );
+Object.keys(SYLLABUS).forEach(s=>{
 
-  const days =
-    Math.max(0,diff);
+let p=pct(s);
 
-  document.getElementById(
-    "countdown"
-  ).textContent =
-    days;
+let n=totalSelected(s);
 
-  document.getElementById(
-    "daysLeft"
-  ).textContent =
-    days;
+if(!n)return;
+
+
+box.innerHTML+=`
+
+<div class="card">
+
+<div class="row">
+
+<h3>${s}</h3>
+
+<span class="badge">
+${p===100?"Done":"On Track"}
+</span>
+
+</div>
+
+
+<div
+class="circle"
+style="--p:${p}%">
+
+<span>${p}%</span>
+
+</div>
+
+
+<b>${p}% Overall Complete</b>
+
+<p class="sub">
+${doneCount(s)} / ${n}
+chapters completed in exam.
+</p>
+
+
+<div class="progress">
+
+<div
+class="bar"
+style="width:${p}%">
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+
+if(!box.innerHTML){
+
+box.innerHTML=`
+
+<div class="card">
+
+<b>No syllabus selected yet.</b>
+
+<p class="sub">
+Choose an exam and tick your chapters.
+</p>
+
+</div>
+
+`;
+
+}
 
 }
 
 
-/* STATS */
+function renderFocus(){
 
-function getAllSelected(){
-
-  let result=[];
-
-  SUBJECTS.forEach(subject=>{
-
-    const chapters =
-      data.syllabus[subject] || [];
-
-    chapters.forEach(chapter=>{
-
-      result.push({
-        subject,
-        chapter
-      });
-
-    });
-
-  });
-
-  return result;
-
-}
+let items=[];
 
 
-function isCompleted(subject,chapter){
+Object.keys(SYLLABUS).forEach(s=>
 
-  return (
-    data.completed?.[subject]?.includes(chapter)
-  );
+(state.selected[s]||[]).forEach(c=>{
 
-}
+if(
+!state.done[s+"|"+c] &&
+items.length<3
+)
+
+items.push([s,c]);
+
+}));
 
 
-function updateStats(){
+document.getElementById("todayFocus").innerHTML=
 
-  const all =
-    getAllSelected();
+items.length
 
-  const total =
-    all.length;
+?
 
-  const completed =
-    all.filter(x=>
-      isCompleted(
-        x.subject,
-        x.chapter
-      )
-    ).length;
+items.map(x=>`
 
-  const percent =
-    total === 0
-      ? 0
-      : Math.round(
-          completed / total * 100
-        );
+<div class="focus-item">
 
-  document.getElementById(
-    "totalChapters"
-  ).textContent = total;
+<b>${x[0]}</b>
 
-  document.getElementById(
-    "completedChapters"
-  ).textContent = completed;
+<div>${x[1]}</div>
 
-  document.getElementById(
-    "overallPercent"
-  ).textContent =
-    percent + "%";
+<small>
+Today: Theory → Questions → Revision
+</small>
 
-  document.getElementById(
-    "overallProgressBar"
-  ).style.width =
-    percent + "%";
+</div>
 
-  document.getElementById(
-    "overallText"
-  ).textContent =
-    `${completed} of ${total} chapters completed`;
+`).join("")
+
+:
+
+`
+
+<div class="focus-item">
+
+🎉 No pending selected chapters.
+
+</div>
+
+`;
 
 }
 
 
-/* TODAY TARGET */
+function renderSubjectTabs(){
 
-function updateTodayTarget(){
+let h="";
 
-  const box =
-    document.getElementById(
-      "todayTarget"
-    );
 
-  const all =
-    getAllSelected();
+Object.keys(SYLLABUS).forEach(s=>{
 
-  const remaining =
-    all.filter(x=>
-      !isCompleted(
-        x.subject,
-        x.chapter
-      )
-    );
+h+=`
 
+<button
+class="${s===currentSubject?"on":""}"
+onclick="currentSubject='${s}';renderChapters()">
 
-  if(remaining.length === 0){
+${s}
 
-    box.innerHTML = `
+</button>
 
-      <div class="success">
-        🎉 Excellent! Exam syllabus complete!
-      </div>
+`;
 
-    `;
+});
 
-    return;
 
-  }
+document.getElementById("subjectTabs").innerHTML=h;
 
-
-  const today =
-    new Date(todayString());
-
-  const exam =
-    new Date(data.setup.examDate);
-
-  let days =
-    Math.ceil(
-      (exam-today) /
-      (1000*60*60*24)
-    );
-
-  days =
-    Math.max(1,days);
-
-
-  const dailyHours =
-    Number(
-      data.setup.dailyHours
-    ) || 3;
-
-  const dailyMinutes =
-    Math.round(
-      dailyHours * 60
-    );
-
-
-  /*
-    Calculate chapters required per day.
-  */
-
-  const chaptersToday =
-    Math.max(
-      1,
-      Math.ceil(
-        remaining.length / days
-      )
-    );
-
-
-  /*
-    Pick chapters from different subjects
-    as much as possible.
-  */
-
-  const selected = [];
-
-  const subjectQueues = {};
-
-  SUBJECTS.forEach(subject=>{
-
-    subjectQueues[subject] =
-      remaining.filter(
-        x=>x.subject===subject
-      );
-
-  });
-
-
-  let safety=0;
-
-  while(
-    selected.length < chaptersToday &&
-    safety < 1000
-  ){
-
-    let added=false;
-
-    for(const subject of SUBJECTS){
-
-      const item =
-        subjectQueues[subject].shift();
-
-      if(item){
-
-        selected.push(item);
-
-        added=true;
-
-      }
-
-      if(
-        selected.length >=
-        chaptersToday
-      ) break;
-
-    }
-
-    if(!added) break;
-
-    safety++;
-
-  }
-
-
-  const minutesPerChapter =
-    Math.max(
-      20,
-      Math.floor(
-        dailyMinutes /
-        selected.length
-      )
-    );
-
-
-  let html = `
-
-    <div class="warning">
-
-      📌 <strong>${selected.length}</strong>
-      chapter(s) planned today.
-
-      <br>
-
-      ⏱️ Around
-      <strong>${dailyMinutes} minutes</strong>
-      available today.
-
-    </div>
-
-  `;
-
-
-  selected.forEach(item=>{
-
-    html += `
-
-      <div class="target">
-
-        <strong>
-          ${item.subject}
-        </strong>
-
-        <br>
-
-        📖 ${item.chapter}
-
-        <br>
-
-        ⏱️ Target:
-        ${minutesPerChapter} minutes
-
-      </div>
-
-    `;
-
-  });
-
-
-  html += `
-
-    <button
-      class="btn-green"
-      onclick="markTodayActivity()"
-    >
-      ✅ Today's Study Done
-    </button>
-
-  `;
-
-
-  box.innerHTML = html;
+document.getElementById("modalSubjects").innerHTML=h;
 
 }
 
 
-/* COMPLETE CHAPTER */
+function renderChapters(){
 
-function toggleComplete(subject,chapter){
+renderSubjectTabs();
 
-  if(!data.completed[subject]){
-
-    data.completed[subject]=[];
-
-  }
+let arr=
+state.selected[currentSubject]||[];
 
 
-  const arr =
-    data.completed[subject];
+if(filterMode==="completed")
 
-  const index =
-    arr.indexOf(chapter);
-
-
-  if(index >= 0){
-
-    arr.splice(index,1);
-
-  }else{
-
-    arr.push(chapter);
-
-    markStudyDate();
-
-  }
+arr=arr.filter(
+c=>state.done[currentSubject+"|"+c]
+);
 
 
-  saveData();
+if(filterMode==="incomplete")
 
-  renderDashboard();
-
-}
-
-
-/* SUBJECT PROGRESS */
-
-function updateSubjectProgress(){
-
-  const container =
-    document.getElementById(
-      "subjectProgress"
-    );
-
-  container.innerHTML = "";
+arr=arr.filter(
+c=>!state.done[currentSubject+"|"+c]
+);
 
 
-  SUBJECTS.forEach(subject=>{
+document.getElementById("chapterList").innerHTML=
 
-    const chapters =
-      data.syllabus[subject] || [];
+arr.length
 
-    if(chapters.length === 0)
-      return;
+?
 
+arr.map(c=>`
 
-    const completed =
-      chapters.filter(
-        c=>isCompleted(subject,c)
-      ).length;
+<div
+class="chapter"
+onclick="toggleDone('${esc(currentSubject)}','${esc(c)}')">
 
+<div>
 
-    const percent =
-      Math.round(
-        completed /
-        chapters.length *
-        100
-      );
+<b>
+Ch ${SYLLABUS[currentSubject].indexOf(c)+1}:
+${c}
+</b>
 
+<small>
+3 preparation stages • Theory • Questions • Revision
+</small>
 
-    const div =
-      document.createElement("div");
-
-    div.className =
-      "subject-card";
+</div>
 
 
-    let html = `
+<div
+class="check ${
+state.done[currentSubject+"|"+c]
+?"done":""
+}">
 
-      <div class="subject-header">
+</div>
 
-        <div class="subject-title">
-          ${subject}
-        </div>
+</div>
 
-        <div>
-          ${completed}/${chapters.length}
-        </div>
+`).join("")
 
-      </div>
+:
 
-      <div class="progress-bg">
+`
 
-        <div
-          class="progress"
-          style="width:${percent}%"
-        ></div>
+<p class="sub">
+No chapters in this filter.
+Select chapters from Settings.
+</p>
 
-      </div>
-
-    `;
-
-
-    chapters.forEach(chapter=>{
-
-      const done =
-        isCompleted(
-          subject,
-          chapter
-        );
-
-
-      html += `
-
-        <label
-          class="chapter ${done ? "done" : ""}"
-        >
-
-          <input
-            type="checkbox"
-            ${done ? "checked" : ""}
-            onchange="
-              toggleComplete(
-                '${escapeQuote(subject)}',
-                '${escapeQuote(chapter)}'
-              )
-            "
-          >
-
-          <span>
-            ${chapter}
-          </span>
-
-        </label>
-
-      `;
-
-    });
-
-
-    div.innerHTML=html;
-
-    container.appendChild(div);
-
-  });
+`;
 
 }
 
 
-function escapeQuote(text){
+function renderModal(){
 
-  return text
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'");
-
-}
+let arr=
+SYLLABUS[currentSubject]||[];
 
 
-/* STREAK */
+document.getElementById("checklist").innerHTML=
 
-function markStudyDate(){
+arr.map((c,i)=>{
 
-  const today =
-    todayString();
-
-  if(!data.studyDates)
-    data.studyDates=[];
+let yes=
+(state.selected[currentSubject]||[])
+.includes(c);
 
 
-  if(
-    !data.studyDates.includes(today)
-  ){
+return `
 
-    data.studyDates.push(today);
+<div class="chapter">
 
-  }
+<div>
+
+<b>
+Ch ${i+1}: ${c}
+</b>
+
+</div>
 
 
-  saveData();
+<div
+class="check ${yes?"done":""}"
+onclick="toggleSelected('${esc(c)}')">
 
-}
+</div>
 
+</div>
 
-function markTodayActivity(){
+`;
 
-  markStudyDate();
-
-  alert(
-    "🔥 Today's study activity saved!"
-  );
-
-  updateStreak();
+}).join("");
 
 }
 
 
-function updateStreak(){
+function toggleSelected(c){
 
-  const dates =
-    (data.studyDates || [])
-    .slice()
-    .sort()
-    .reverse();
+let a=
+state.selected[currentSubject]||[];
 
 
-  if(dates.length === 0){
+if(a.includes(c))
 
-    document.getElementById(
-      "streakNumber"
-    ).textContent=0;
+a=a.filter(x=>x!==c);
 
-    document.getElementById(
-      "lastActivity"
-    ).textContent="Not started";
+else
 
-    return;
-
-  }
+a.push(c);
 
 
-  let streak=0;
+state.selected[currentSubject]=a;
 
-  let checkDate =
-    new Date(todayString());
+saveState();
 
-
-  /*
-    If today isn't completed,
-    start checking from yesterday.
-  */
-
-  if(
-    !dates.includes(
-      todayString()
-    )
-  ){
-
-    checkDate.setDate(
-      checkDate.getDate()-1
-    );
-
-  }
-
-
-  while(true){
-
-    const key =
-      checkDate
-      .toISOString()
-      .split("T")[0];
-
-
-    if(
-      dates.includes(key)
-    ){
-
-      streak++;
-
-      checkDate.setDate(
-        checkDate.getDate()-1
-      );
-
-    }else{
-
-      break;
-
-    }
-
-  }
-
-
-  document.getElementById(
-    "streakNumber"
-  ).textContent =
-    streak;
-
-
-  document.getElementById(
-    "lastActivity"
-  ).textContent =
-    dates[0];
+renderModal();
 
 }
 
 
-/* EDIT SYLLABUS */
+function toggleDone(s,c){
 
-function openSyllabusEditor(){
+let k=s+"|"+c;
 
-  document
-    .getElementById(
-      "dashboardSection"
-    )
-    .classList.add("hidden");
-
-  renderSyllabus();
-
-}
+state.done[k]=!state.done[k];
 
 
-function resetPlanner(){
+if(state.done[k]){
 
-  const yes =
-    confirm(
-      "Reset karne par current exam planner delete ho jayega. Continue?"
-    );
+let d=
+new Date()
+.toISOString()
+.slice(0,10);
 
-  if(!yes) return;
-
-  localStorage.removeItem(
-    "akshatStudyTracker"
-  );
-
-  location.reload();
+state.activity[d]=
+(state.activity[d]||0)+1;
 
 }
 
 
-/* INITIAL LOAD */
-
-function loadApp(){
-
-  if(!data.setup){
-
-    document
-      .getElementById(
-        "setupSection"
-      )
-      .classList.remove("hidden");
-
-    return;
-
-  }
-
-
-  const total =
-    getAllSelected().length;
-
-
-  if(total === 0){
-
-    renderSyllabus();
-
-  }else{
-
-    showDashboard();
-
-  }
+saveState();
 
 }
 
 
-loadApp();
+function openChecklist(){
+
+if(!state.exam){
+
+alert(
+"Pehle upcoming exam select karo."
+);
+
+return;
+
+}
+
+
+document
+.getElementById("modal")
+.classList.add("show");
+
+renderModal();
+
+}
+
+
+function closeChecklist(){
+
+document
+.getElementById("modal")
+.classList.remove("show");
+
+renderAll();
+
+}
+
+
+function renderInsights(){
+
+let a=
+document.getElementById("analytics");
+
+a.innerHTML="";
+
+
+Object.keys(SYLLABUS).forEach(s=>{
+
+let n=totalSelected(s);
+
+if(!n)return;
+
+let p=pct(s);
+
+
+a.innerHTML+=`
+
+<div class="card">
+
+<div class="row">
+
+<h2>${s}</h2>
+
+<span class="badge">
+
+${p===100?"Done":"On Track"}
+
+</span>
+
+</div>
+
+
+<div class="statgrid">
+
+<div class="stat">
+
+<small>Completed</small>
+
+<h3>
+${doneCount(s)} / ${n}
+</h3>
+
+</div>
+
+
+<div class="stat">
+
+<small>Pending</small>
+
+<h3>
+${n-doneCount(s)}
+</h3>
+
+</div>
+
+</div>
+
+
+<p>
+Overall Progress
+</p>
+
+
+<div class="progress">
+
+<div
+class="bar"
+style="width:${p}%">
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+
+let vals=[];
+
+
+for(let i=6;i>=0;i--){
+
+let d=new Date();
+
+d.setDate(d.getDate()-i);
+
+let k=
+d.toISOString().slice(0,10);
+
+vals.push([
+
+d.toLocaleDateString(
+undefined,
+{weekday:"short"}
+),
+
+state.activity[k]||0
+
+]);
+
+}
+
+
+document.getElementById("trend").innerHTML=
+
+`
+
+<div
+style="
+display:flex;
+align-items:end;
+gap:8px;
+height:150px;
+padding:10px 0">
+
+${vals.map(v=>`
+
+<div
+style="
+flex:1;
+text-align:center">
+
+<b>${v[1]}</b>
+
+<div
+style="
+height:${Math.max(5,v[1]*14)}px;
+background:var(--blue);
+border-radius:8px 8px 2px 2px;
+margin-top:4px">
+
+</div>
+
+<small>${v[0]}</small>
+
+</div>
+
+`).join("")}
+
+</div>
+
+`;
+
+}
+
+
+function renderDates(){
+
+document.getElementById("dates").innerHTML=
+
+Object.keys(SYLLABUS)
+.slice(0,3)
+.map(s=>`
+
+<div class="form-row">
+
+<label>
+${s} Exam Date
+</label>
+
+<input
+type="date"
+value="${state.dates[s]||""}"
+onchange="
+state.dates['${s}']=this.value;
+saveState()
+">
+
+</div>
+
+`).join("");
+
+}
+
+
+function toggleDark(){
+
+document.body.classList.toggle("dark");
+
+if(
+document.body.classList.contains("dark")
+){
+
+document.documentElement.style
+.setProperty("--bg","#10151c");
+
+document.documentElement.style
+.setProperty("--card","#18202a");
+
+document.documentElement.style
+.setProperty("--text","#f3f5f7");
+
+document.documentElement.style
+.setProperty("--line","#344150");
+
+}else{
+
+location.reload();
+
+}
+
+}
+
+
+function resetApp(){
+
+if(confirm("Reset all progress?")){
+
+localStorage.removeItem(
+"akshnatTracker"
+);
+
+location.reload();
+
+}
+
+}
+
+
+function esc(s){
+
+return s
+.replaceAll("\\","\\\\")
+.replaceAll("'","\\'");
+
+}
+
+
+renderAll();
 
 </script>
 
