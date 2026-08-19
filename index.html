@@ -2,370 +2,182 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b7fab">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#087fb2">
 <title>Akshnat Study Tracker</title>
 
 <style>
 :root{
---bg:#f4f6f8;--card:#fff;--text:#101a2c;--muted:#667085;
---blue:#087fb2;--green:#16a673;--red:#d83c3c;--line:#d7dde5
+ --bg:#f4f6f8;--card:#fff;--text:#101a2c;--muted:#667085;
+ --blue:#087fb2;--green:#16a673;--red:#d83c3c;--line:#d7dde5
 }
-
 *{box-sizing:border-box}
-
 body{
-margin:0;background:var(--bg);color:var(--text);
-font-family:Arial,Helvetica,sans-serif;font-weight:600
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:Arial,Helvetica,sans-serif
 }
-
-button,select,input{font:inherit}
+button,input,select{font:inherit}
 button{cursor:pointer}
-
-.app{
-max-width:760px;margin:auto;min-height:100vh;
-padding-bottom:82px
-}
+.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:80px}
 
 header{
-position:sticky;top:0;z-index:10;
-background:rgba(255,255,255,.97);
-border-bottom:1px solid var(--line);
-padding:12px 14px;display:flex;gap:10px;
-align-items:center
+ position:sticky;top:0;z-index:10;background:var(--card);
+ border-bottom:1px solid var(--line);padding:12px;
+ display:flex;gap:9px;align-items:center
 }
-
-.brand{
-display:flex;align-items:center;gap:9px;
-min-width:150px
-}
-
-.brand b{
-font-size:18px;line-height:1.05
-}
-
-.logo{
-width:42px;height:42px;border-radius:10px;
-object-fit:cover;background:#fff
-}
-
+.brand{display:flex;align-items:center;gap:8px;min-width:145px}
+.brand b{font-size:17px;line-height:1.05}
 .pill,.select{
-border:1px solid var(--line);
-background:#fff;border-radius:14px;padding:12px
+ border:1px solid var(--line);background:var(--card);
+ border-radius:13px;padding:11px
 }
-
-.select{
-flex:1;min-width:0
-}
+.select{flex:1;min-width:0}
 
 main{padding:18px 14px}
-
 .screen{display:none}
 .screen.active{display:block}
 
 .card{
-background:var(--card);
-border:1px solid var(--line);
-border-radius:22px;padding:18px;margin-bottom:16px;
-box-shadow:0 2px 10px rgba(15,30,50,.04)
+ background:var(--card);border:1px solid var(--line);
+ border-radius:20px;padding:17px;margin-bottom:15px;
+ box-shadow:0 2px 9px rgba(15,30,50,.04)
 }
-
-h1{font-size:30px;margin:6px 0 8px}
-h2{font-size:24px;margin:8px 0 14px}
-h3{margin:0 0 8px}
-
-.sub{
-color:var(--muted);
-font-weight:500;
-line-height:1.45
-}
-
-.badge{
-display:inline-block;
-border:1px solid #8dd9bc;
-color:var(--green);
-background:#effbf6;
-border-radius:18px;
-padding:8px 13px
-}
+h1{font-size:29px;margin:5px 0 8px}
+h2{font-size:23px;margin:7px 0 13px}
+h3{margin:0 0 7px}
+.sub{color:var(--muted);font-weight:400;line-height:1.45}
 
 .row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px
+ display:flex;justify-content:space-between;
+ align-items:center;gap:10px
 }
-
-.progress{
-height:13px;
-background:#dfe5ec;
-border-radius:20px;
-overflow:hidden
-}
-
-.bar{
-height:100%;
-background:var(--blue);
-border-radius:20px
-}
-
-.circle{
-width:118px;height:118px;
-border-radius:50%;
-display:grid;place-items:center;
-margin:12px auto;
-background:conic-gradient(
-var(--blue) var(--p),
-#dce3eb 0
-);
-position:relative
-}
-
-.circle:after{
-content:"";
-position:absolute;
-width:88px;height:88px;
-background:var(--card);
-border-radius:50%
-}
-
-.circle span{
-z-index:1;
-font-size:25px
-}
-
-.focus-item,.chapter{
-border:1px solid var(--line);
-border-radius:17px;
-padding:15px;
-margin-top:10px;
-background:#f8fafc
-}
-
-.focus-item small,.chapter small{
-display:block;
-color:var(--muted);
-font-weight:500;
-margin-top:4px
-}
-
-.check{
-width:27px;height:27px;
-border-radius:50%;
-border:2px solid #c8d1dc;
-background:#edf1f5;
-display:grid;
-place-items:center;
-flex:none
-}
-
-.check.done{
-background:var(--green);
-border-color:#0d8f64;
-color:white
-}
-
-.check.done:after{
-content:"✓"
-}
-
-.tabs{
-display:flex;
-gap:8px;
-margin-bottom:14px
-}
-
-.tabs button{
-flex:1;
-padding:12px 7px;
-border-radius:15px;
-border:1px solid var(--line);
-background:#f4f6f8
-}
-
-.tabs button.on{
-background:var(--blue);
-color:#fff
-}
-
-.subjects{
-display:flex;
-gap:8px;
-overflow:auto
-}
-
-.subjects button{
-white-space:nowrap;
-padding:11px 15px;
-border-radius:14px;
-border:1px solid var(--line);
-background:#f2f4f7
-}
-
-.subjects button.on{
-background:var(--blue);
-color:#fff
-}
-
-.form-row{
-margin:12px 0
-}
-
-.form-row label{
-display:block;
-margin-bottom:7px
-}
-
-.form-row input,
-.form-row select{
-width:100%;
-padding:13px;
-border:1px solid var(--line);
-border-radius:13px;
-background:#fff
-}
-
-.primary{
-background:var(--blue);
-color:#fff;
-border:0;
-border-radius:13px;
-padding:13px 18px
-}
-
-.danger{
-background:var(--red);
-color:#fff;
-border:0;
-border-radius:13px;
-padding:13px 18px
-}
-
-.full{
-width:100%
-}
-
-.bottom{
-position:fixed;
-bottom:0;
-left:50%;
-transform:translateX(-50%);
-width:min(760px,100%);
-background:#fff;
-border-top:1px solid var(--line);
-display:flex;
-z-index:20
-}
-
-.bottom button{
-flex:1;
-border:0;
-background:#fff;
-padding:10px 3px;
-color:#667085
-}
-
-.bottom button.on{
-color:var(--blue)
-}
-
-.bottom .ico{
-font-size:22px;
-display:block
-}
-
-.bottom small{
-font-size:12px
-}
-
-.statgrid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px
-}
-
-.stat{
-background:#f7f9fb;
-border-radius:15px;
-padding:13px
-}
-
-.checklist .chapter{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px
-}
-
-.modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.42);
-display:none;
-align-items:flex-end;
-z-index:30
-}
-
-.modal.show{
-display:flex
-}
-
-.sheet{
-background:var(--card);
-width:100%;
-max-width:760px;
-margin:auto;
-padding:20px;
-border-radius:24px 24px 0 0;
-max-height:90vh;
-overflow:auto
+.badge{
+ display:inline-block;border:1px solid #8dd9bc;
+ color:var(--green);background:#effbf6;
+ border-radius:18px;padding:7px 11px
 }
 
 .notice{
-padding:13px;
-border:1px solid #ead88d;
-background:#fffbea;
-border-radius:15px;
-margin-bottom:15px
+ padding:12px;border:1px solid #ead88d;
+ background:#fffbea;border-radius:14px;margin-bottom:15px
 }
 
-.profileBox{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px
+.form-row{margin:11px 0}
+.form-row label{display:block;margin-bottom:6px}
+.form-row input,.form-row select{
+ width:100%;padding:12px;border:1px solid var(--line);
+ border-radius:12px;background:var(--card);color:var(--text)
 }
 
-@media(max-width:520px){
-.profileBox{grid-template-columns:1fr}
+.primary{
+ background:var(--blue);color:#fff;border:0;
+ border-radius:12px;padding:12px 17px
+}
+.danger{
+ background:var(--red);color:#fff;border:0;
+ border-radius:12px;padding:12px 17px
+}
+.full{width:100%}
+
+.progress{
+ height:12px;background:#dfe5ec;
+ border-radius:20px;overflow:hidden
+}
+.bar{height:100%;background:var(--blue);border-radius:20px}
+
+.circle{
+ width:112px;height:112px;border-radius:50%;
+ display:grid;place-items:center;margin:12px auto;
+ background:conic-gradient(var(--blue) var(--p),#dce3eb 0);
+ position:relative
+}
+.circle:after{
+ content:"";position:absolute;width:83px;height:83px;
+ background:var(--card);border-radius:50%
+}
+.circle span{z-index:1;font-size:24px}
+
+.subjects{
+ display:flex;gap:8px;overflow-x:auto;padding-bottom:3px
+}
+.subjects button{
+ white-space:nowrap;padding:10px 14px;border-radius:13px;
+ border:1px solid var(--line);background:#f2f4f7
+}
+.subjects button.on{background:var(--blue);color:#fff}
+
+.tabs{display:flex;gap:7px;margin:12px 0}
+.tabs button{
+ flex:1;padding:10px 5px;border-radius:13px;
+ border:1px solid var(--line);background:#f2f4f7
+}
+.tabs button.on{background:var(--blue);color:#fff}
+
+.chapter,.focus{
+ border:1px solid var(--line);border-radius:16px;
+ padding:14px;margin-top:9px;background:#f8fafc
+}
+.chapter{
+ display:flex;justify-content:space-between;
+ align-items:center;gap:10px
+}
+.chapter small,.focus small{
+ display:block;color:var(--muted);font-weight:400;margin-top:4px
 }
 
-.darkMode{
---bg:#10151c;
---card:#18202a;
---text:#f3f5f7;
---muted:#aab4c1;
---line:#344150
+.check{
+ width:27px;height:27px;min-width:27px;
+ border-radius:50%;border:2px solid #c8d1dc;
+ background:#edf1f5;display:grid;place-items:center
+}
+.check.done{background:var(--green);border-color:#0d8f64;color:#fff}
+.check.done:after{content:"✓"}
+
+.statgrid{
+ display:grid;grid-template-columns:1fr 1fr;gap:9px
+}
+.stat{background:#f7f9fb;border-radius:14px;padding:13px}
+
+.bottom{
+ position:fixed;bottom:0;left:50%;
+ transform:translateX(-50%);
+ width:min(760px,100%);background:var(--card);
+ border-top:1px solid var(--line);display:flex;z-index:20
+}
+.bottom button{
+ flex:1;border:0;background:transparent;padding:9px 2px;
+ color:#667085
+}
+.bottom button.on{color:var(--blue)}
+.ico{font-size:21px;display:block}
+.bottom small{font-size:11px}
+
+.modal{
+ position:fixed;inset:0;background:rgba(0,0,0,.45);
+ display:none;align-items:flex-end;z-index:50
+}
+.modal.show{display:flex}
+.sheet{
+ width:100%;max-width:760px;margin:auto;
+ background:var(--card);padding:19px;
+ border-radius:23px 23px 0 0;
+ max-height:90vh;overflow:auto
 }
 
-body.darkMode header,
-body.darkMode .bottom{
-background:#18202a
+.dark{
+ --bg:#10151c;--card:#18202a;--text:#f3f5f7;
+ --muted:#aab4c1;--line:#344150
+}
+body.dark .chapter,
+body.dark .focus,
+body.dark .stat,
+body.dark .tabs button,
+body.dark .subjects button{
+ background:#202a36
 }
 
-body.darkMode .focus-item,
-body.darkMode .chapter,
-body.darkMode .stat,
-body.darkMode .tabs button,
-body.darkMode .subjects button{
-background:#202a36
-}
-
-body.darkMode .form-row input,
-body.darkMode .form-row select,
-body.darkMode .pill,
-body.darkMode .select{
-background:#202a36;
-color:#fff
+@media(min-width:700px){
+ main{padding:24px}
 }
 </style>
 </head>
@@ -375,353 +187,216 @@ color:#fff
 <div class="app">
 
 <header>
+ <div class="brand">
+  <b>📈 Akshnat<br>Study Tracker</b>
+ </div>
 
-<div class="brand">
+ <button class="pill" onclick="toggleDark()">🌙</button>
 
-<img
-class="logo"
-src="logo.jpg"
-alt="Logo"
-onerror="this.style.display='none'"
->
-
-<b>
-Akshnat<br>Study Tracker
-</b>
-
-</div>
-
-<button class="pill" onclick="toggleDark()">🌙</button>
-
-<select id="profile" class="select" onchange="renderAll()">
-<option id="profileOption">Student</option>
-</select>
-
+ <select id="topProfile" class="select"></select>
 </header>
-
 
 <main>
 
 <!-- HOME -->
-
 <section id="home" class="screen active">
 
 <div class="notice">
 💾 Your progress is saved automatically on this device.
 </div>
 
-
-<!-- PROFILE -->
-
 <div class="card">
 
 <h2>👤 Student Profile</h2>
 
-<div class="profileBox">
-
 <div class="form-row">
-
 <label>Your Name</label>
-
-<input
-id="studentName"
-type="text"
-placeholder="Enter your name"
-oninput="saveProfile()"
->
-
+<input id="nameInput" placeholder="Enter your name">
 </div>
 
-
 <div class="form-row">
-
 <label>Class</label>
-
-<select
-id="classSelect"
-onchange="saveProfile()">
-
-<option value="Class 9">Class 9</option>
-<option value="Class 10">Class 10</option>
-
+<select id="classInput">
+<option value="9">Class 9</option>
+<option value="10">Class 10</option>
 </select>
-
 </div>
 
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<h1 id="hello">Hi!</h1>
-
-<div class="sub">
-Class 9 Exam Preparation
-</div>
-
-</div>
-
-<span class="badge" id="examBadge">
-Choose Exam
-</span>
-
-</div>
-
-<p>
-🔥 <b id="streak">0 Day Streak</b>
-</p>
-
-</div>
-
-
-<!-- EXAM -->
-
-<div class="card">
-
-<h2>Upcoming Exam</h2>
-
-<div class="form-row">
-
-<label>Which exam is upcoming?</label>
-
-<select id="exam" onchange="setExam(this.value)">
-
-<option value="">Select exam</option>
-<option>UT - 1</option>
-<option>MID TERM</option>
-<option>ANNUAL EXAM</option>
-
-</select>
-
-</div>
-
-
-<div class="form-row">
-
-<label>Exam date</label>
-
-<input
-id="examDate"
-type="date"
-onchange="setExamDate(this.value)"
->
-
-</div>
-
-
-<button
-class="primary full"
-onclick="openChecklist()">
-
-Select Syllabus Chapters →
-
+<button class="primary full" onclick="saveProfile()">
+Save Profile
 </button>
 
 </div>
 
+<div class="card">
 
-<h2>Subject Preparation Status</h2>
+<div class="row">
+<div>
+<h1 id="hello">Hi, Student!</h1>
+<div class="sub" id="classText">Class 9 Exam Preparation</div>
+</div>
 
-<div id="subjectStatus"></div>
+<span class="badge" id="examBadge">Choose Exam</span>
+</div>
 
+<p>🔥 <b id="streak">0 Day Streak</b></p>
+
+</div>
 
 <div class="card">
 
+<h2>🎯 Upcoming Exam</h2>
+
+<div class="form-row">
+<label>Which exam is upcoming?</label>
+
+<select id="examInput" onchange="changeExam()">
+<option value="">Select exam</option>
+<option value="UT - 1">UT - 1</option>
+<option value="MID TERM">MID TERM</option>
+<option value="ANNUAL EXAM">ANNUAL EXAM</option>
+</select>
+</div>
+
+<div class="form-row">
+<label>Exam date</label>
+<input id="examDateInput" type="date" onchange="changeExamDate()">
+</div>
+
+<button class="primary full" onclick="openSyllabus()">
+📚 Select Syllabus Chapters →
+</button>
+
+</div>
+
+<h2>Subject Preparation Status</h2>
+<div id="status"></div>
+
+<div class="card">
 <h2>🎯 Today's Focus</h2>
-
-<div id="todayFocus"></div>
-
+<div id="focus"></div>
 </div>
 
 </section>
 
 
 <!-- CHAPTERS -->
-
 <section id="chapters" class="screen">
 
 <h1>Chapters</h1>
 
 <div class="card">
 
-<div class="subjects" id="subjectTabs"></div>
+<div id="chapterSubjects" class="subjects"></div>
 
-<div class="tabs" style="margin-top:12px">
-
-<button
-id="allBtn"
-class="on"
-onclick="setFilter('all')">
-
-All Chapters
-
-</button>
-
-<button
-id="incompleteBtn"
-onclick="setFilter('incomplete')">
-
-Incomplete
-
-</button>
-
-<button
-id="completedBtn"
-onclick="setFilter('completed')">
-
-Completed
-
-</button>
-
+<div class="tabs">
+<button id="filterAll" class="on" onclick="setFilter('all')">All</button>
+<button id="filterPending" onclick="setFilter('pending')">Incomplete</button>
+<button id="filterDone" onclick="setFilter('done')">Completed</button>
 </div>
 
 <div id="chapterList"></div>
 
 </div>
-
 </section>
 
 
 <!-- INSIGHTS -->
-
 <section id="insights" class="screen">
 
-<h1>Study Insights & Analytics</h1>
+<h1>Study Insights</h1>
 
 <div class="sub">
-Visual analytics and preparation progress.
+Your preparation progress and selected syllabus.
 </div>
-
 
 <div class="card">
+<h2>📚 Syllabus Overview</h2>
 
-<h2>📊 7-Day Activity Trend</h2>
+<button class="primary full" onclick="openSyllabus()">
+Select / Edit Exam Syllabus
+</button>
 
-<p>
-🔥 <span id="insightStreak">
-0 Day Streak
-</span>
-</p>
-
-<div id="trend"></div>
-
+<div id="insightSubjects" style="margin-top:12px"></div>
 </div>
 
-<div id="analytics"></div>
+<div class="card">
+<h2>📊 7-Day Activity</h2>
+<p>🔥 <b id="insightStreak">0 Day Streak</b></p>
+<div id="trend"></div>
+</div>
 
 </section>
 
 
 <!-- SETTINGS -->
-
 <section id="settings" class="screen">
 
-<h1>Settings & Profile</h1>
-
+<h1>⚙ Settings</h1>
 
 <div class="card">
 
 <h2>👤 Profile</h2>
 
 <div class="form-row">
-
 <label>Name</label>
-
-<input
-id="settingsName"
-type="text"
-onchange="updateName(this.value)"
->
-
+<input id="settingsName">
 </div>
-
 
 <div class="form-row">
-
 <label>Class</label>
-
-<select
-id="settingsClass"
-onchange="updateClass(this.value)">
-
-<option>Class 9</option>
-<option>Class 10</option>
-
+<select id="settingsClass">
+<option value="9">Class 9</option>
+<option value="10">Class 10</option>
 </select>
-
 </div>
 
-</div>
-
-
-<div class="card">
-
-<h2>📚 Exam Syllabus Selection</h2>
-
-<div class="sub">
-Select the chapters included in your current exam.
-</div>
-
-<button
-class="primary full"
-style="margin-top:12px"
-onclick="openChecklist()">
-
-Edit Exam Syllabus Checklist
-
+<button class="primary full" onclick="saveSettings()">
+Save Profile Changes
 </button>
 
 </div>
 
+<div class="card">
+
+<h2>📚 Exam Syllabus</h2>
+
+<div class="sub">
+Choose the chapters that are actually included in your exam.
+</div>
+
+<button class="primary full" style="margin-top:12px"
+onclick="openSyllabus()">
+Open Syllabus Checklist
+</button>
+
+</div>
 
 <div class="card">
 
 <h2>📅 Exam Datesheet</h2>
-
-<div id="dates"></div>
+<div id="datesheet"></div>
 
 </div>
-
 
 <div class="card">
 
 <h2>🎨 Appearance</h2>
 
-<button
-class="pill"
-onclick="toggleDark()">
-
-🌙 Switch Dark Mode
-
+<button class="pill" onclick="toggleDark()">
+🌙 Toggle Dark Mode
 </button>
 
 </div>
 
-
 <div class="card">
 
-<h2 style="color:var(--red)">
-⚠️ Danger Zone
-</h2>
+<h2 style="color:var(--red)">⚠️ Danger Zone</h2>
 
-<div class="sub">
-Clear all local data and reset app state.
-</div>
+<p class="sub">Delete all saved tracker data.</p>
 
-<br>
-
-<button
-class="danger"
-onclick="resetApp()">
-
+<button class="danger" onclick="resetApp()">
 Reset All App Data
-
 </button>
 
 </div>
@@ -731,44 +406,27 @@ Reset All App Data
 </main>
 
 
-<!-- BOTTOM NAV -->
-
+<!-- NAV -->
 <nav class="bottom">
 
-<button
-class="on"
-onclick="go('home',this)">
-
+<button class="on" onclick="go('home',this)">
 <span class="ico">▦</span>
 <small>Home</small>
-
 </button>
 
-
-<button
-onclick="go('chapters',this)">
-
+<button onclick="go('chapters',this)">
 <span class="ico">☰</span>
 <small>Chapters</small>
-
 </button>
 
-
-<button
-onclick="go('insights',this)">
-
+<button onclick="go('insights',this)">
 <span class="ico">▥</span>
 <small>Insights</small>
-
 </button>
 
-
-<button
-onclick="go('settings',this)">
-
+<button onclick="go('settings',this)">
 <span class="ico">⚙</span>
 <small>Settings</small>
-
 </button>
 
 </nav>
@@ -777,60 +435,44 @@ onclick="go('settings',this)">
 
 
 <!-- SYLLABUS MODAL -->
-
-<div class="modal" id="modal">
+<div id="modal" class="modal">
 
 <div class="sheet">
 
 <div class="row">
+<h2>📚 Select Syllabus</h2>
 
-<h2>Select Exam Syllabus</h2>
-
-<button
-class="pill"
-onclick="closeChecklist()">
-
-✕
-
-</button>
-
+<button class="pill" onclick="closeSyllabus()">✕</button>
 </div>
 
 <p class="sub">
-Tick only the chapters included in your exam.
+First select your exam, then tick only the chapters included in that exam.
 </p>
 
-<div class="subjects" id="modalSubjects"></div>
+<div id="modalSubjects" class="subjects"></div>
 
-<div
-class="checklist"
-id="checklist">
-</div>
+<div id="checklist"></div>
 
-<button
-class="primary full"
+<button class="primary full"
 style="margin-top:14px"
-onclick="closeChecklist()">
-
+onclick="closeSyllabus()">
 Save Syllabus
-
 </button>
 
 </div>
-
 </div>
 
 
 <script>
 
-/*
-====================================================
-CLASS 9 — CBSE 2026-27
-New curriculum structure
-====================================================
-*/
+/* =====================================================
+   SYLLABUS
+   The tracker structure is ready for the new 2026-27
+   Class IX curriculum. Chapter data can be updated
+   independently without changing the app.
+===================================================== */
 
-const CLASS9 = {
+const SYLLABUS9 = {
 
 "Mathematics":[
 "Number Systems",
@@ -855,11 +497,11 @@ const CLASS9 = {
 ],
 
 "Social Science":[
-"Part 1: India and the Contemporary World",
-"Part 2: India — Land and the People",
-"Part 3: Democratic Politics",
-"Part 4: Economics",
-"Interdisciplinary Social Science / Projects"
+"India and the Contemporary World",
+"India — Land and the People",
+"Democratic Politics",
+"Economics",
+"Interdisciplinary Social Science"
 ],
 
 "English":[
@@ -871,7 +513,7 @@ const CLASS9 = {
 ],
 
 "Hindi":[
-"Hindi R1/R2 — NCERT",
+"हिंदी — R1 / R2",
 "पठन कौशल",
 "व्याकरण",
 "लेखन कौशल",
@@ -879,7 +521,7 @@ const CLASS9 = {
 ],
 
 "Urdu":[
-"Urdu R1/R2 — NCERT",
+"Urdu — R1 / R2",
 "Reading Skills",
 "Grammar",
 "Writing Skills",
@@ -890,209 +532,215 @@ const CLASS9 = {
 
 
 /*
-CLASS 10
-Structure is ready.
-Exact 2026-27 chapter list can be added
-without changing the tracker system.
+Class 10 is included as an option in the profile.
+Its detailed chapter database can be filled separately.
+It will NOT break the tracker.
 */
 
-const CLASS10 = {
+const SYLLABUS10 = {
 
 "Mathematics":[
-"Mathematics — Class X 2026-27"
+"Class 10 Mathematics — Syllabus"
 ],
 
 "Science":[
-"Science — Class X 2026-27"
+"Class 10 Science — Syllabus"
 ],
 
 "Social Science":[
-"Social Science — Class X 2026-27"
+"Class 10 Social Science — Syllabus"
 ],
 
 "English":[
-"English — Class X 2026-27"
+"Class 10 English — Syllabus"
 ],
 
 "Hindi":[
-"Hindi — Class X 2026-27"
+"Class 10 Hindi — Syllabus"
 ],
 
 "Urdu":[
-"Urdu — Class X 2026-27"
+"Class 10 Urdu — Syllabus"
 ]
 
 };
 
 
-let state = JSON.parse(
-localStorage.getItem("akshnatTrackerV3") || "null"
-) || {
+const KEY="akshnat-study-tracker-final";
 
-name:"",
-className:"Class 9",
 
-exam:"",
-examDate:"",
+let state=loadState();
 
-selected:{},
+let currentSubject=
+Object.keys(getSyllabus())[0];
 
-done:{},
+let filter="all";
 
-activity:{},
 
-dates:{},
+function defaultState(){
 
-dark:false
-
+return {
+ name:"",
+ className:"9",
+ exam:"",
+ examDate:"",
+ selected:{},
+ done:{},
+ activity:{},
+ datesheet:{},
+ dark:false
 };
-
-
-let currentSubject="Mathematics";
-let filterMode="all";
-
-
-function getSyllabus(){
-
-return state.className==="Class 10"
-?CLASS10
-:CLASS9;
 
 }
 
 
-function saveOnly(){
+function loadState(){
+
+try{
+
+const x=
+JSON.parse(localStorage.getItem(KEY));
+
+return x || defaultState();
+
+}catch(e){
+
+return defaultState();
+
+}
+
+}
+
+
+function save(){
 
 localStorage.setItem(
-"akshnatTrackerV3",
+KEY,
 JSON.stringify(state)
 );
 
 }
 
 
+function getSyllabus(){
+
+return state.className==="10"
+?SYLLABUS10
+:SYLLABUS9;
+
+}
+
+
+/* ---------- PROFILE ---------- */
+
 function saveProfile(){
 
-let name=
-document.getElementById("studentName").value.trim();
+state.name=
+document.getElementById("nameInput")
+.value.trim();
 
-let cls=
-document.getElementById("classSelect").value;
+state.className=
+document.getElementById("classInput")
+.value;
 
-state.name=name;
-state.className=cls;
+save();
 
-saveOnly();
-
-updateProfileUI();
-
-renderSubjectsOnly();
-
-}
-
-
-function updateName(v){
-
-state.name=v.trim();
-
-saveOnly();
-
-updateProfileUI();
-
-}
-
-
-function updateClass(v){
-
-state.className=v;
-
-state.selected={};
-state.done={};
-
-saveOnly();
-
-currentSubject=Object.keys(
-getSyllabus()
-)[0];
+currentSubject=
+Object.keys(getSyllabus())[0];
 
 renderAll();
 
-}
-
-
-function updateProfileUI(){
-
-let name=state.name||"Student";
-
-document.getElementById(
-"hello"
-).textContent=
-"Hi, "+name+"!";
-
-document.getElementById(
-"profileOption"
-).textContent=
-name+" ("+state.className+")";
-
-document.getElementById(
-"profile"
-).value=
-name+" ("+state.className+")";
-
-document.getElementById(
-"studentName"
-).value=
-state.name;
-
-document.getElementById(
-"classSelect"
-).value=
-state.className;
-
-document.getElementById(
-"settingsName"
-).value=
-state.name;
-
-document.getElementById(
-"settingsClass"
-).value=
-state.className;
+alert("Profile saved successfully.");
 
 }
 
 
-function setExam(v){
+function saveSettings(){
 
-state.exam=v;
+state.name=
+document.getElementById("settingsName")
+.value.trim();
 
-saveOnly();
+state.className=
+document.getElementById("settingsClass")
+.value;
 
-document.getElementById(
-"examBadge"
-).textContent=
-v||"Choose Exam";
+save();
 
-}
+currentSubject=
+Object.keys(getSyllabus())[0];
 
+renderAll();
 
-function setExamDate(v){
-
-state.examDate=v;
-
-saveOnly();
-
-}
-
-
-function getSelected(subject){
-
-return state.selected[subject]||[];
+alert("Settings saved successfully.");
 
 }
 
 
-function getDone(subject,chapter){
+/* ---------- EXAM ---------- */
+
+function changeExam(){
+
+state.exam=
+document.getElementById("examInput").value;
+
+save();
+
+renderHome();
+
+}
+
+
+function changeExamDate(){
+
+state.examDate=
+document.getElementById("examDateInput").value;
+
+save();
+
+renderHome();
+
+}
+
+
+/* ---------- NAVIGATION ---------- */
+
+function go(id,button){
+
+document
+.querySelectorAll(".screen")
+.forEach(s=>s.classList.remove("active"));
+
+document
+.getElementById(id)
+.classList.add("active");
+
+document
+.querySelectorAll(".bottom button")
+.forEach(b=>b.classList.remove("on"));
+
+button.classList.add("on");
+
+if(id==="home")renderHome();
+if(id==="chapters")renderChapters();
+if(id==="insights")renderInsights();
+if(id==="settings")renderSettings();
+
+window.scrollTo(0,0);
+
+}
+
+
+/* ---------- BASIC HELPERS ---------- */
+
+function selected(subject){
+
+return state.selected[subject] || [];
+
+}
+
+
+function isDone(subject,chapter){
 
 return !!state.done[
 subject+"|"+chapter
@@ -1101,139 +749,57 @@ subject+"|"+chapter
 }
 
 
-function selectedCount(subject){
+function total(subject){
 
-return getSelected(subject).length;
+return selected(subject).length;
 
 }
 
 
-function completedCount(subject){
+function completed(subject){
 
-return getSelected(subject)
-.filter(c=>getDone(subject,c))
+return selected(subject)
+.filter(c=>isDone(subject,c))
 .length;
 
 }
 
 
-function percent(subject){
+function percentage(subject){
 
-let total=
-selectedCount(subject);
+const t=total(subject);
 
-return total
-?Math.round(
-completedCount(subject)/total*100
-)
+return t
+?Math.round(completed(subject)/t*100)
 :0;
 
 }
 
 
-function getAllSelected(){
-
-let all=[];
-
-Object.keys(getSyllabus())
-.forEach(subject=>{
-
-getSelected(subject)
-.forEach(chapter=>{
-
-all.push({
-subject,
-chapter
-});
-
-});
-
-});
-
-return all;
-
-}
-
-
-/* NAVIGATION */
-
-function go(id,btn){
-
-document
-.querySelectorAll(".screen")
-.forEach(x=>
-x.classList.remove("active")
-);
-
-document
-.getElementById(id)
-.classList.add("active");
-
-document
-.querySelectorAll(".bottom button")
-.forEach(x=>
-x.classList.remove("on")
-);
-
-btn.classList.add("on");
-
-if(id==="home"){
-renderHome();
-}
-
-if(id==="chapters"){
-renderChapters();
-}
-
-if(id==="insights"){
-renderInsights();
-}
-
-if(id==="settings"){
-renderSettings();
-}
-
-window.scrollTo(0,0);
-
-}
-
-
-/* FULL RENDER ONLY WHEN NEEDED */
-
-function renderAll(){
-
-updateProfileUI();
-
-document.getElementById(
-"exam"
-).value=state.exam||"";
-
-document.getElementById(
-"examDate"
-).value=state.examDate||"";
-
-document.getElementById(
-"examBadge"
-).textContent=
-state.exam||"Choose Exam";
-
-renderHome();
-
-renderChapters();
-
-renderInsights();
-
-renderSettings();
-
-if(state.dark)
-document.body.classList.add("darkMode");
-
-}
-
-
-/* HOME */
+/* ---------- HOME ---------- */
 
 function renderHome(){
+
+document.getElementById("nameInput").value=
+state.name;
+
+document.getElementById("classInput").value=
+state.className;
+
+document.getElementById("hello").textContent=
+"Hi, "+(state.name||"Student")+"!";
+
+document.getElementById("classText").textContent=
+"Class "+state.className+" Exam Preparation";
+
+document.getElementById("examInput").value=
+state.exam;
+
+document.getElementById("examDateInput").value=
+state.examDate;
+
+document.getElementById("examBadge").textContent=
+state.exam||"Choose Exam";
 
 renderStatus();
 renderFocus();
@@ -1244,29 +810,21 @@ renderStreak();
 
 function renderStatus(){
 
-let box=
-document.getElementById(
-"subjectStatus"
-);
-
-let syllabus=getSyllabus();
+const box=
+document.getElementById("status");
 
 let html="";
 
-
-Object.keys(syllabus)
+Object.keys(getSyllabus())
 .forEach(subject=>{
 
-let total=
-selectedCount(subject);
+const t=total(subject);
 
-if(!total)return;
+if(!t)return;
 
-let done=
-completedCount(subject);
-
-let p=
-percent(subject);
+const d=completed(subject);
+const left=t-d;
+const p=percentage(subject);
 
 html+=`
 
@@ -1282,34 +840,17 @@ ${p===100?"Done":"On Track"}
 
 </div>
 
-<div
-class="circle"
-style="--p:${p}%">
-
+<div class="circle" style="--p:${p}%">
 <span>${p}%</span>
-
 </div>
 
-<b>${p}% Overall Complete</b>
+<b>${d} completed • ${left} chapters left</b>
 
-<p class="sub">
-
-${done} completed •
-${total-done} chapters left
-
-</p>
-
-<div class="progress">
-
-<div
-class="bar"
-style="width:${p}%">
+<div class="progress" style="margin-top:10px">
+<div class="bar" style="width:${p}%"></div>
 </div>
 
 </div>
-
-</div>
-
 `;
 
 });
@@ -1318,21 +859,15 @@ style="width:${p}%">
 if(!html){
 
 html=`
-
 <div class="card">
-
-<b>No syllabus selected yet.</b>
-
+<b>No syllabus selected.</b>
 <p class="sub">
-Choose your exam and select the chapters.
+Select your exam and open the syllabus checklist.
 </p>
-
 </div>
-
 `;
 
 }
-
 
 box.innerHTML=html;
 
@@ -1341,27 +876,37 @@ box.innerHTML=html;
 
 function renderFocus(){
 
-let all=
-getAllSelected()
-.filter(x=>
-!getDone(x.subject,x.chapter)
-);
+const pending=[];
 
-let box=
-document.getElementById(
-"todayFocus"
-);
+Object.keys(getSyllabus())
+.forEach(subject=>{
 
-if(!all.length){
+selected(subject).forEach(chapter=>{
+
+if(!isDone(subject,chapter) &&
+pending.length<3){
+
+pending.push({
+subject,
+chapter
+});
+
+}
+
+});
+
+});
+
+
+const box=
+document.getElementById("focus");
+
+if(!pending.length){
 
 box.innerHTML=`
-
-<div class="focus-item">
-
+<div class="focus">
 🎉 No pending selected chapters.
-
 </div>
-
 `;
 
 return;
@@ -1369,51 +914,36 @@ return;
 }
 
 
-let examDate=
-state.examDate
-?new Date(state.examDate)
-:null;
-
-let now=new Date();
-
 let days=1;
 
-if(examDate){
+if(state.examDate){
+
+const target=
+new Date(state.examDate+"T23:59:59");
+
+const now=new Date();
 
 days=Math.max(
 1,
-Math.ceil(
-(examDate-now)/
-86400000
-)
+Math.ceil((target-now)/86400000)
 );
 
 }
 
 
-let perDay=
+const daily=
 Math.max(
 1,
-Math.ceil(all.length/days)
-);
-
-let today=
-all.slice(0,perDay);
-
-let minutes=
-Math.max(
-15,
-Math.floor(
-180/today.length
+Math.ceil(
+pending.length/days
 )
 );
 
 
 box.innerHTML=
+pending.slice(0,daily).map(x=>`
 
-today.map(x=>`
-
-<div class="focus-item">
+<div class="focus">
 
 <b>${x.subject}</b>
 
@@ -1421,8 +951,6 @@ today.map(x=>`
 
 <small>
 Today: Theory → Questions → Revision
-<br>
-⏱️ About ${minutes} minutes
 </small>
 
 </div>
@@ -1432,127 +960,103 @@ Today: Theory → Questions → Revision
 }
 
 
-/* CHAPTER TABS */
+/* ---------- SUBJECTS ---------- */
 
-function renderSubjectsOnly(){
+function subjectButtons(containerId){
 
-let subjects=
-Object.keys(getSyllabus());
+const box=
+document.getElementById(containerId);
 
-if(!subjects.includes(currentSubject))
-currentSubject=subjects[0];
-
-let html="";
-
-subjects.forEach(s=>{
-
-html+=`
+box.innerHTML=
+Object.keys(getSyllabus())
+.map(subject=>`
 
 <button
-class="${s===currentSubject?"on":""}"
-onclick="changeSubject('${escapeJS(s)}')">
+class="${subject===currentSubject?"on":""}"
+onclick="selectSubject('${esc(subject)}')">
 
-${s}
+${subject}
 
 </button>
 
-`;
-
-});
-
-document.getElementById(
-"subjectTabs"
-).innerHTML=html;
-
-document.getElementById(
-"modalSubjects"
-).innerHTML=html;
+`).join("");
 
 }
 
 
-function changeSubject(s){
+function selectSubject(subject){
 
-currentSubject=s;
+currentSubject=subject;
 
-renderSubjectsOnly();
+subjectButtons("chapterSubjects");
+subjectButtons("modalSubjects");
+
 renderChapters();
 renderChecklist();
 
 }
 
 
-function setFilter(mode){
+/* ---------- CHAPTERS ---------- */
 
-filterMode=mode;
+function setFilter(value){
 
-document.getElementById(
-"allBtn"
-).classList.toggle(
-"on",mode==="all"
-);
+filter=value;
 
-document.getElementById(
-"incompleteBtn"
-).classList.toggle(
-"on",mode==="incomplete"
-);
+document
+.getElementById("filterAll")
+.classList.toggle("on",value==="all");
 
-document.getElementById(
-"completedBtn"
-).classList.toggle(
-"on",mode==="completed"
-);
+document
+.getElementById("filterPending")
+.classList.toggle("on",value==="pending");
+
+document
+.getElementById("filterDone")
+.classList.toggle("on",value==="done");
 
 renderChapters();
 
 }
 
 
-/* CHAPTERS */
-
 function renderChapters(){
 
-renderSubjectsOnly();
+subjectButtons("chapterSubjects");
 
 let list=
-getSelected(currentSubject);
+[...selected(currentSubject)];
 
 
-if(filterMode==="completed"){
-
-list=list.filter(
-c=>getDone(currentSubject,c)
-);
-
-}
-
-if(filterMode==="incomplete"){
+if(filter==="pending"){
 
 list=list.filter(
-c=>!getDone(currentSubject,c)
+c=>!isDone(currentSubject,c)
 );
 
 }
 
 
-let box=
-document.getElementById(
-"chapterList"
+if(filter==="done"){
+
+list=list.filter(
+c=>isDone(currentSubject,c)
 );
+
+}
+
+
+const box=
+document.getElementById("chapterList");
 
 
 if(!list.length){
 
 box.innerHTML=`
-
 <p class="sub">
-
-No chapters in this filter.
-Select chapters from Settings.
-
+No chapters here yet.
+Open Settings → Exam Syllabus Checklist.
 </p>
-
 `;
 
 return;
@@ -1563,33 +1067,22 @@ return;
 box.innerHTML=
 list.map(chapter=>{
 
-let done=
-getDone(currentSubject,chapter);
+const done=
+isDone(currentSubject,chapter);
 
-return `
+return`
 
-<div
-class="chapter"
-onclick="toggleDone(
-'${escapeJS(currentSubject)}',
-'${escapeJS(chapter)}'
-)">
+<div class="chapter"
+onclick="toggleDone('${esc(currentSubject)}','${esc(chapter)}')">
 
 <div>
-
-<b>
-${chapter}
-</b>
-
+<b>${chapter}</b>
 <small>
 Theory • Questions • Revision
 </small>
-
 </div>
 
-<div
-class="check ${done?"done":""}">
-</div>
+<div class="check ${done?"done":""}"></div>
 
 </div>
 
@@ -1600,14 +1093,46 @@ class="check ${done?"done":""}">
 }
 
 
-/* CHECKLIST */
+function toggleDone(subject,chapter){
 
-function openChecklist(){
+const key=
+subject+"|"+chapter;
+
+state.done[key]=
+!state.done[key];
+
+
+if(state.done[key]){
+
+const date=
+new Date()
+.toISOString()
+.slice(0,10);
+
+state.activity[date]=
+(state.activity[date]||0)+1;
+
+}
+
+
+save();
+
+renderChapters();
+renderStatus();
+renderFocus();
+renderStreak();
+
+}
+
+
+/* ---------- SYLLABUS MODAL ---------- */
+
+function openSyllabus(){
 
 if(!state.exam){
 
 alert(
-"Please select the upcoming exam first."
+"Please select UT-1, MID TERM or ANNUAL EXAM first."
 );
 
 return;
@@ -1618,58 +1143,49 @@ document
 .getElementById("modal")
 .classList.add("show");
 
+subjectButtons("modalSubjects");
 renderChecklist();
 
 }
 
 
-function closeChecklist(){
+function closeSyllabus(){
 
 document
 .getElementById("modal")
 .classList.remove("show");
 
-renderHome();
+renderAll();
 
 }
 
 
 function renderChecklist(){
 
-renderSubjectsOnly();
-
-let list=
+const chapters=
 getSyllabus()[currentSubject]||[];
 
-let selected=
-getSelected(currentSubject);
+const chosen=
+selected(currentSubject);
 
-document.getElementById(
-"checklist"
-).innerHTML=
+document.getElementById("checklist").innerHTML=
 
-list.map((chapter,i)=>{
+chapters.map((chapter,index)=>{
 
-let yes=
-selected.includes(chapter);
+const yes=
+chosen.includes(chapter);
 
-return `
+return`
 
 <div class="chapter">
 
 <div>
-
-<b>
-${i+1}. ${chapter}
-</b>
-
+<b>${index+1}. ${chapter}</b>
 </div>
 
 <div
 class="check ${yes?"done":""}"
-onclick="toggleSelected(
-'${escapeJS(chapter)}'
-)">
+onclick="toggleSelected('${esc(chapter)}')">
 </div>
 
 </div>
@@ -1683,73 +1199,125 @@ onclick="toggleSelected(
 
 function toggleSelected(chapter){
 
-let arr=[
-...getSelected(currentSubject)
-];
+let arr=
+[...selected(currentSubject)];
 
-let index=
-arr.indexOf(chapter);
+if(arr.includes(chapter)){
 
-if(index>=0)
-arr.splice(index,1);
-else
+arr=arr.filter(c=>c!==chapter);
+
+}else{
+
 arr.push(chapter);
+
+}
 
 state.selected[currentSubject]=arr;
 
-saveOnly();
+save();
 
 renderChecklist();
 
 }
 
 
-/* COMPLETE CHAPTER */
+/* ---------- INSIGHTS ---------- */
 
-function toggleDone(subject,chapter){
+function renderInsights(){
 
-let key=
-subject+"|"+chapter;
+subjectButtons("chapterSubjects");
 
-let newValue=
-!state.done[key];
+const box=
+document.getElementById("insightSubjects");
 
-state.done[key]=newValue;
+let html="";
+
+Object.keys(getSyllabus())
+.forEach(subject=>{
+
+const t=total(subject);
+
+if(!t)return;
+
+const d=completed(subject);
+const left=t-d;
+const p=percentage(subject);
+
+html+=`
+
+<div class="card">
+
+<div class="row">
+
+<h3>${subject}</h3>
+
+<span class="badge">${p}%</span>
+
+</div>
+
+<div class="statgrid">
+
+<div class="stat">
+<small>Completed</small>
+<h3>${d}</h3>
+</div>
+
+<div class="stat">
+<small>⏳ Chapters Left</small>
+<h3>${left}</h3>
+</div>
+
+</div>
+
+<div class="progress" style="margin-top:12px">
+<div class="bar" style="width:${p}%"></div>
+</div>
+
+</div>
+
+`;
+
+});
 
 
-if(newValue){
+if(!html){
 
-let d=
-new Date()
-.toISOString()
-.slice(0,10);
+html=`
+<p class="sub">
+No exam syllabus selected yet.
+Tap "Select / Edit Exam Syllabus".
+</p>
+`;
 
-state.activity[d]=
-(state.activity[d]||0)+1;
+}
+
+box.innerHTML=html;
+
+renderTrend();
 
 }
 
 
-saveOnly();
+function renderTrend(){
 
+const box=
+document.getElementById("trend");
 
-/*
-Only update required UI.
-This is the main performance fix.
-*/
+let html=`
+<div style="
+display:flex;
+align-items:end;
+gap:8px;
+height:155px">
+`;
 
-renderChapters();
-renderStatus();
-renderFocus();
-renderStreak();
+for(let i=6;i>=0;i--){
 
-}
+const d=new Date();
 
+d.setDate(
+d.getDate()-i
+);
 
-/* STREAK */
-
-function calculateStreak(){
-
-let dates=
-Object.keys(state.activity)
-.filter(d=>s
+const key=
+d.toISOString().sli
