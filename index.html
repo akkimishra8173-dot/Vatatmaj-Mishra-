@@ -2,182 +2,317 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#087fb2">
-<title>Akshnat Study Tracker</title>
+<title>Study Work Tracker</title>
 
 <style>
 :root{
- --bg:#f4f6f8;--card:#fff;--text:#101a2c;--muted:#667085;
- --blue:#087fb2;--green:#16a673;--red:#d83c3c;--line:#d7dde5
+  --bg:#f4f6f8;
+  --card:#fff;
+  --text:#101828;
+  --muted:#667085;
+  --blue:#087fb2;
+  --green:#16a673;
+  --red:#d83c3c;
+  --orange:#f79009;
+  --line:#d9dee7;
 }
 *{box-sizing:border-box}
 body{
- margin:0;background:var(--bg);color:var(--text);
- font-family:Arial,Helvetica,sans-serif
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
 }
 button,input,select{font:inherit}
 button{cursor:pointer}
-.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:80px}
+
+.app{
+  max-width:760px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:85px;
+}
 
 header{
- position:sticky;top:0;z-index:10;background:var(--card);
- border-bottom:1px solid var(--line);padding:12px;
- display:flex;gap:9px;align-items:center
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:var(--card);
+  border-bottom:1px solid var(--line);
+  padding:13px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
-.brand{display:flex;align-items:center;gap:8px;min-width:145px}
-.brand b{font-size:17px;line-height:1.05}
-.pill,.select{
- border:1px solid var(--line);background:var(--card);
- border-radius:13px;padding:11px
-}
-.select{flex:1;min-width:0}
 
-main{padding:18px 14px}
-.screen{display:none}
-.screen.active{display:block}
+.logo{
+  font-size:19px;
+  font-weight:800;
+  line-height:1.05;
+}
+
+main{padding:16px 13px}
 
 .card{
- background:var(--card);border:1px solid var(--line);
- border-radius:20px;padding:17px;margin-bottom:15px;
- box-shadow:0 2px 9px rgba(15,30,50,.04)
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:17px;
+  margin-bottom:15px;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
 }
+
 h1{font-size:29px;margin:5px 0 8px}
-h2{font-size:23px;margin:7px 0 13px}
-h3{margin:0 0 7px}
-.sub{color:var(--muted);font-weight:400;line-height:1.45}
+h2{font-size:22px;margin:6px 0 14px}
+h3{margin:0 0 5px}
+
+.sub{
+  color:var(--muted);
+  line-height:1.45;
+}
 
 .row{
- display:flex;justify-content:space-between;
- align-items:center;gap:10px
-}
-.badge{
- display:inline-block;border:1px solid #8dd9bc;
- color:var(--green);background:#effbf6;
- border-radius:18px;padding:7px 11px
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
 }
 
-.notice{
- padding:12px;border:1px solid #ead88d;
- background:#fffbea;border-radius:14px;margin-bottom:15px
+.form{
+  margin:12px 0;
 }
 
-.form-row{margin:11px 0}
-.form-row label{display:block;margin-bottom:6px}
-.form-row input,.form-row select{
- width:100%;padding:12px;border:1px solid var(--line);
- border-radius:12px;background:var(--card);color:var(--text)
+.form label{
+  display:block;
+  margin-bottom:6px;
+  font-weight:700;
+}
+
+.form input,
+.form select{
+  width:100%;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--card);
+  color:var(--text);
 }
 
 .primary{
- background:var(--blue);color:#fff;border:0;
- border-radius:12px;padding:12px 17px
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:13px;
+  background:var(--blue);
+  color:white;
+  font-weight:700;
 }
+
 .danger{
- background:var(--red);color:#fff;border:0;
- border-radius:12px;padding:12px 17px
+  padding:12px 16px;
+  border:0;
+  border-radius:12px;
+  background:var(--red);
+  color:white;
+  font-weight:700;
 }
-.full{width:100%}
+
+/* SUMMARY */
+
+.summaryGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.summary{
+  padding:15px;
+  border-radius:16px;
+  background:#f7f9fb;
+  border:1px solid var(--line);
+}
+
+.summary strong{
+  display:block;
+  font-size:25px;
+  margin-top:5px;
+}
+
+.blue{color:var(--blue)}
+.green{color:var(--green)}
+.red{color:var(--red)}
+.orange{color:var(--orange)}
 
 .progress{
- height:12px;background:#dfe5ec;
- border-radius:20px;overflow:hidden
-}
-.bar{height:100%;background:var(--blue);border-radius:20px}
-
-.circle{
- width:112px;height:112px;border-radius:50%;
- display:grid;place-items:center;margin:12px auto;
- background:conic-gradient(var(--blue) var(--p),#dce3eb 0);
- position:relative
-}
-.circle:after{
- content:"";position:absolute;width:83px;height:83px;
- background:var(--card);border-radius:50%
-}
-.circle span{z-index:1;font-size:24px}
-
-.subjects{
- display:flex;gap:8px;overflow-x:auto;padding-bottom:3px
-}
-.subjects button{
- white-space:nowrap;padding:10px 14px;border-radius:13px;
- border:1px solid var(--line);background:#f2f4f7
-}
-.subjects button.on{background:var(--blue);color:#fff}
-
-.tabs{display:flex;gap:7px;margin:12px 0}
-.tabs button{
- flex:1;padding:10px 5px;border-radius:13px;
- border:1px solid var(--line);background:#f2f4f7
-}
-.tabs button.on{background:var(--blue);color:#fff}
-
-.chapter,.focus{
- border:1px solid var(--line);border-radius:16px;
- padding:14px;margin-top:9px;background:#f8fafc
-}
-.chapter{
- display:flex;justify-content:space-between;
- align-items:center;gap:10px
-}
-.chapter small,.focus small{
- display:block;color:var(--muted);font-weight:400;margin-top:4px
+  height:13px;
+  background:#e1e6ec;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:10px;
 }
 
-.check{
- width:27px;height:27px;min-width:27px;
- border-radius:50%;border:2px solid #c8d1dc;
- background:#edf1f5;display:grid;place-items:center
+.bar{
+  height:100%;
+  background:var(--blue);
+  border-radius:20px;
+  transition:.2s;
 }
-.check.done{background:var(--green);border-color:#0d8f64;color:#fff}
-.check.done:after{content:"✓"}
 
-.statgrid{
- display:grid;grid-template-columns:1fr 1fr;gap:9px
+/* WORK */
+
+.work{
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:13px;
+  margin-top:10px;
+  background:#fafbfc;
 }
-.stat{background:#f7f9fb;border-radius:14px;padding:13px}
+
+.workTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.subjectName{
+  font-weight:800;
+  font-size:16px;
+}
+
+.workButtons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-top:12px;
+}
+
+.workBtn{
+  padding:10px 5px;
+  border-radius:11px;
+  border:1px solid var(--line);
+  background:#fff;
+  font-weight:700;
+}
+
+.workBtn.done.active{
+  background:#eaf9f3;
+  border-color:var(--green);
+  color:var(--green);
+}
+
+.workBtn.pending.active{
+  background:#fff0f0;
+  border-color:var(--red);
+  color:var(--red);
+}
+
+.urgentBtn{
+  margin-top:8px;
+  width:100%;
+  padding:10px;
+  border-radius:11px;
+  border:1px solid var(--line);
+  background:#fff;
+  font-weight:700;
+}
+
+.urgentBtn.active{
+  background:#fff5e6;
+  border-color:var(--orange);
+  color:var(--orange);
+}
+
+/* URGENT */
+
+.urgentItem{
+  padding:13px;
+  border-left:5px solid var(--orange);
+  background:#fff8ed;
+  border-radius:12px;
+  margin-top:9px;
+}
+
+.empty{
+  padding:15px;
+  border-radius:14px;
+  background:#f7f9fb;
+  color:var(--muted);
+}
+
+/* NAV */
 
 .bottom{
- position:fixed;bottom:0;left:50%;
- transform:translateX(-50%);
- width:min(760px,100%);background:var(--card);
- border-top:1px solid var(--line);display:flex;z-index:20
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(760px,100%);
+  display:flex;
+  background:var(--card);
+  border-top:1px solid var(--line);
+  z-index:20;
 }
+
 .bottom button{
- flex:1;border:0;background:transparent;padding:9px 2px;
- color:#667085
-}
-.bottom button.on{color:var(--blue)}
-.ico{font-size:21px;display:block}
-.bottom small{font-size:11px}
-
-.modal{
- position:fixed;inset:0;background:rgba(0,0,0,.45);
- display:none;align-items:flex-end;z-index:50
-}
-.modal.show{display:flex}
-.sheet{
- width:100%;max-width:760px;margin:auto;
- background:var(--card);padding:19px;
- border-radius:23px 23px 0 0;
- max-height:90vh;overflow:auto
+  flex:1;
+  border:0;
+  background:transparent;
+  padding:10px 3px;
+  color:var(--muted);
 }
 
-.dark{
- --bg:#10151c;--card:#18202a;--text:#f3f5f7;
- --muted:#aab4c1;--line:#344150
-}
-body.dark .chapter,
-body.dark .focus,
-body.dark .stat,
-body.dark .tabs button,
-body.dark .subjects button{
- background:#202a36
+.bottom button.active{
+  color:var(--blue);
 }
 
-@media(min-width:700px){
- main{padding:24px}
+.ico{
+  display:block;
+  font-size:21px;
+}
+
+.bottom small{
+  font-size:11px;
+}
+
+/* SCREENS */
+
+.screen{display:none}
+.screen.active{display:block}
+
+/* DARK */
+
+body.dark{
+  --bg:#10151c;
+  --card:#18212b;
+  --text:#f3f5f7;
+  --muted:#aab4c1;
+  --line:#344150;
+}
+
+body.dark .summary,
+body.dark .work,
+body.dark .empty{
+  background:#202a36;
+}
+
+body.dark .workBtn,
+body.dark .urgentBtn{
+  background:#18212b;
+  color:var(--text);
+}
+
+body.dark .urgentItem{
+  background:#302819;
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+  h1{font-size:26px}
+  .summaryGrid{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -187,216 +322,262 @@ body.dark .subjects button{
 <div class="app">
 
 <header>
- <div class="brand">
-  <b>📈 Akshnat<br>Study Tracker</b>
- </div>
+  <div class="logo">
+    📚 Study<br>Tracker
+  </div>
 
- <button class="pill" onclick="toggleDark()">🌙</button>
-
- <select id="topProfile" class="select"></select>
+  <button onclick="toggleDark()">🌙</button>
 </header>
 
 <main>
 
 <!-- HOME -->
-<section id="home" class="screen active">
 
-<div class="notice">
-💾 Your progress is saved automatically on this device.
-</div>
+<section id="home" class="screen active">
 
 <div class="card">
 
-<h2>👤 Student Profile</h2>
+<h1 id="hello">Hi, Student! 👋</h1>
 
-<div class="form-row">
+<p class="sub">
+Track your school work, pending work and urgent work in one place.
+</p>
+
+<div class="form">
+
 <label>Your Name</label>
-<input id="nameInput" placeholder="Enter your name">
+
+<input
+id="name"
+placeholder="Enter your name">
+
 </div>
 
-<div class="form-row">
+<div class="form">
+
 <label>Class</label>
-<select id="classInput">
+
+<select id="className">
+<option value="">Select Class</option>
 <option value="9">Class 9</option>
 <option value="10">Class 10</option>
 </select>
+
 </div>
 
-<button class="primary full" onclick="saveProfile()">
+<button class="primary" onclick="saveProfile()">
 Save Profile
 </button>
 
 </div>
 
+
+<!-- OVERALL -->
+
+<div class="card">
+
+<h2>📊 Overall Progress</h2>
+
+<div class="summaryGrid">
+
+<div class="summary">
+<span>Total Subjects</span>
+<strong id="totalSubjects">14</strong>
+</div>
+
+<div class="summary">
+<span>Completed</span>
+<strong class="green" id="completedCount">0</strong>
+</div>
+
+<div class="summary">
+<span>Pending</span>
+<strong class="red" id="pendingCount">14</strong>
+</div>
+
+<div class="summary">
+<span>⚡ Urgent</span>
+<strong class="orange" id="urgentCount">0</strong>
+</div>
+
+</div>
+
+<p>
+<b>Overall Work Completed:
+<span id="percent">0%</span>
+</b>
+</p>
+
+<div class="progress">
+<div id="overallBar" class="bar" style="width:0%"></div>
+</div>
+
+<p class="sub" id="remainingText">
+14 subjects ka kaam baki hai.
+</p>
+
+</div>
+
+
+<!-- URGENT -->
+
+<div class="card">
+
+<h2>⚡ Urgent Work</h2>
+
+<div id="urgentList"></div>
+
+</div>
+
+
+<!-- ALL WORK -->
+
 <div class="card">
 
 <div class="row">
-<div>
-<h1 id="hello">Hi, Student!</h1>
-<div class="sub" id="classText">Class 9 Exam Preparation</div>
-</div>
 
-<span class="badge" id="examBadge">Choose Exam</span>
-</div>
+<h2>📋 Work Status</h2>
 
-<p>🔥 <b id="streak">0 Day Streak</b></p>
+<span class="sub">14 Subjects</span>
 
 </div>
 
-<div class="card">
+<div id="workList"></div>
 
-<h2>🎯 Upcoming Exam</h2>
-
-<div class="form-row">
-<label>Which exam is upcoming?</label>
-
-<select id="examInput" onchange="changeExam()">
-<option value="">Select exam</option>
-<option value="UT - 1">UT - 1</option>
-<option value="MID TERM">MID TERM</option>
-<option value="ANNUAL EXAM">ANNUAL EXAM</option>
-</select>
-</div>
-
-<div class="form-row">
-<label>Exam date</label>
-<input id="examDateInput" type="date" onchange="changeExamDate()">
-</div>
-
-<button class="primary full" onclick="openSyllabus()">
-📚 Select Syllabus Chapters →
-</button>
-
-</div>
-
-<h2>Subject Preparation Status</h2>
-<div id="status"></div>
-
-<div class="card">
-<h2>🎯 Today's Focus</h2>
-<div id="focus"></div>
 </div>
 
 </section>
 
 
-<!-- CHAPTERS -->
-<section id="chapters" class="screen">
+<!-- DASHBOARD -->
 
-<h1>Chapters</h1>
+<section id="dashboard" class="screen">
+
+<h1>📈 Dashboard</h1>
+
+<div class="card">
+
+<h2>Overall Status</h2>
+
+<div class="summaryGrid">
+
+<div class="summary">
+<span>Done</span>
+<strong class="green" id="dashDone">0</strong>
+</div>
+
+<div class="summary">
+<span>Pending</span>
+<strong class="red" id="dashPending">14</strong>
+</div>
+
+<div class="summary">
+<span>Urgent</span>
+<strong class="orange" id="dashUrgent">0</strong>
+</div>
+
+<div class="summary">
+<span>Completion</span>
+<strong class="blue" id="dashPercent">0%</strong>
+</div>
+
+</div>
+
+<div class="progress">
+<div id="dashBar" class="bar"></div>
+</div>
+
+</div>
 
 <div class="card">
 
-<div id="chapterSubjects" class="subjects"></div>
+<h2>⏳ Work Remaining</h2>
 
-<div class="tabs">
-<button id="filterAll" class="on" onclick="setFilter('all')">All</button>
-<button id="filterPending" onclick="setFilter('pending')">Incomplete</button>
-<button id="filterDone" onclick="setFilter('done')">Completed</button>
-</div>
+<p id="dashRemaining"></p>
 
-<div id="chapterList"></div>
-
-</div>
-</section>
-
-
-<!-- INSIGHTS -->
-<section id="insights" class="screen">
-
-<h1>Study Insights</h1>
-
-<div class="sub">
-Your preparation progress and selected syllabus.
 </div>
 
 <div class="card">
-<h2>📚 Syllabus Overview</h2>
 
-<button class="primary full" onclick="openSyllabus()">
-Select / Edit Exam Syllabus
-</button>
+<h2>⚡ Urgent Subjects</h2>
 
-<div id="insightSubjects" style="margin-top:12px"></div>
-</div>
+<div id="dashUrgentList"></div>
 
-<div class="card">
-<h2>📊 7-Day Activity</h2>
-<p>🔥 <b id="insightStreak">0 Day Streak</b></p>
-<div id="trend"></div>
 </div>
 
 </section>
 
 
 <!-- SETTINGS -->
+
 <section id="settings" class="screen">
 
-<h1>⚙ Settings</h1>
+<h1>⚙️ Settings</h1>
 
 <div class="card">
 
 <h2>👤 Profile</h2>
 
-<div class="form-row">
+<div class="form">
+
 <label>Name</label>
+
 <input id="settingsName">
+
 </div>
 
-<div class="form-row">
+<div class="form">
+
 <label>Class</label>
+
 <select id="settingsClass">
 <option value="9">Class 9</option>
 <option value="10">Class 10</option>
 </select>
+
 </div>
 
-<button class="primary full" onclick="saveSettings()">
-Save Profile Changes
+<button class="primary" onclick="saveSettings()">
+Save Changes
 </button>
 
 </div>
 
-<div class="card">
-
-<h2>📚 Exam Syllabus</h2>
-
-<div class="sub">
-Choose the chapters that are actually included in your exam.
-</div>
-
-<button class="primary full" style="margin-top:12px"
-onclick="openSyllabus()">
-Open Syllabus Checklist
-</button>
-
-</div>
 
 <div class="card">
 
-<h2>📅 Exam Datesheet</h2>
-<div id="datesheet"></div>
+<h2>📚 Subjects</h2>
+
+<p class="sub">
+Tracker mein sirf ye 14 subjects hain.
+</p>
+
+<div id="subjectNames"></div>
 
 </div>
+
 
 <div class="card">
 
 <h2>🎨 Appearance</h2>
 
-<button class="pill" onclick="toggleDark()">
+<button class="primary" onclick="toggleDark()">
 🌙 Toggle Dark Mode
 </button>
 
 </div>
 
+
 <div class="card">
 
-<h2 style="color:var(--red)">⚠️ Danger Zone</h2>
+<h2 class="red">⚠️ Reset</h2>
 
-<p class="sub">Delete all saved tracker data.</p>
+<p class="sub">
+Saara saved progress delete ho jayega.
+</p>
 
 <button class="danger" onclick="resetApp()">
-Reset All App Data
+Reset All Data
 </button>
 
 </div>
@@ -407,25 +588,21 @@ Reset All App Data
 
 
 <!-- NAV -->
+
 <nav class="bottom">
 
-<button class="on" onclick="go('home',this)">
-<span class="ico">▦</span>
+<button class="active" onclick="go('home',this)">
+<span class="ico">🏠</span>
 <small>Home</small>
 </button>
 
-<button onclick="go('chapters',this)">
-<span class="ico">☰</span>
-<small>Chapters</small>
-</button>
-
-<button onclick="go('insights',this)">
-<span class="ico">▥</span>
-<small>Insights</small>
+<button onclick="go('dashboard',this)">
+<span class="ico">📊</span>
+<small>Dashboard</small>
 </button>
 
 <button onclick="go('settings',this)">
-<span class="ico">⚙</span>
+<span class="ico">⚙️</span>
 <small>Settings</small>
 </button>
 
@@ -434,890 +611,642 @@ Reset All App Data
 </div>
 
 
-<!-- SYLLABUS MODAL -->
-<div id="modal" class="modal">
-
-<div class="sheet">
-
-<div class="row">
-<h2>📚 Select Syllabus</h2>
-
-<button class="pill" onclick="closeSyllabus()">✕</button>
-</div>
-
-<p class="sub">
-First select your exam, then tick only the chapters included in that exam.
-</p>
-
-<div id="modalSubjects" class="subjects"></div>
-
-<div id="checklist"></div>
-
-<button class="primary full"
-style="margin-top:14px"
-onclick="closeSyllabus()">
-Save Syllabus
-</button>
-
-</div>
-</div>
-
-
 <script>
 
-/* =====================================================
-   SYLLABUS
-   The tracker structure is ready for the new 2026-27
-   Class IX curriculum. Chapter data can be updated
-   independently without changing the app.
-===================================================== */
+/* ==========================================
+   ONLY THESE 14 SUBJECTS
+========================================== */
 
-const SYLLABUS9 = {
+const SUBJECTS = [
+  "Hindi I",
+  "Hindi II",
+  "English I",
+  "English II",
+  "IT",
+  "Biology",
+  "Physics",
+  "Chemistry",
+  "History",
+  "Geography",
+  "Economics",
+  "Political Science",
+  "Mathematics",
+  "Sanskrit"
+];
 
-"Mathematics":[
-"Number Systems",
-"Algebra",
-"Coordinate Geometry",
-"Geometry",
-"Mensuration",
-"Statistics and Probability"
-],
-
-"Science":[
-"Exploration: Entering the World of Secondary Science",
-"Cell: The Building Block of Life",
-"Tissues in Action",
-"Describing Motion Around Us",
-"Exploring Mixtures and their Separation",
-"How Forces Affect Motion",
-"Work, Energy, and Simple Machines",
-"Journey Inside the Atom",
-"Atomic Foundations of Matter",
-"Sound Waves: Characteristics and Applications"
-],
-
-"Social Science":[
-"India and the Contemporary World",
-"India — Land and the People",
-"Democratic Politics",
-"Economics",
-"Interdisciplinary Social Science"
-],
-
-"English":[
-"Kaveri — English",
-"Reading Skills",
-"Grammar",
-"Creative Writing",
-"Speaking and Listening"
-],
-
-"Hindi":[
-"हिंदी — R1 / R2",
-"पठन कौशल",
-"व्याकरण",
-"लेखन कौशल",
-"साहित्य"
-],
-
-"Urdu":[
-"Urdu — R1 / R2",
-"Reading Skills",
-"Grammar",
-"Writing Skills",
-"Literature"
-]
-
-};
+const STORAGE_KEY = "study_tracker_v3";
 
 
-/*
-Class 10 is included as an option in the profile.
-Its detailed chapter database can be filled separately.
-It will NOT break the tracker.
-*/
-
-const SYLLABUS10 = {
-
-"Mathematics":[
-"Class 10 Mathematics — Syllabus"
-],
-
-"Science":[
-"Class 10 Science — Syllabus"
-],
-
-"Social Science":[
-"Class 10 Social Science — Syllabus"
-],
-
-"English":[
-"Class 10 English — Syllabus"
-],
-
-"Hindi":[
-"Class 10 Hindi — Syllabus"
-],
-
-"Urdu":[
-"Class 10 Urdu — Syllabus"
-]
-
-};
-
-
-const KEY="akshnat-study-tracker-final";
-
-
-let state=loadState();
-
-let currentSubject=
-Object.keys(getSyllabus())[0];
-
-let filter="all";
-
+/* ==========================================
+   DEFAULT DATA
+========================================== */
 
 function defaultState(){
 
-return {
- name:"",
- className:"9",
- exam:"",
- examDate:"",
- selected:{},
- done:{},
- activity:{},
- datesheet:{},
- dark:false
-};
+  let status = {};
+  let urgent = {};
+
+  SUBJECTS.forEach(subject=>{
+    status[subject] = "pending";
+    urgent[subject] = false;
+  });
+
+  return {
+    name:"",
+    className:"",
+    status:status,
+    urgent:urgent,
+    dark:false
+  };
+}
+
+
+let state = loadData();
+
+
+function loadData(){
+
+  try{
+
+    const saved =
+      JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+    if(saved){
+
+      const fresh = defaultState();
+
+      fresh.name = saved.name || "";
+      fresh.className = saved.className || "";
+      fresh.dark = !!saved.dark;
+
+      SUBJECTS.forEach(subject=>{
+
+        fresh.status[subject] =
+          saved.status &&
+          saved.status[subject]
+          ? saved.status[subject]
+          : "pending";
+
+        fresh.urgent[subject] =
+          saved.urgent &&
+          saved.urgent[subject]
+          ? true
+          : false;
+
+      });
+
+      return fresh;
+    }
+
+  }catch(error){}
+
+  return defaultState();
+}
+
+
+function saveData(){
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(state)
+  );
 
 }
 
 
-function loadState(){
-
-try{
-
-const x=
-JSON.parse(localStorage.getItem(KEY));
-
-return x || defaultState();
-
-}catch(e){
-
-return defaultState();
-
-}
-
-}
-
-
-function save(){
-
-localStorage.setItem(
-KEY,
-JSON.stringify(state)
-);
-
-}
-
-
-function getSyllabus(){
-
-return state.className==="10"
-?SYLLABUS10
-:SYLLABUS9;
-
-}
-
-
-/* ---------- PROFILE ---------- */
+/* ==========================================
+   PROFILE
+========================================== */
 
 function saveProfile(){
 
-state.name=
-document.getElementById("nameInput")
-.value.trim();
+  state.name =
+    document.getElementById("name").value.trim();
 
-state.className=
-document.getElementById("classInput")
-.value;
+  state.className =
+    document.getElementById("className").value;
 
-save();
+  saveData();
 
-currentSubject=
-Object.keys(getSyllabus())[0];
+  renderAll();
 
-renderAll();
-
-alert("Profile saved successfully.");
+  alert("Profile saved successfully ✅");
 
 }
 
 
 function saveSettings(){
 
-state.name=
-document.getElementById("settingsName")
-.value.trim();
+  state.name =
+    document.getElementById("settingsName").value.trim();
 
-state.className=
-document.getElementById("settingsClass")
-.value;
+  state.className =
+    document.getElementById("settingsClass").value;
 
-save();
+  saveData();
 
-currentSubject=
-Object.keys(getSyllabus())[0];
+  renderAll();
 
-renderAll();
-
-alert("Settings saved successfully.");
+  alert("Changes saved ✅");
 
 }
 
 
-/* ---------- EXAM ---------- */
+/* ==========================================
+   WORK STATUS
+========================================== */
 
-function changeExam(){
+function setStatus(subject,status){
 
-state.exam=
-document.getElementById("examInput").value;
+  state.status[subject] = status;
 
-save();
+  saveData();
 
-renderHome();
-
-}
-
-
-function changeExamDate(){
-
-state.examDate=
-document.getElementById("examDateInput").value;
-
-save();
-
-renderHome();
+  renderAll();
 
 }
 
 
-/* ---------- NAVIGATION ---------- */
+function toggleUrgent(subject){
 
-function go(id,button){
+  state.urgent[subject] =
+    !state.urgent[subject];
 
-document
-.querySelectorAll(".screen")
-.forEach(s=>s.classList.remove("active"));
+  saveData();
 
-document
-.getElementById(id)
-.classList.add("active");
-
-document
-.querySelectorAll(".bottom button")
-.forEach(b=>b.classList.remove("on"));
-
-button.classList.add("on");
-
-if(id==="home")renderHome();
-if(id==="chapters")renderChapters();
-if(id==="insights")renderInsights();
-if(id==="settings")renderSettings();
-
-window.scrollTo(0,0);
+  renderAll();
 
 }
 
 
-/* ---------- BASIC HELPERS ---------- */
+/* ==========================================
+   COUNTS
+========================================== */
 
-function selected(subject){
+function getCompleted(){
 
-return state.selected[subject] || [];
-
-}
-
-
-function isDone(subject,chapter){
-
-return !!state.done[
-subject+"|"+chapter
-];
+  return SUBJECTS.filter(
+    s=>state.status[s]==="done"
+  ).length;
 
 }
 
 
-function total(subject){
+function getPending(){
 
-return selected(subject).length;
-
-}
-
-
-function completed(subject){
-
-return selected(subject)
-.filter(c=>isDone(subject,c))
-.length;
+  return SUBJECTS.filter(
+    s=>state.status[s]==="pending"
+  ).length;
 
 }
 
 
-function percentage(subject){
+function getUrgent(){
 
-const t=total(subject);
-
-return t
-?Math.round(completed(subject)/t*100)
-:0;
+  return SUBJECTS.filter(
+    s=>state.urgent[s]
+  ).length;
 
 }
 
 
-/* ---------- HOME ---------- */
+function getPercent(){
+
+  return Math.round(
+    getCompleted() / SUBJECTS.length * 100
+  );
+
+}
+
+
+/* ==========================================
+   HOME
+========================================== */
 
 function renderHome(){
 
-document.getElementById("nameInput").value=
-state.name;
+  document.getElementById("name").value =
+    state.name;
 
-document.getElementById("classInput").value=
-state.className;
+  document.getElementById("className").value =
+    state.className;
 
-document.getElementById("hello").textContent=
-"Hi, "+(state.name||"Student")+"!";
-
-document.getElementById("classText").textContent=
-"Class "+state.className+" Exam Preparation";
-
-document.getElementById("examInput").value=
-state.exam;
-
-document.getElementById("examDateInput").value=
-state.examDate;
-
-document.getElementById("examBadge").textContent=
-state.exam||"Choose Exam";
-
-renderStatus();
-renderFocus();
-renderStreak();
-
-}
+  document.getElementById("hello").textContent =
+    state.name
+    ? "Hi, "+state.name+"! 👋"
+    : "Hi, Student! 👋";
 
 
-function renderStatus(){
+  const completed =
+    getCompleted();
 
-const box=
-document.getElementById("status");
+  const pending =
+    getPending();
 
-let html="";
+  const urgent =
+    getUrgent();
 
-Object.keys(getSyllabus())
-.forEach(subject=>{
-
-const t=total(subject);
-
-if(!t)return;
-
-const d=completed(subject);
-const left=t-d;
-const p=percentage(subject);
-
-html+=`
-
-<div class="card">
-
-<div class="row">
-
-<h3>${subject}</h3>
-
-<span class="badge">
-${p===100?"Done":"On Track"}
-</span>
-
-</div>
-
-<div class="circle" style="--p:${p}%">
-<span>${p}%</span>
-</div>
-
-<b>${d} completed • ${left} chapters left</b>
-
-<div class="progress" style="margin-top:10px">
-<div class="bar" style="width:${p}%"></div>
-</div>
-
-</div>
-`;
-
-});
+  const percent =
+    getPercent();
 
 
-if(!html){
+  document.getElementById("totalSubjects")
+    .textContent = SUBJECTS.length;
 
-html=`
-<div class="card">
-<b>No syllabus selected.</b>
-<p class="sub">
-Select your exam and open the syllabus checklist.
-</p>
-</div>
-`;
+  document.getElementById("completedCount")
+    .textContent = completed;
 
-}
+  document.getElementById("pendingCount")
+    .textContent = pending;
 
-box.innerHTML=html;
+  document.getElementById("urgentCount")
+    .textContent = urgent;
+
+  document.getElementById("percent")
+    .textContent = percent+"%";
+
+  document.getElementById("overallBar")
+    .style.width = percent+"%";
+
+
+  document.getElementById("remainingText")
+    .textContent =
+      pending===0
+      ? "🎉 Saara kaam complete ho gaya!"
+      : pending+" subject ka kaam abhi baki hai.";
+
+
+  renderWorkList();
+
+  renderUrgent();
 
 }
 
 
-function renderFocus(){
+/* ==========================================
+   WORK LIST
+========================================== */
 
-const pending=[];
+function renderWorkList(){
 
-Object.keys(getSyllabus())
-.forEach(subject=>{
+  const box =
+    document.getElementById("workList");
 
-selected(subject).forEach(chapter=>{
+  box.innerHTML = SUBJECTS.map(subject=>{
 
-if(!isDone(subject,chapter) &&
-pending.length<3){
+    const done =
+      state.status[subject]==="done";
 
-pending.push({
-subject,
-chapter
-});
+    const pending =
+      state.status[subject]==="pending";
 
-}
-
-});
-
-});
+    const urgent =
+      state.urgent[subject];
 
 
-const box=
-document.getElementById("focus");
+    return `
 
-if(!pending.length){
+      <div class="work">
 
-box.innerHTML=`
-<div class="focus">
-🎉 No pending selected chapters.
-</div>
-`;
+        <div class="workTop">
 
-return;
+          <div class="subjectName">
+            ${subject}
+          </div>
 
-}
+          ${
+            urgent
+            ? `<span class="orange">⚡ Urgent</span>`
+            : ""
+          }
 
-
-let days=1;
-
-if(state.examDate){
-
-const target=
-new Date(state.examDate+"T23:59:59");
-
-const now=new Date();
-
-days=Math.max(
-1,
-Math.ceil((target-now)/86400000)
-);
-
-}
+        </div>
 
 
-const daily=
-Math.max(
-1,
-Math.ceil(
-pending.length/days
-)
-);
+        <div class="workButtons">
+
+          <button
+            class="workBtn done ${done?"active":""}"
+            onclick="setStatus('${esc(subject)}','done')">
+
+            ✅ Work Done
+
+          </button>
 
 
-box.innerHTML=
-pending.slice(0,daily).map(x=>`
+          <button
+            class="workBtn pending ${pending?"active":""}"
+            onclick="setStatus('${esc(subject)}','pending')">
 
-<div class="focus">
+            ❌ Pending
 
-<b>${x.subject}</b>
+          </button>
 
-<div>${x.chapter}</div>
+        </div>
 
-<small>
-Today: Theory → Questions → Revision
-</small>
 
-</div>
+        <button
+          class="urgentBtn ${urgent?"active":""}"
+          onclick="toggleUrgent('${esc(subject)}')">
 
-`).join("");
+          ${
+            urgent
+            ? "⚡ Remove from Urgent"
+            : "⚡ Mark as Urgent"
+          }
+
+        </button>
+
+      </div>
+
+    `;
+
+  }).join("");
 
 }
 
 
-/* ---------- SUBJECTS ---------- */
+/* ==========================================
+   URGENT SECTION
+========================================== */
 
-function subjectButtons(containerId){
+function renderUrgent(){
 
-const box=
-document.getElementById(containerId);
+  const box =
+    document.getElementById("urgentList");
 
-box.innerHTML=
-Object.keys(getSyllabus())
-.map(subject=>`
-
-<button
-class="${subject===currentSubject?"on":""}"
-onclick="selectSubject('${esc(subject)}')">
-
-${subject}
-
-</button>
-
-`).join("");
-
-}
+  const urgent =
+    SUBJECTS.filter(
+      s=>state.urgent[s]
+    );
 
 
-function selectSubject(subject){
+  if(!urgent.length){
 
-currentSubject=subject;
+    box.innerHTML = `
+      <div class="empty">
+        🎉 Abhi koi urgent work nahi hai.
+      </div>
+    `;
 
-subjectButtons("chapterSubjects");
-subjectButtons("modalSubjects");
-
-renderChapters();
-renderChecklist();
-
-}
+    return;
+  }
 
 
-/* ---------- CHAPTERS ---------- */
+  box.innerHTML =
+    urgent.map(subject=>`
 
-function setFilter(value){
+      <div class="urgentItem">
 
-filter=value;
+        <div class="row">
 
-document
-.getElementById("filterAll")
-.classList.toggle("on",value==="all");
+          <b>⚡ ${subject}</b>
 
-document
-.getElementById("filterPending")
-.classList.toggle("on",value==="pending");
+          <span>
+            ${
+              state.status[subject]==="done"
+              ? "✅ Done"
+              : "❌ Pending"
+            }
+          </span>
 
-document
-.getElementById("filterDone")
-.classList.toggle("on",value==="done");
+        </div>
 
-renderChapters();
+      </div>
+
+    `).join("");
 
 }
 
 
-function renderChapters(){
+/* ==========================================
+   DASHBOARD
+========================================== */
 
-subjectButtons("chapterSubjects");
+function renderDashboard(){
 
-let list=
-[...selected(currentSubject)];
+  const done =
+    getCompleted();
 
+  const pending =
+    getPending();
 
-if(filter==="pending"){
+  const urgent =
+    getUrgent();
 
-list=list.filter(
-c=>!isDone(currentSubject,c)
-);
-
-}
-
-
-if(filter==="done"){
-
-list=list.filter(
-c=>isDone(currentSubject,c)
-);
-
-}
+  const percent =
+    getPercent();
 
 
-const box=
-document.getElementById("chapterList");
+  document.getElementById("dashDone")
+    .textContent = done;
+
+  document.getElementById("dashPending")
+    .textContent = pending;
+
+  document.getElementById("dashUrgent")
+    .textContent = urgent;
+
+  document.getElementById("dashPercent")
+    .textContent = percent+"%";
+
+  document.getElementById("dashBar")
+    .style.width = percent+"%";
 
 
-if(!list.length){
-
-box.innerHTML=`
-<p class="sub">
-No chapters here yet.
-Open Settings → Exam Syllabus Checklist.
-</p>
-`;
-
-return;
-
-}
+  document.getElementById("dashRemaining")
+    .textContent =
+      pending===0
+      ? "🎉 Saara kaam complete!"
+      : "Abhi "+pending+
+        " subjects ka kaam baki hai. "+
+        "Inmein se "+urgent+
+        " urgent hain.";
 
 
-box.innerHTML=
-list.map(chapter=>{
-
-const done=
-isDone(currentSubject,chapter);
-
-return`
-
-<div class="chapter"
-onclick="toggleDone('${esc(currentSubject)}','${esc(chapter)}')">
-
-<div>
-<b>${chapter}</b>
-<small>
-Theory • Questions • Revision
-</small>
-</div>
-
-<div class="check ${done?"done":""}"></div>
-
-</div>
-
-`;
-
-}).join("");
-
-}
+  const box =
+    document.getElementById("dashUrgentList");
 
 
-function toggleDone(subject,chapter){
-
-const key=
-subject+"|"+chapter;
-
-state.done[key]=
-!state.done[key];
+  const urgentSubjects =
+    SUBJECTS.filter(
+      s=>state.urgent[s]
+    );
 
 
-if(state.done[key]){
+  if(!urgentSubjects.length){
 
-const date=
-new Date()
-.toISOString()
-.slice(0,10);
+    box.innerHTML =
+      `<div class="empty">
+        Koi urgent work nahi hai.
+      </div>`;
 
-state.activity[date]=
-(state.activity[date]||0)+1;
+    return;
+  }
+
+
+  box.innerHTML =
+    urgentSubjects.map(s=>`
+
+      <div class="urgentItem">
+        <b>⚡ ${s}</b>
+        <br>
+        <span class="sub">
+          ${
+            state.status[s]==="done"
+            ? "Completed"
+            : "Pending — Do this first"
+          }
+        </span>
+      </div>
+
+    `).join("");
 
 }
 
 
-save();
+/* ==========================================
+   SETTINGS
+========================================== */
 
-renderChapters();
-renderStatus();
-renderFocus();
-renderStreak();
+function renderSettings(){
 
-}
+  document.getElementById("settingsName")
+    .value = state.name;
+
+  document.getElementById("settingsClass")
+    .value = state.className;
 
 
-/* ---------- SYLLABUS MODAL ---------- */
+  document.getElementById("subjectNames")
+    .innerHTML =
+      SUBJECTS.map((s,i)=>`
 
-function openSyllabus(){
+        <div style="
+          padding:10px 0;
+          border-bottom:1px solid var(--line)">
 
-if(!state.exam){
+          ${i+1}. ${s}
 
-alert(
-"Please select UT-1, MID TERM or ANNUAL EXAM first."
-);
+        </div>
 
-return;
-
-}
-
-document
-.getElementById("modal")
-.classList.add("show");
-
-subjectButtons("modalSubjects");
-renderChecklist();
+      `).join("");
 
 }
 
 
-function closeSyllabus(){
+/* ==========================================
+   NAVIGATION
+========================================== */
 
-document
-.getElementById("modal")
-.classList.remove("show");
+function go(id,button){
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(s=>s.classList.remove("active"));
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
+
+  document
+    .querySelectorAll(".bottom button")
+    .forEach(b=>b.classList.remove("active"));
+
+  button.classList.add("active");
+
+
+  if(id==="home")
+    renderHome();
+
+  if(id==="dashboard")
+    renderDashboard();
+
+  if(id==="settings")
+    renderSettings();
+
+
+  window.scrollTo(0,0);
+
+}
+
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+function toggleDark(){
+
+  state.dark =
+    !state.dark;
+
+  document.body.classList.toggle(
+    "dark",
+    state.dark
+  );
+
+  saveData();
+
+}
+
+
+/* ==========================================
+   RESET
+========================================== */
+
+function resetApp(){
+
+  if(!confirm(
+    "Kya tum sach mein saara progress delete karna chahte ho?"
+  )) return;
+
+
+  localStorage.removeItem(
+    STORAGE_KEY
+  );
+
+  location.reload();
+
+}
+
+
+/* ==========================================
+   ESCAPE
+========================================== */
+
+function esc(text){
+
+  return String(text)
+    .replaceAll("\\","\\\\")
+    .replaceAll("'","\\'");
+
+}
+
+
+/* ==========================================
+   RENDER EVERYTHING
+========================================== */
+
+function renderAll(){
+
+  document.body.classList.toggle(
+    "dark",
+    state.dark
+  );
+
+  renderHome();
+  renderDashboard();
+  renderSettings();
+
+}
+
+
+/* START */
 
 renderAll();
 
-}
+</script>
 
-
-function renderChecklist(){
-
-const chapters=
-getSyllabus()[currentSubject]||[];
-
-const chosen=
-selected(currentSubject);
-
-document.getElementById("checklist").innerHTML=
-
-chapters.map((chapter,index)=>{
-
-const yes=
-chosen.includes(chapter);
-
-return`
-
-<div class="chapter">
-
-<div>
-<b>${index+1}. ${chapter}</b>
-</div>
-
-<div
-class="check ${yes?"done":""}"
-onclick="toggleSelected('${esc(chapter)}')">
-</div>
-
-</div>
-
-`;
-
-}).join("");
-
-}
-
-
-function toggleSelected(chapter){
-
-let arr=
-[...selected(currentSubject)];
-
-if(arr.includes(chapter)){
-
-arr=arr.filter(c=>c!==chapter);
-
-}else{
-
-arr.push(chapter);
-
-}
-
-state.selected[currentSubject]=arr;
-
-save();
-
-renderChecklist();
-
-}
-
-
-/* ---------- INSIGHTS ---------- */
-
-function renderInsights(){
-
-subjectButtons("chapterSubjects");
-
-const box=
-document.getElementById("insightSubjects");
-
-let html="";
-
-Object.keys(getSyllabus())
-.forEach(subject=>{
-
-const t=total(subject);
-
-if(!t)return;
-
-const d=completed(subject);
-const left=t-d;
-const p=percentage(subject);
-
-html+=`
-
-<div class="card">
-
-<div class="row">
-
-<h3>${subject}</h3>
-
-<span class="badge">${p}%</span>
-
-</div>
-
-<div class="statgrid">
-
-<div class="stat">
-<small>Completed</small>
-<h3>${d}</h3>
-</div>
-
-<div class="stat">
-<small>⏳ Chapters Left</small>
-<h3>${left}</h3>
-</div>
-
-</div>
-
-<div class="progress" style="margin-top:12px">
-<div class="bar" style="width:${p}%"></div>
-</div>
-
-</div>
-
-`;
-
-});
-
-
-if(!html){
-
-html=`
-<p class="sub">
-No exam syllabus selected yet.
-Tap "Select / Edit Exam Syllabus".
-</p>
-`;
-
-}
-
-box.innerHTML=html;
-
-renderTrend();
-
-}
-
-
-function renderTrend(){
-
-const box=
-document.getElementById("trend");
-
-let html=`
-<div style="
-display:flex;
-align-items:end;
-gap:8px;
-height:155px">
-`;
-
-for(let i=6;i>=0;i--){
-
-const d=new Date();
-
-d.setDate(
-d.getDate()-i
-);
-
-const key=
-d.toISOString().sli
+</body>
+</html>
