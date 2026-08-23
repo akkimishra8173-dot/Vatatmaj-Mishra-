@@ -48,9 +48,11 @@ header{
 }
 
 .logo{
-  font-size:19px;
-  font-weight:800;
-  line-height:1.05;
+    width:48px;
+    height:48px;
+    object-fit:contain;
+    border-radius:50%;
+    flex:none;
 }
 
 main{padding:16px 13px}
@@ -322,9 +324,10 @@ body.dark .urgentItem{
 <div class="app">
 
 <header>
-  <div class="logo">
-    📚 Vatatmaj Study<br>Tracker
-  </div>
+<div class="logo">
+  <img src="logo.png" alt="Vatatmaj Logo" style="width:42px;height:42px;object-fit:contain;border-radius:50%;">
+  <span>Vatatmaj Study<br>Tracker</span>
+</div>
 
   <button onclick="toggleDark()">🌙</button>
 </header>
