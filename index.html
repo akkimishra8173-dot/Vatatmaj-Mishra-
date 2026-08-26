@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#087fb2">
-<title>Study Work Tracker</title>
+<title>Vatatmaj Study Tracker</title>
 
 <style>
 :root{
@@ -18,44 +18,115 @@
   --orange:#f79009;
   --line:#d9dee7;
 }
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  margin:0;
+  padding:0;
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
+  padding:0;
   background:var(--bg);
   color:var(--text);
   font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
 }
-button,input,select{font:inherit}
-button{cursor:pointer}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =========================
+   APP
+========================= */
 
 .app{
+  width:100%;
   max-width:760px;
-  margin:auto;
+  margin:0 auto;
   min-height:100vh;
-  padding-bottom:85px;
+  padding-bottom:90px;
 }
+
+/* =========================
+   HEADER
+========================= */
 
 header{
   position:sticky;
   top:0;
-  z-index:10;
+  z-index:100;
+  width:100%;
+  min-height:72px;
   background:var(--card);
   border-bottom:1px solid var(--line);
-  padding:13px;
+  padding:10px 13px;
   display:flex;
   align-items:center;
+  justify-content:space-between;
   gap:10px;
 }
 
 .logo{
-    width:48px;
-    height:48px;
-    object-fit:contain;
-    border-radius:50%;
-    flex:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:auto;
+  height:auto;
+  flex:1;
+  min-width:0;
+  font-size:19px;
+  font-weight:800;
+  line-height:1.15;
 }
 
-main{padding:16px 13px}
+.logo img{
+  width:48px;
+  height:48px;
+  object-fit:contain;
+  border-radius:50%;
+  flex:none;
+}
+
+.logo span{
+  display:block;
+  white-space:normal;
+}
+
+.darkToggle{
+  width:44px;
+  height:40px;
+  flex:none;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--card);
+  color:var(--text);
+  font-size:20px;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+  padding:16px 13px;
+}
+
+/* =========================
+   CARD
+========================= */
 
 .card{
   background:var(--card);
@@ -66,9 +137,19 @@ main{padding:16px 13px}
   box-shadow:0 2px 8px rgba(0,0,0,.04);
 }
 
-h1{font-size:29px;margin:5px 0 8px}
-h2{font-size:22px;margin:6px 0 14px}
-h3{margin:0 0 5px}
+h1{
+  font-size:29px;
+  margin:5px 0 8px;
+}
+
+h2{
+  font-size:22px;
+  margin:6px 0 14px;
+}
+
+h3{
+  margin:0 0 5px;
+}
 
 .sub{
   color:var(--muted);
@@ -100,6 +181,12 @@ h3{margin:0 0 5px}
   border-radius:12px;
   background:var(--card);
   color:var(--text);
+  outline:none;
+}
+
+.form input:focus,
+.form select:focus{
+  border-color:var(--blue);
 }
 
 .primary{
@@ -121,7 +208,9 @@ h3{margin:0 0 5px}
   font-weight:700;
 }
 
-/* SUMMARY */
+/* =========================
+   SUMMARY
+========================= */
 
 .summaryGrid{
   display:grid;
@@ -142,10 +231,25 @@ h3{margin:0 0 5px}
   margin-top:5px;
 }
 
-.blue{color:var(--blue)}
-.green{color:var(--green)}
-.red{color:var(--red)}
-.orange{color:var(--orange)}
+.blue{
+  color:var(--blue);
+}
+
+.green{
+  color:var(--green);
+}
+
+.red{
+  color:var(--red);
+}
+
+.orange{
+  color:var(--orange);
+}
+
+/* =========================
+   PROGRESS
+========================= */
 
 .progress{
   height:13px;
@@ -157,12 +261,15 @@ h3{margin:0 0 5px}
 
 .bar{
   height:100%;
+  width:0%;
   background:var(--blue);
   border-radius:20px;
-  transition:.2s;
+  transition:width .2s ease;
 }
 
-/* WORK */
+/* =========================
+   WORK
+========================= */
 
 .work{
   border:1px solid var(--line);
@@ -196,6 +303,7 @@ h3{margin:0 0 5px}
   border-radius:11px;
   border:1px solid var(--line);
   background:#fff;
+  color:var(--text);
   font-weight:700;
 }
 
@@ -218,6 +326,7 @@ h3{margin:0 0 5px}
   border-radius:11px;
   border:1px solid var(--line);
   background:#fff;
+  color:var(--text);
   font-weight:700;
 }
 
@@ -227,7 +336,9 @@ h3{margin:0 0 5px}
   color:var(--orange);
 }
 
-/* URGENT */
+/* =========================
+   URGENT
+========================= */
 
 .urgentItem{
   padding:13px;
@@ -244,7 +355,9 @@ h3{margin:0 0 5px}
   color:var(--muted);
 }
 
-/* NAV */
+/* =========================
+   BOTTOM NAV
+========================= */
 
 .bottom{
   position:fixed;
@@ -252,17 +365,19 @@ h3{margin:0 0 5px}
   left:50%;
   transform:translateX(-50%);
   width:min(760px,100%);
+  min-height:70px;
   display:flex;
   background:var(--card);
   border-top:1px solid var(--line);
-  z-index:20;
+  z-index:200;
+  padding-bottom:env(safe-area-inset-bottom);
 }
 
 .bottom button{
   flex:1;
   border:0;
   background:transparent;
-  padding:10px 3px;
+  padding:9px 3px;
   color:var(--muted);
 }
 
@@ -273,18 +388,28 @@ h3{margin:0 0 5px}
 .ico{
   display:block;
   font-size:21px;
+  margin-bottom:2px;
 }
 
 .bottom small{
   font-size:11px;
 }
 
-/* SCREENS */
+/* =========================
+   SCREENS
+========================= */
 
-.screen{display:none}
-.screen.active{display:block}
+.screen{
+  display:none;
+}
 
-/* DARK */
+.screen.active{
+  display:block;
+}
+
+/* =========================
+   DARK MODE
+========================= */
 
 body.dark{
   --bg:#10151c;
@@ -310,11 +435,73 @@ body.dark .urgentItem{
   background:#302819;
 }
 
-/* MOBILE */
+body.dark .progress{
+  background:#303b48;
+}
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:480px){
-  h1{font-size:26px}
-  .summaryGrid{grid-template-columns:1fr 1fr}
+
+  header{
+    min-height:66px;
+    padding:9px 12px;
+  }
+
+  .logo{
+    font-size:17px;
+    gap:9px;
+  }
+
+  .logo img{
+    width:42px;
+    height:42px;
+  }
+
+  .darkToggle{
+    width:42px;
+    height:38px;
+  }
+
+  main{
+    padding:14px 12px;
+  }
+
+  h1{
+    font-size:26px;
+  }
+
+  h2{
+    font-size:21px;
+  }
+
+  .summaryGrid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+/* VERY SMALL PHONES */
+
+@media(max-width:350px){
+
+  .logo{
+    font-size:15px;
+  }
+
+  .logo img{
+    width:38px;
+    height:38px;
+  }
+
+  .summary{
+    padding:12px;
+  }
+
+  .summary strong{
+    font-size:22px;
+  }
 }
 </style>
 </head>
@@ -323,294 +510,445 @@ body.dark .urgentItem{
 
 <div class="app">
 
-<header>
-<div class="logo">
-  <img src="file_000000007f3882118f1efba550b4da00.png"
-       alt="Vatatmaj Logo"
-       style="width:42px;height:42px;object-fit:contain;border-radius:50%;">
-  <span>Vatatmaj Study<br>Tracker</span>
-</div>
-</div>
+<!-- =========================
+     HEADER
+========================= -->
 
-  <button onclick="toggleDark()">🌙</button>
+<header>
+
+  <div class="logo">
+
+    <img
+      src="file_000000007f3882118f1efba550b4da00.png"
+      alt="Vatatmaj Logo">
+
+    <span>
+      Vatatmaj Study<br>Tracker
+    </span>
+
+  </div>
+
+  <button
+    class="darkToggle"
+    onclick="toggleDark()"
+    aria-label="Toggle dark mode">
+    🌙
+  </button>
+
 </header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
 
 <main>
 
-<!-- HOME -->
+<!-- =========================
+     HOME
+========================= -->
 
 <section id="home" class="screen active">
 
-<div class="card">
+  <div class="card">
 
-<h1 id="hello">Hi, Student! 👋</h1>
+    <h1 id="hello">
+      Hi, Student! 👋
+    </h1>
 
-<p class="sub">
-Track your school work, pending work and urgent work in one place.
-</p>
+    <p class="sub">
+      Track your school work, pending work and urgent work in one place.
+    </p>
 
-<div class="form">
+    <div class="form">
 
-<label>Your Name</label>
+      <label>Your Name</label>
 
-<input
-id="name"
-placeholder="Enter your name">
+      <input
+        id="name"
+        placeholder="Enter your name">
 
-</div>
+    </div>
 
-<div class="form">
+    <div class="form">
 
-<label>Class</label>
+      <label>Class</label>
 
-<select id="className">
-<option value="">Select Class</option>
-<option value="9">Class 9</option>
-<option value="10">Class 10</option>
-</select>
+      <select id="className">
 
-</div>
+        <option value="">
+          Select Class
+        </option>
 
-<button class="primary" onclick="saveProfile()">
-Save Profile
-</button>
+        <option value="9">
+          Class 9
+        </option>
 
-</div>
+        <option value="10">
+          Class 10
+        </option>
 
+      </select>
 
-<!-- OVERALL -->
+    </div>
 
-<div class="card">
+    <button
+      class="primary"
+      onclick="saveProfile()">
+      Save Profile
+    </button>
 
-<h2>📊 Overall Progress</h2>
-
-<div class="summaryGrid">
-
-<div class="summary">
-<span>Total Subjects</span>
-<strong id="totalSubjects">14</strong>
-</div>
-
-<div class="summary">
-<span>Completed</span>
-<strong class="green" id="completedCount">0</strong>
-</div>
-
-<div class="summary">
-<span>Pending</span>
-<strong class="red" id="pendingCount">14</strong>
-</div>
-
-<div class="summary">
-<span>⚡ Urgent</span>
-<strong class="orange" id="urgentCount">0</strong>
-</div>
-
-</div>
-
-<p>
-<b>Overall Work Completed:
-<span id="percent">0%</span>
-</b>
-</p>
-
-<div class="progress">
-<div id="overallBar" class="bar" style="width:0%"></div>
-</div>
-
-<p class="sub" id="remainingText">
-14 subjects ka kaam baki hai.
-</p>
-
-</div>
+  </div>
 
 
-<!-- URGENT -->
+  <!-- OVERALL -->
 
-<div class="card">
+  <div class="card">
 
-<h2>⚡ Urgent Work</h2>
+    <h2>
+      📊 Overall Progress
+    </h2>
 
-<div id="urgentList"></div>
+    <div class="summaryGrid">
 
-</div>
+      <div class="summary">
+        <span>Total Subjects</span>
+        <strong id="totalSubjects">14</strong>
+      </div>
+
+      <div class="summary">
+        <span>Completed</span>
+        <strong
+          class="green"
+          id="completedCount">
+          0
+        </strong>
+      </div>
+
+      <div class="summary">
+        <span>Pending</span>
+        <strong
+          class="red"
+          id="pendingCount">
+          14
+        </strong>
+      </div>
+
+      <div class="summary">
+        <span>⚡ Urgent</span>
+        <strong
+          class="orange"
+          id="urgentCount">
+          0
+        </strong>
+      </div>
+
+    </div>
+
+    <p>
+      <b>
+        Overall Work Completed:
+        <span id="percent">0%</span>
+      </b>
+    </p>
+
+    <div class="progress">
+      <div
+        id="overallBar"
+        class="bar">
+      </div>
+    </div>
+
+    <p
+      class="sub"
+      id="remainingText">
+      14 subjects ka kaam baki hai.
+    </p>
+
+  </div>
 
 
-<!-- ALL WORK -->
+  <!-- URGENT -->
 
-<div class="card">
+  <div class="card">
 
-<div class="row">
+    <h2>
+      ⚡ Urgent Work
+    </h2>
 
-<h2>📋 Work Status</h2>
+    <div id="urgentList"></div>
 
-<span class="sub">14 Subjects</span>
+  </div>
 
-</div>
 
-<div id="workList"></div>
+  <!-- ALL WORK -->
 
-</div>
+  <div class="card">
+
+    <div class="row">
+
+      <h2>
+        📋 Work Status
+      </h2>
+
+      <span class="sub">
+        14 Subjects
+      </span>
+
+    </div>
+
+    <div id="workList"></div>
+
+  </div>
 
 </section>
 
 
-<!-- DASHBOARD -->
+<!-- =========================
+     DASHBOARD
+========================= -->
 
-<section id="dashboard" class="screen">
+<section
+  id="dashboard"
+  class="screen">
 
-<h1>📈 Dashboard</h1>
+  <h1>
+    📈 Dashboard
+  </h1>
 
-<div class="card">
+  <div class="card">
 
-<h2>Overall Status</h2>
+    <h2>
+      Overall Status
+    </h2>
 
-<div class="summaryGrid">
+    <div class="summaryGrid">
 
-<div class="summary">
-<span>Done</span>
-<strong class="green" id="dashDone">0</strong>
-</div>
+      <div class="summary">
+        <span>Done</span>
+        <strong
+          class="green"
+          id="dashDone">
+          0
+        </strong>
+      </div>
 
-<div class="summary">
-<span>Pending</span>
-<strong class="red" id="dashPending">14</strong>
-</div>
+      <div class="summary">
+        <span>Pending</span>
+        <strong
+          class="red"
+          id="dashPending">
+          14
+        </strong>
+      </div>
 
-<div class="summary">
-<span>Urgent</span>
-<strong class="orange" id="dashUrgent">0</strong>
-</div>
+      <div class="summary">
+        <span>Urgent</span>
+        <strong
+          class="orange"
+          id="dashUrgent">
+          0
+        </strong>
+      </div>
 
-<div class="summary">
-<span>Completion</span>
-<strong class="blue" id="dashPercent">0%</strong>
-</div>
+      <div class="summary">
+        <span>Completion</span>
+        <strong
+          class="blue"
+          id="dashPercent">
+          0%
+        </strong>
+      </div>
 
-</div>
+    </div>
 
-<div class="progress">
-<div id="dashBar" class="bar"></div>
-</div>
+    <div class="progress">
+      <div
+        id="dashBar"
+        class="bar">
+      </div>
+    </div>
 
-</div>
+  </div>
 
-<div class="card">
 
-<h2>⏳ Work Remaining</h2>
+  <div class="card">
 
-<p id="dashRemaining"></p>
+    <h2>
+      ⏳ Work Remaining
+    </h2>
 
-</div>
+    <p id="dashRemaining"></p>
 
-<div class="card">
+  </div>
 
-<h2>⚡ Urgent Subjects</h2>
 
-<div id="dashUrgentList"></div>
+  <div class="card">
 
-</div>
+    <h2>
+      ⚡ Urgent Subjects
+    </h2>
+
+    <div id="dashUrgentList"></div>
+
+  </div>
 
 </section>
 
 
-<!-- SETTINGS -->
+<!-- =========================
+     SETTINGS
+========================= -->
 
-<section id="settings" class="screen">
+<section
+  id="settings"
+  class="screen">
 
-<h1>⚙️ Settings</h1>
+  <h1>
+    ⚙️ Settings
+  </h1>
 
-<div class="card">
+  <div class="card">
 
-<h2>👤 Profile</h2>
+    <h2>
+      👤 Profile
+    </h2>
 
-<div class="form">
+    <div class="form">
 
-<label>Name</label>
+      <label>Name</label>
 
-<input id="settingsName">
+      <input id="settingsName">
 
-</div>
+    </div>
 
-<div class="form">
+    <div class="form">
 
-<label>Class</label>
+      <label>Class</label>
 
-<select id="settingsClass">
-<option value="9">Class 9</option>
-<option value="10">Class 10</option>
-</select>
+      <select id="settingsClass">
 
-</div>
+        <option value="9">
+          Class 9
+        </option>
 
-<button class="primary" onclick="saveSettings()">
-Save Changes
-</button>
+        <option value="10">
+          Class 10
+        </option>
 
-</div>
+      </select>
 
+    </div>
 
-<div class="card">
+    <button
+      class="primary"
+      onclick="saveSettings()">
+      Save Changes
+    </button>
 
-<h2>📚 Subjects</h2>
-
-<p class="sub">
-Tracker mein sirf ye 14 subjects hain.
-</p>
-
-<div id="subjectNames"></div>
-
-</div>
-
-
-<div class="card">
-
-<h2>🎨 Appearance</h2>
-
-<button class="primary" onclick="toggleDark()">
-🌙 Toggle Dark Mode
-</button>
-
-</div>
+  </div>
 
 
-<div class="card">
+  <div class="card">
 
-<h2 class="red">⚠️ Reset</h2>
+    <h2>
+      📚 Subjects
+    </h2>
 
-<p class="sub">
-Saara saved progress delete ho jayega.
-</p>
+    <p class="sub">
+      Tracker mein sirf ye 14 subjects hain.
+    </p>
 
-<button class="danger" onclick="resetApp()">
-Reset All Data
-</button>
+    <div id="subjectNames"></div>
 
-</div>
+  </div>
+
+
+  <div class="card">
+
+    <h2>
+      🎨 Appearance
+    </h2>
+
+    <button
+      class="primary"
+      onclick="toggleDark()">
+      🌙 Toggle Dark Mode
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2 class="red">
+      ⚠️ Reset
+    </h2>
+
+    <p class="sub">
+      Saara saved progress delete ho jayega.
+    </p>
+
+    <button
+      class="danger"
+      onclick="resetApp()">
+      Reset All Data
+    </button>
+
+  </div>
 
 </section>
 
 </main>
 
 
-<!-- NAV -->
+<!-- =========================
+     BOTTOM NAV
+========================= -->
 
 <nav class="bottom">
 
-<button class="active" onclick="go('home',this)">
-<span class="ico">🏠</span>
-<small>Home</small>
-</button>
+  <button
+    class="active"
+    onclick="go('home',this)">
 
-<button onclick="go('dashboard',this)">
-<span class="ico">📊</span>
-<small>Dashboard</small>
-</button>
+    <span class="ico">
+      🏠
+    </span>
 
-<button onclick="go('settings',this)">
-<span class="ico">⚙️</span>
-<small>Settings</small>
-</button>
+    <small>
+      Home
+    </small>
+
+  </button>
+
+
+  <button
+    onclick="go('dashboard',this)">
+
+    <span class="ico">
+      📊
+    </span>
+
+    <small>
+      Dashboard
+    </small>
+
+  </button>
+
+
+  <button
+    onclick="go('settings',this)">
+
+    <span class="ico">
+      ⚙️
+    </span>
+
+    <small>
+      Settings
+    </small>
+
+  </button>
 
 </nav>
 
@@ -624,6 +962,7 @@ Reset All Data
 ========================================== */
 
 const SUBJECTS = [
+
   "Hindi I",
   "Hindi II",
   "English I",
@@ -638,6 +977,7 @@ const SUBJECTS = [
   "Political Science",
   "Mathematics",
   "Sanskrit"
+
 ];
 
 const STORAGE_KEY = "study_tracker_v3";
@@ -649,23 +989,32 @@ const STORAGE_KEY = "study_tracker_v3";
 
 function defaultState(){
 
-  let status = {};
-  let urgent = {};
+  const status = {};
+  const urgent = {};
 
-  SUBJECTS.forEach(subject=>{
+  SUBJECTS.forEach(subject => {
+
     status[subject] = "pending";
     urgent[subject] = false;
+
   });
 
   return {
+
     name:"",
     className:"",
     status:status,
     urgent:urgent,
     dark:false
+
   };
+
 }
 
+
+/* ==========================================
+   LOAD DATA
+========================================== */
 
 let state = loadData();
 
@@ -675,40 +1024,65 @@ function loadData(){
   try{
 
     const saved =
-      JSON.parse(localStorage.getItem(STORAGE_KEY));
+      JSON.parse(
+        localStorage.getItem(STORAGE_KEY)
+      );
 
     if(saved){
 
       const fresh = defaultState();
 
-      fresh.name = saved.name || "";
-      fresh.className = saved.className || "";
-      fresh.dark = !!saved.dark;
+      fresh.name =
+        saved.name || "";
 
-      SUBJECTS.forEach(subject=>{
+      fresh.className =
+        saved.className || "";
 
-        fresh.status[subject] =
+      fresh.dark =
+        !!saved.dark;
+
+
+      SUBJECTS.forEach(subject => {
+
+        if(
           saved.status &&
           saved.status[subject]
-          ? saved.status[subject]
-          : "pending";
+        ){
 
-        fresh.urgent[subject] =
+          fresh.status[subject] =
+            saved.status[subject];
+
+        }
+
+        if(
           saved.urgent &&
           saved.urgent[subject]
-          ? true
-          : false;
+        ){
+
+          fresh.urgent[subject] = true;
+
+        }
 
       });
 
       return fresh;
+
     }
 
-  }catch(error){}
+  }catch(error){
+
+    console.log("Data load error:",error);
+
+  }
 
   return defaultState();
+
 }
 
+
+/* ==========================================
+   SAVE DATA
+========================================== */
 
 function saveData(){
 
@@ -727,16 +1101,23 @@ function saveData(){
 function saveProfile(){
 
   state.name =
-    document.getElementById("name").value.trim();
+    document
+      .getElementById("name")
+      .value
+      .trim();
 
   state.className =
-    document.getElementById("className").value;
+    document
+      .getElementById("className")
+      .value;
 
   saveData();
 
   renderAll();
 
-  alert("Profile saved successfully ✅");
+  alert(
+    "Profile saved successfully ✅"
+  );
 
 }
 
@@ -744,16 +1125,23 @@ function saveProfile(){
 function saveSettings(){
 
   state.name =
-    document.getElementById("settingsName").value.trim();
+    document
+      .getElementById("settingsName")
+      .value
+      .trim();
 
   state.className =
-    document.getElementById("settingsClass").value;
+    document
+      .getElementById("settingsClass")
+      .value;
 
   saveData();
 
   renderAll();
 
-  alert("Changes saved ✅");
+  alert(
+    "Changes saved ✅"
+  );
 
 }
 
@@ -764,7 +1152,8 @@ function saveSettings(){
 
 function setStatus(subject,status){
 
-  state.status[subject] = status;
+  state.status[subject] =
+    status;
 
   saveData();
 
@@ -792,7 +1181,8 @@ function toggleUrgent(subject){
 function getCompleted(){
 
   return SUBJECTS.filter(
-    s=>state.status[s]==="done"
+    subject =>
+      state.status[subject] === "done"
   ).length;
 
 }
@@ -801,7 +1191,8 @@ function getCompleted(){
 function getPending(){
 
   return SUBJECTS.filter(
-    s=>state.status[s]==="pending"
+    subject =>
+      state.status[subject] === "pending"
   ).length;
 
 }
@@ -810,7 +1201,8 @@ function getPending(){
 function getUrgent(){
 
   return SUBJECTS.filter(
-    s=>state.urgent[s]
+    subject =>
+      state.urgent[subject]
   ).length;
 
 }
@@ -819,7 +1211,9 @@ function getUrgent(){
 function getPercent(){
 
   return Math.round(
-    getCompleted() / SUBJECTS.length * 100
+    getCompleted() /
+    SUBJECTS.length *
+    100
   );
 
 }
@@ -837,10 +1231,12 @@ function renderHome(){
   document.getElementById("className").value =
     state.className;
 
-  document.getElementById("hello").textContent =
-    state.name
-    ? "Hi, "+state.name+"! 👋"
-    : "Hi, Student! 👋";
+
+  document.getElementById("hello")
+    .textContent =
+      state.name
+      ? "Hi, " + state.name + "! 👋"
+      : "Hi, Student! 👋";
 
 
   const completed =
@@ -857,33 +1253,40 @@ function renderHome(){
 
 
   document.getElementById("totalSubjects")
-    .textContent = SUBJECTS.length;
+    .textContent =
+      SUBJECTS.length;
 
   document.getElementById("completedCount")
-    .textContent = completed;
+    .textContent =
+      completed;
 
   document.getElementById("pendingCount")
-    .textContent = pending;
+    .textContent =
+      pending;
 
   document.getElementById("urgentCount")
-    .textContent = urgent;
+    .textContent =
+      urgent;
 
   document.getElementById("percent")
-    .textContent = percent+"%";
+    .textContent =
+      percent + "%";
+
 
   document.getElementById("overallBar")
-    .style.width = percent+"%";
+    .style.width =
+      percent + "%";
 
 
   document.getElementById("remainingText")
     .textContent =
-      pending===0
+      pending === 0
       ? "🎉 Saara kaam complete ho gaya!"
-      : pending+" subject ka kaam abhi baki hai.";
+      : pending +
+        " subject ka kaam abhi baki hai.";
 
 
   renderWorkList();
-
   renderUrgent();
 
 }
@@ -898,76 +1301,78 @@ function renderWorkList(){
   const box =
     document.getElementById("workList");
 
-  box.innerHTML = SUBJECTS.map(subject=>{
 
-    const done =
-      state.status[subject]==="done";
+  box.innerHTML =
+    SUBJECTS.map(subject => {
 
-    const pending =
-      state.status[subject]==="pending";
+      const done =
+        state.status[subject] === "done";
 
-    const urgent =
-      state.urgent[subject];
+      const pending =
+        state.status[subject] === "pending";
+
+      const urgent =
+        state.urgent[subject];
 
 
-    return `
+      return `
 
-      <div class="work">
+        <div class="work">
 
-        <div class="workTop">
+          <div class="workTop">
 
-          <div class="subjectName">
-            ${subject}
+            <div class="subjectName">
+              ${subject}
+            </div>
+
+            ${
+              urgent
+              ? `<span class="orange">⚡ Urgent</span>`
+              : ""
+            }
+
           </div>
 
-          ${
-            urgent
-            ? `<span class="orange">⚡ Urgent</span>`
-            : ""
-          }
 
-        </div>
+          <div class="workButtons">
+
+            <button
+              class="workBtn done ${done ? "active" : ""}"
+              onclick="setStatus('${esc(subject)}','done')">
+
+              ✅ Work Done
+
+            </button>
 
 
-        <div class="workButtons">
+            <button
+              class="workBtn pending ${pending ? "active" : ""}"
+              onclick="setStatus('${esc(subject)}','pending')">
+
+              ❌ Pending
+
+            </button>
+
+          </div>
+
 
           <button
-            class="workBtn done ${done?"active":""}"
-            onclick="setStatus('${esc(subject)}','done')">
+            class="urgentBtn ${urgent ? "active" : ""}"
+            onclick="toggleUrgent('${esc(subject)}')">
 
-            ✅ Work Done
+            ${
+              urgent
+              ? "⚡ Remove from Urgent"
+              : "⚡ Mark as Urgent"
+            }
 
           </button>
 
-
-          <button
-            class="workBtn pending ${pending?"active":""}"
-            onclick="setStatus('${esc(subject)}','pending')">
-
-            ❌ Pending
-
-          </button>
-
         </div>
 
+      `;
 
-        <button
-          class="urgentBtn ${urgent?"active":""}"
-          onclick="toggleUrgent('${esc(subject)}')">
-
-          ${
-            urgent
-            ? "⚡ Remove from Urgent"
-            : "⚡ Mark as Urgent"
-          }
-
-        </button>
-
-      </div>
-
-    `;
-
-  }).join("");
+    }).join("");
 
 }
 
@@ -981,39 +1386,48 @@ function renderUrgent(){
   const box =
     document.getElementById("urgentList");
 
+
   const urgent =
     SUBJECTS.filter(
-      s=>state.urgent[s]
+      subject =>
+        state.urgent[subject]
     );
 
 
   if(!urgent.length){
 
     box.innerHTML = `
+
       <div class="empty">
         🎉 Abhi koi urgent work nahi hai.
       </div>
+
     `;
 
     return;
+
   }
 
 
   box.innerHTML =
-    urgent.map(subject=>`
+    urgent.map(subject => `
 
       <div class="urgentItem">
 
         <div class="row">
 
-          <b>⚡ ${subject}</b>
+          <b>
+            ⚡ ${subject}
+          </b>
 
           <span>
+
             ${
-              state.status[subject]==="done"
+              state.status[subject] === "done"
               ? "✅ Done"
               : "❌ Pending"
             }
+
           </span>
 
         </div>
@@ -1031,228 +1445,4 @@ function renderUrgent(){
 
 function renderDashboard(){
 
-  const done =
-    getCompleted();
-
-  const pending =
-    getPending();
-
-  const urgent =
-    getUrgent();
-
-  const percent =
-    getPercent();
-
-
-  document.getElementById("dashDone")
-    .textContent = done;
-
-  document.getElementById("dashPending")
-    .textContent = pending;
-
-  document.getElementById("dashUrgent")
-    .textContent = urgent;
-
-  document.getElementById("dashPercent")
-    .textContent = percent+"%";
-
-  document.getElementById("dashBar")
-    .style.width = percent+"%";
-
-
-  document.getElementById("dashRemaining")
-    .textContent =
-      pending===0
-      ? "🎉 Saara kaam complete!"
-      : "Abhi "+pending+
-        " subjects ka kaam baki hai. "+
-        "Inmein se "+urgent+
-        " urgent hain.";
-
-
-  const box =
-    document.getElementById("dashUrgentList");
-
-
-  const urgentSubjects =
-    SUBJECTS.filter(
-      s=>state.urgent[s]
-    );
-
-
-  if(!urgentSubjects.length){
-
-    box.innerHTML =
-      `<div class="empty">
-        Koi urgent work nahi hai.
-      </div>`;
-
-    return;
-  }
-
-
-  box.innerHTML =
-    urgentSubjects.map(s=>`
-
-      <div class="urgentItem">
-        <b>⚡ ${s}</b>
-        <br>
-        <span class="sub">
-          ${
-            state.status[s]==="done"
-            ? "Completed"
-            : "Pending — Do this first"
-          }
-        </span>
-      </div>
-
-    `).join("");
-
-}
-
-
-/* ==========================================
-   SETTINGS
-========================================== */
-
-function renderSettings(){
-
-  document.getElementById("settingsName")
-    .value = state.name;
-
-  document.getElementById("settingsClass")
-    .value = state.className;
-
-
-  document.getElementById("subjectNames")
-    .innerHTML =
-      SUBJECTS.map((s,i)=>`
-
-        <div style="
-          padding:10px 0;
-          border-bottom:1px solid var(--line)">
-
-          ${i+1}. ${s}
-
-        </div>
-
-      `).join("");
-
-}
-
-
-/* ==========================================
-   NAVIGATION
-========================================== */
-
-function go(id,button){
-
-  document
-    .querySelectorAll(".screen")
-    .forEach(s=>s.classList.remove("active"));
-
-  document
-    .getElementById(id)
-    .classList.add("active");
-
-
-  document
-    .querySelectorAll(".bottom button")
-    .forEach(b=>b.classList.remove("active"));
-
-  button.classList.add("active");
-
-
-  if(id==="home")
-    renderHome();
-
-  if(id==="dashboard")
-    renderDashboard();
-
-  if(id==="settings")
-    renderSettings();
-
-
-  window.scrollTo(0,0);
-
-}
-
-
-/* ==========================================
-   DARK MODE
-========================================== */
-
-function toggleDark(){
-
-  state.dark =
-    !state.dark;
-
-  document.body.classList.toggle(
-    "dark",
-    state.dark
-  );
-
-  saveData();
-
-}
-
-
-/* ==========================================
-   RESET
-========================================== */
-
-function resetApp(){
-
-  if(!confirm(
-    "Kya tum sach mein saara progress delete karna chahte ho?"
-  )) return;
-
-
-  localStorage.removeItem(
-    STORAGE_KEY
-  );
-
-  location.reload();
-
-}
-
-
-/* ==========================================
-   ESCAPE
-========================================== */
-
-function esc(text){
-
-  return String(text)
-    .replaceAll("\\","\\\\")
-    .replaceAll("'","\\'");
-
-}
-
-
-/* ==========================================
-   RENDER EVERYTHING
-========================================== */
-
-function renderAll(){
-
-  document.body.classList.toggle(
-    "dark",
-    state.dark
-  );
-
-  renderHome();
-  renderDashboard();
-  renderSettings();
-
-}
-
-
-/* START */
-
-renderAll();
-
-</script>
-
-</body>
-</html>
+  con
