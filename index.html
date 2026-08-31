@@ -2,489 +2,452 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#087fb2">
+
 <title>Vatatmaj Study Tracker</title>
 
 <style>
+
 :root{
-  --bg:#f4f6f8;
-  --card:#ffffff;
-  --text:#101828;
-  --muted:#667085;
-  --blue:#087fb2;
-  --green:#16a673;
-  --red:#d83c3c;
-  --orange:#f79009;
-  --line:#d9dee7;
+--bg:#f4f6f8;
+--card:#ffffff;
+--text:#101828;
+--muted:#667085;
+--blue:#087fb2;
+--green:#16a673;
+--red:#d83c3c;
+--orange:#f79009;
+--line:#d9dee7;
 }
 
 *{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+box-sizing:border-box;
 }
 
-html{
-  margin:0;
-  padding:0;
-  min-height:100%;
-  scroll-behavior:smooth;
+html,body{
+margin:0;
+padding:0;
+min-height:100%;
 }
 
 body{
-  margin:0;
-  padding:0;
-  min-height:100vh;
-  min-height:100dvh;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-  overflow-x:hidden;
+background:var(--bg);
+color:var(--text);
+font-family:Arial,Helvetica,sans-serif;
 }
 
 button,input,select{
-  font:inherit;
+font:inherit;
 }
 
 button{
-  cursor:pointer;
+cursor:pointer;
 }
 
 .app{
-  width:100%;
-  max-width:760px;
-  min-height:100vh;
-  min-height:100dvh;
-  margin:0 auto;
-  padding-bottom:88px;
+width:100%;
+max-width:760px;
+margin:auto;
+min-height:100vh;
+padding-bottom:85px;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 
 header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  width:100%;
-  min-height:72px;
-  background:var(--card);
-  border-bottom:1px solid var(--line);
-  padding:10px 13px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
+position:sticky;
+top:0;
+z-index:50;
+width:100%;
+background:var(--card);
+border-bottom:1px solid var(--line);
+padding:10px 13px;
+display:flex;
+align-items:center;
+gap:10px;
 }
 
-.brand{
-  min-width:0;
-  display:flex;
-  align-items:center;
-  gap:10px;
+.logoBox{
+display:flex;
+align-items:center;
+gap:9px;
+flex:1;
+min-width:0;
 }
 
 .logo{
-  width:46px;
-  height:46px;
-  flex:0 0 46px;
-  object-fit:contain;
-  display:block;
-  border-radius:50%;
+width:46px;
+height:46px;
+object-fit:contain;
+border-radius:50%;
+flex:none;
 }
 
-.brandText{
-  font-size:18px;
-  font-weight:800;
-  line-height:1.15;
-  color:var(--text);
+.logoText{
+font-size:16px;
+font-weight:800;
+line-height:1.15;
 }
 
 .darkButton{
-  width:44px;
-  height:44px;
-  flex:0 0 44px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:var(--card);
-  color:var(--text);
+width:42px;
+height:42px;
+border:1px solid var(--line);
+border-radius:12px;
+background:var(--card);
 }
 
-/* ================= MAIN ================= */
+/* MAIN */
 
 main{
-  width:100%;
-  padding:16px 13px 20px;
+padding:16px 13px;
 }
 
+.screen{
+display:none;
+}
+
+.screen.active{
+display:block;
+}
+
+/* CARDS */
+
 .card{
-  width:100%;
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:17px;
-  margin:0 0 15px;
-  box-shadow:0 2px 8px rgba(0,0,0,.04);
+background:var(--card);
+border:1px solid var(--line);
+border-radius:20px;
+padding:17px;
+margin-bottom:15px;
+box-shadow:0 2px 8px rgba(0,0,0,.04);
 }
 
 h1{
-  font-size:29px;
-  line-height:1.2;
-  margin:5px 0 8px;
+font-size:28px;
+margin:4px 0 8px;
 }
 
 h2{
-  font-size:22px;
-  line-height:1.2;
-  margin:6px 0 14px;
+font-size:22px;
+margin:5px 0 14px;
 }
 
 h3{
-  margin:0 0 5px;
-}
-
-p{
-  margin:10px 0;
+margin:0 0 5px;
 }
 
 .sub{
-  color:var(--muted);
-  line-height:1.45;
+color:var(--muted);
+line-height:1.45;
 }
 
 .row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
 }
 
+/* FORM */
+
 .form{
-  margin:12px 0;
+margin:12px 0;
 }
 
 .form label{
-  display:block;
-  margin-bottom:6px;
-  font-weight:700;
+display:block;
+font-weight:700;
+margin-bottom:6px;
 }
 
 .form input,
 .form select{
-  width:100%;
-  padding:13px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:var(--card);
-  color:var(--text);
-  outline:none;
+width:100%;
+padding:13px;
+border:1px solid var(--line);
+border-radius:12px;
+background:var(--card);
+color:var(--text);
+outline:none;
 }
 
 .form input:focus,
 .form select:focus{
-  border-color:var(--blue);
+border-color:var(--blue);
 }
 
+/* BUTTONS */
+
 .primary{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:13px;
-  background:var(--blue);
-  color:#fff;
-  font-weight:700;
+width:100%;
+padding:13px;
+border:0;
+border-radius:13px;
+background:var(--blue);
+color:#fff;
+font-weight:700;
 }
 
 .danger{
-  width:100%;
-  padding:12px 16px;
-  border:0;
-  border-radius:12px;
-  background:var(--red);
-  color:#fff;
-  font-weight:700;
+padding:12px 16px;
+border:0;
+border-radius:12px;
+background:var(--red);
+color:white;
+font-weight:700;
 }
 
-/* ================= SUMMARY ================= */
+/* SUMMARY */
 
 .summaryGrid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
 }
 
 .summary{
-  min-width:0;
-  padding:15px;
-  border-radius:16px;
-  background:#f7f9fb;
-  border:1px solid var(--line);
+padding:15px;
+border-radius:16px;
+background:#f7f9fb;
+border:1px solid var(--line);
+}
+
+.summary span{
+font-size:14px;
 }
 
 .summary strong{
-  display:block;
-  font-size:25px;
-  margin-top:5px;
-}
-
-.blue{
-  color:var(--blue);
+display:block;
+font-size:25px;
+margin-top:5px;
 }
 
 .green{
-  color:var(--green);
+color:var(--green);
 }
 
 .red{
-  color:var(--red);
+color:var(--red);
 }
 
 .orange{
-  color:var(--orange);
+color:var(--orange);
 }
 
-/* ================= PROGRESS ================= */
+.blue{
+color:var(--blue);
+}
+
+/* PROGRESS */
 
 .progress{
-  width:100%;
-  height:13px;
-  background:#e1e6ec;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:10px;
+height:13px;
+background:#e1e6ec;
+border-radius:20px;
+overflow:hidden;
+margin-top:10px;
 }
 
 .bar{
-  width:0%;
-  height:100%;
-  background:var(--blue);
-  border-radius:20px;
-  transition:width .2s ease;
+height:100%;
+width:0%;
+background:var(--blue);
+border-radius:20px;
+transition:width .25s ease;
 }
 
-/* ================= WORK ================= */
+/* WORK */
 
 .work{
-  width:100%;
-  border:1px solid var(--line);
-  border-radius:17px;
-  padding:13px;
-  margin-top:10px;
-  background:#fafbfc;
+border:1px solid var(--line);
+border-radius:17px;
+padding:13px;
+margin-top:10px;
+background:#fafbfc;
 }
 
 .workTop{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
 }
 
 .subjectName{
-  font-weight:800;
-  font-size:16px;
+font-weight:800;
+font-size:16px;
 }
 
 .workButtons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
-  margin-top:12px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:12px;
 }
 
 .workBtn{
-  width:100%;
-  padding:10px 5px;
-  border-radius:11px;
-  border:1px solid var(--line);
-  background:#fff;
-  color:var(--text);
-  font-weight:700;
+padding:11px 5px;
+border-radius:11px;
+border:1px solid var(--line);
+background:#fff;
+font-weight:700;
 }
 
 .workBtn.done.active{
-  background:#eaf9f3;
-  border-color:var(--green);
-  color:var(--green);
+background:#eaf9f3;
+border-color:var(--green);
+color:var(--green);
 }
 
 .workBtn.pending.active{
-  background:#fff0f0;
-  border-color:var(--red);
-  color:var(--red);
+background:#fff0f0;
+border-color:var(--red);
+color:var(--red);
 }
 
 .urgentBtn{
-  width:100%;
-  margin-top:8px;
-  padding:10px;
-  border-radius:11px;
-  border:1px solid var(--line);
-  background:#fff;
-  color:var(--text);
-  font-weight:700;
+margin-top:8px;
+width:100%;
+padding:10px;
+border-radius:11px;
+border:1px solid var(--line);
+background:#fff;
+font-weight:700;
 }
 
 .urgentBtn.active{
-  background:#fff5e6;
-  border-color:var(--orange);
-  color:var(--orange);
+background:#fff5e6;
+border-color:var(--orange);
+color:var(--orange);
 }
 
-/* ================= URGENT ================= */
+/* URGENT */
 
 .urgentItem{
-  padding:13px;
-  border-left:5px solid var(--orange);
-  background:#fff8ed;
-  border-radius:12px;
-  margin-top:9px;
+padding:13px;
+border-left:5px solid var(--orange);
+background:#fff8ed;
+border-radius:12px;
+margin-top:9px;
 }
 
 .empty{
-  padding:15px;
-  border-radius:14px;
-  background:#f7f9fb;
-  color:var(--muted);
+padding:15px;
+border-radius:14px;
+background:#f7f9fb;
+color:var(--muted);
 }
 
-/* ================= SCREENS ================= */
+/* SUBJECT LIST */
 
-.screen{
-  display:none;
-  width:100%;
+.subjectList{
+margin-top:8px;
 }
 
-.screen.active{
-  display:block;
+.subjectLine{
+padding:10px 0;
+border-bottom:1px solid var(--line);
 }
 
-/* ================= BOTTOM NAV ================= */
+.subjectLine:last-child{
+border-bottom:0;
+}
+
+/* NAV */
 
 .bottom{
-  position:fixed;
-  left:50%;
-  bottom:0;
-  transform:translateX(-50%);
-  width:min(760px,100%);
-  min-height:70px;
-  display:flex;
-  background:var(--card);
-  border-top:1px solid var(--line);
-  z-index:200;
-  padding-bottom:env(safe-area-inset-bottom);
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:min(760px,100%);
+display:flex;
+background:var(--card);
+border-top:1px solid var(--line);
+z-index:100;
 }
 
 .bottom button{
-  flex:1;
-  min-width:0;
-  border:0;
-  background:transparent;
-  padding:9px 3px 7px;
-  color:var(--muted);
+flex:1;
+border:0;
+background:transparent;
+padding:9px 3px;
+color:var(--muted);
 }
 
 .bottom button.active{
-  color:var(--blue);
+color:var(--blue);
 }
 
 .ico{
-  display:block;
-  font-size:23px;
-  line-height:1.2;
+display:block;
+font-size:21px;
+margin-bottom:2px;
 }
 
 .bottom small{
-  display:block;
-  font-size:12px;
-  margin-top:2px;
+font-size:11px;
 }
 
-/* ================= DARK MODE ================= */
+/* DARK */
 
 body.dark{
-  --bg:#10151c;
-  --card:#18212b;
-  --text:#f3f5f7;
-  --muted:#aab4c1;
-  --line:#344150;
+--bg:#10151c;
+--card:#18212b;
+--text:#f3f5f7;
+--muted:#aab4c1;
+--line:#344150;
 }
 
 body.dark .summary,
 body.dark .work,
 body.dark .empty{
-  background:#202a36;
+background:#202a36;
 }
 
 body.dark .workBtn,
-body.dark .urgentBtn{
-  background:#18212b;
-  color:var(--text);
+body.dark .urgentBtn,
+body.dark .darkButton{
+background:#18212b;
+color:var(--text);
 }
 
 body.dark .urgentItem{
-  background:#302819;
+background:#302819;
 }
 
 body.dark .progress{
-  background:#303b48;
+background:#35404c;
 }
 
-/* ================= MOBILE ================= */
+/* MOBILE */
 
 @media(max-width:480px){
 
-  .app{
-    padding-bottom:86px;
-  }
-
-  header{
-    min-height:68px;
-    padding:9px 12px;
-  }
-
-  .logo{
-    width:42px;
-    height:42px;
-    flex-basis:42px;
-  }
-
-  .brandText{
-    font-size:17px;
-  }
-
-  main{
-    padding:14px 12px 20px;
-  }
-
-  h1{
-    font-size:27px;
-  }
-
-  h2{
-    font-size:21px;
-  }
-
-  .card{
-    padding:16px;
-  }
-
-  .summary{
-    padding:13px;
-  }
-
-  .summary strong{
-    font-size:23px;
-  }
+main{
+padding:14px 10px;
 }
 
-/* Prevent accidental giant blank layout */
-img{
-  max-width:100%;
+.card{
+padding:15px;
+border-radius:18px;
 }
 
-section{
-  contain:layout style;
+h1{
+font-size:26px;
 }
+
+.summaryGrid{
+grid-template-columns:1fr 1fr;
+}
+
+.workButtons{
+grid-template-columns:1fr 1fr;
+}
+
+}
+
 </style>
 </head>
 
@@ -492,200 +455,243 @@ section{
 
 <div class="app">
 
-<!-- ================= HEADER ================= -->
+<!-- HEADER -->
 
 <header>
 
-  <div class="brand">
+<div class="logoBox">
 
-    <img
-      class="logo"
-      src="file_000000007f3882118f1efba550b4da00.png"
-      alt="Vatatmaj Logo">
+<img
+class="logo"
+src="file_000000007f3882118f1efba550b4da00.png"
+alt="Vatatmaj Logo"
+>
 
-    <div class="brandText">
-      Vatatmaj Study<br>Tracker
-    </div>
+<div class="logoText">
+Vatatmaj<br>
+Study Tracker
+</div>
 
-  </div>
+</div>
 
-  <button
-    class="darkButton"
-    onclick="toggleDark()"
-    aria-label="Toggle dark mode">
-    🌙
-  </button>
+<button
+class="darkButton"
+onclick="toggleDark()"
+title="Dark Mode"
+>
+🌙
+</button>
 
 </header>
 
 
-<!-- ================= MAIN ================= -->
-
 <main>
-
 
 <!-- ================= HOME ================= -->
 
-<section id="home" class="screen active">
+<section
+id="home"
+class="screen active"
+>
 
-  <!-- PROFILE -->
+<div class="card">
 
-  <div class="card">
+<h1 id="hello">
+Hi, Student! 👋
+</h1>
 
-    <h1 id="hello">
-      Hi, Student! 👋
-    </h1>
-
-    <p class="sub">
-      Track your school work, pending work and urgent work in one place.
-    </p>
-
-    <div class="form">
-
-      <label for="name">
-        Your Name
-      </label>
-
-      <input
-        id="name"
-        type="text"
-        placeholder="Enter your name"
-        autocomplete="name">
-
-    </div>
-
-    <div class="form">
-
-      <label for="className">
-        Class
-      </label>
-
-      <select id="className">
-
-        <option value="">
-          Select Class
-        </option>
-
-        <option value="9">
-          Class 9
-        </option>
-
-        <option value="10">
-          Class 10
-        </option>
-
-      </select>
-
-    </div>
-
-    <button
-      class="primary"
-      onclick="saveProfile()">
-      Save Profile
-    </button>
-
-  </div>
+<p class="sub">
+Track your school work, pending work and urgent work in one place.
+</p>
 
 
-  <!-- OVERALL -->
+<div class="form">
 
-  <div class="card">
+<label>Your Name</label>
 
-    <h2>
-      📊 Overall Progress
-    </h2>
+<input
+id="name"
+type="text"
+placeholder="Enter your name"
+>
 
-    <div class="summaryGrid">
-
-      <div class="summary">
-        <span>Total Subjects</span>
-        <strong id="totalSubjects">14</strong>
-      </div>
-
-      <div class="summary">
-        <span>Completed</span>
-        <strong
-          class="green"
-          id="completedCount">
-          0
-        </strong>
-      </div>
-
-      <div class="summary">
-        <span>Pending</span>
-        <strong
-          class="red"
-          id="pendingCount">
-          14
-        </strong>
-      </div>
-
-      <div class="summary">
-        <span>⚡ Urgent</span>
-        <strong
-          class="orange"
-          id="urgentCount">
-          0
-        </strong>
-      </div>
-
-    </div>
-
-    <p>
-      <b>
-        Overall Work Completed:
-        <span id="percent">0%</span>
-      </b>
-    </p>
-
-    <div class="progress">
-      <div
-        id="overallBar"
-        class="bar">
-      </div>
-    </div>
-
-    <p
-      class="sub"
-      id="remainingText">
-      14 subjects ka kaam baki hai.
-    </p>
-
-  </div>
+</div>
 
 
-  <!-- URGENT -->
+<div class="form">
 
-  <div class="card">
+<label>Class</label>
 
-    <h2>
-      ⚡ Urgent Work
-    </h2>
+<select id="className">
 
-    <div id="urgentList"></div>
+<option value="">
+Select Class
+</option>
 
-  </div>
+<option value="9">
+Class 9
+</option>
+
+<option value="10">
+Class 10
+</option>
+
+</select>
+
+</div>
 
 
-  <!-- ALL WORK -->
+<button
+class="primary"
+onclick="saveProfile()"
+>
+Save Profile
+</button>
 
-  <div class="card">
+</div>
 
-    <div class="row">
 
-      <h2>
-        📋 Work Status
-      </h2>
+<!-- OVERALL -->
 
-      <span class="sub">
-        14 Subjects
-      </span>
+<div class="card">
 
-    </div>
+<h2>
+📊 Overall Progress
+</h2>
 
-    <div id="workList"></div>
+<div class="summaryGrid">
 
-  </div>
+<div class="summary">
+
+<span>
+Total Subjects
+</span>
+
+<strong
+id="totalSubjects"
+>
+14
+</strong>
+
+</div>
+
+
+<div class="summary">
+
+<span>
+Completed
+</span>
+
+<strong
+class="green"
+id="completedCount"
+>
+0
+</strong>
+
+</div>
+
+
+<div class="summary">
+
+<span>
+Pending
+</span>
+
+<strong
+class="red"
+id="pendingCount"
+>
+14
+</strong>
+
+</div>
+
+
+<div class="summary">
+
+<span>
+⚡ Urgent
+</span>
+
+<strong
+class="orange"
+id="urgentCount"
+>
+0
+</strong>
+
+</div>
+
+</div>
+
+
+<p>
+
+<b>
+Overall Work Completed:
+<span id="percent">
+0%
+</span>
+</b>
+
+</p>
+
+
+<div class="progress">
+
+<div
+id="overallBar"
+class="bar"
+></div>
+
+</div>
+
+
+<p
+class="sub"
+id="remainingText"
+>
+14 subjects ka kaam abhi baki hai.
+</p>
+
+</div>
+
+
+<!-- URGENT -->
+
+<div class="card">
+
+<h2>
+⚡ Urgent Work
+</h2>
+
+<div id="urgentList"></div>
+
+</div>
+
+
+<!-- WORK -->
+
+<div class="card">
+
+<div class="row">
+
+<h2>
+📋 Work Status
+</h2>
+
+<span
+class="sub"
+>
+14 Subjects
+</span>
+
+</div>
+
+<div id="workList"></div>
+
+</div>
 
 </section>
 
@@ -693,89 +699,129 @@ section{
 <!-- ================= DASHBOARD ================= -->
 
 <section
-  id="dashboard"
-  class="screen">
+id="dashboard"
+class="screen"
+>
 
-  <h1>
-    📈 Dashboard
-  </h1>
+<h1>
+📈 Dashboard
+</h1>
 
-  <div class="card">
-
-    <h2>
-      Overall Status
-    </h2>
-
-    <div class="summaryGrid">
-
-      <div class="summary">
-        <span>Done</span>
-        <strong
-          class="green"
-          id="dashDone">
-          0
-        </strong>
-      </div>
-
-      <div class="summary">
-        <span>Pending</span>
-        <strong
-          class="red"
-          id="dashPending">
-          14
-        </strong>
-      </div>
-
-      <div class="summary">
-        <span>Urgent</span>
-        <strong
-          class="orange"
-          id="dashUrgent">
-          0
-        </strong>
-      </div>
-
-      <div class="summary">
-        <span>Completion</span>
-        <strong
-          class="blue"
-          id="dashPercent">
-          0%
-        </strong>
-      </div>
-
-    </div>
-
-    <div class="progress">
-      <div
-        id="dashBar"
-        class="bar">
-      </div>
-    </div>
-
-  </div>
+<p class="sub">
+Your complete study work overview.
+</p>
 
 
-  <div class="card">
+<div class="card">
 
-    <h2>
-      ⏳ Work Remaining
-    </h2>
-
-    <p id="dashRemaining"></p>
-
-  </div>
+<h2>
+Overall Status
+</h2>
 
 
-  <div class="card">
+<div class="summaryGrid">
 
-    <h2>
-      ⚡ Urgent Subjects
-    </h2>
+<div class="summary">
 
-    <div id="dashUrgentList"></div>
+<span>
+Done
+</span>
 
-  </div>
+<strong
+class="green"
+id="dashDone"
+>
+0
+</strong>
+
+</div>
+
+
+<div class="summary">
+
+<span>
+Pending
+</span>
+
+<strong
+class="red"
+id="dashPending"
+>
+14
+</strong>
+
+</div>
+
+
+<div class="summary">
+
+<span>
+Urgent
+</span>
+
+<strong
+class="orange"
+id="dashUrgent"
+>
+0
+</strong>
+
+</div>
+
+
+<div class="summary">
+
+<span>
+Completion
+</span>
+
+<strong
+class="blue"
+id="dashPercent"
+>
+0%
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="progress">
+
+<div
+id="dashBar"
+class="bar"
+></div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+⏳ Work Remaining
+</h2>
+
+<p
+id="dashRemaining"
+class="sub"
+></p>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+⚡ Urgent Subjects
+</h2>
+
+<div id="dashUrgentList"></div>
+
+</div>
 
 </section>
 
@@ -783,158 +829,173 @@ section{
 <!-- ================= SETTINGS ================= -->
 
 <section
-  id="settings"
-  class="screen">
+id="settings"
+class="screen"
+>
 
-  <h1>
-    ⚙️ Settings
-  </h1>
-
-
-  <!-- PROFILE SETTINGS -->
-
-  <div class="card">
-
-    <h2>
-      👤 Profile
-    </h2>
-
-    <div class="form">
-
-      <label for="settingsName">
-        Name
-      </label>
-
-      <input
-        id="settingsName"
-        type="text">
-
-    </div>
+<h1>
+⚙️ Settings
+</h1>
 
 
-    <div class="form">
+<div class="card">
 
-      <label for="settingsClass">
-        Class
-      </label>
-
-      <select id="settingsClass">
-
-        <option value="">
-          Select Class
-        </option>
-
-        <option value="9">
-          Class 9
-        </option>
-
-        <option value="10">
-          Class 10
-        </option>
-
-      </select>
-
-    </div>
+<h2>
+👤 Profile
+</h2>
 
 
-    <button
-      class="primary"
-      onclick="saveSettings()">
-      Save Changes
-    </button>
+<div class="form">
 
-  </div>
+<label>
+Name
+</label>
 
+<input
+id="settingsName"
+type="text"
+>
 
-  <!-- SUBJECTS -->
-
-  <div class="card">
-
-    <h2>
-      📚 Subjects
-    </h2>
-
-    <p class="sub">
-      Tracker mein sirf ye 14 subjects hain.
-    </p>
-
-    <div id="subjectNames"></div>
-
-  </div>
+</div>
 
 
-  <!-- APPEARANCE -->
+<div class="form">
 
-  <div class="card">
+<label>
+Class
+</label>
 
-    <h2>
-      🎨 Appearance
-    </h2>
+<select id="settingsClass">
 
-    <button
-      class="primary"
-      onclick="toggleDark()">
-      🌙 Toggle Dark Mode
-    </button>
+<option value="9">
+Class 9
+</option>
 
-  </div>
+<option value="10">
+Class 10
+</option>
+
+</select>
+
+</div>
 
 
-  <!-- RESET -->
+<button
+class="primary"
+onclick="saveSettings()"
+>
+Save Changes
+</button>
 
-  <div class="card">
+</div>
 
-    <h2 class="red">
-      ⚠️ Reset
-    </h2>
 
-    <p class="sub">
-      Saara saved progress delete ho jayega.
-    </p>
+<div class="card">
 
-    <button
-      class="danger"
-      onclick="resetApp()">
-      Reset All Data
-    </button>
+<h2>
+📚 Subjects
+</h2>
 
-  </div>
+<p class="sub">
+Tracker mein sirf ye 14 subjects hain.
+</p>
+
+<div
+id="subjectNames"
+class="subjectList"
+></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+🎨 Appearance
+</h2>
+
+<button
+class="primary"
+onclick="toggleDark()"
+>
+🌙 Toggle Dark Mode
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="red">
+⚠️ Reset Data
+</h2>
+
+<p class="sub">
+Saara saved progress delete ho jayega.
+</p>
+
+<button
+class="danger"
+onclick="resetApp()"
+>
+Reset All Data
+</button>
+
+</div>
 
 </section>
 
 </main>
 
 
-<!-- ================= BOTTOM NAV ================= -->
+<!-- ================= NAVIGATION ================= -->
 
 <nav class="bottom">
 
-  <button
-    class="active"
-    onclick="go('home',this)">
+<button
+class="active"
+onclick="go('home',this)"
+>
 
-    <span class="ico">🏠</span>
-    <small>Home</small>
+<span class="ico">
+🏠
+</span>
 
-  </button>
+<small>
+Home
+</small>
 
-
-  <button
-    onclick="go('dashboard',this)">
-
-    <span class="ico">📊</span>
-    <small>Dashboard</small>
-
-  </button>
+</button>
 
 
-  <button
-    onclick="go('settings',this)">
+<button
+onclick="go('dashboard',this)"
+>
 
-    <span class="ico">⚙️</span>
-    <small>Settings</small>
+<span class="ico">
+📊
+</span>
 
-  </button>
+<small>
+Dashboard
+</small>
+
+</button>
+
+
+<button
+onclick="go('settings',this)"
+>
+
+<span class="ico">
+⚙️
+</span>
+
+<small>
+Settings
+</small>
+
+</button>
 
 </nav>
 
@@ -943,477 +1004,920 @@ section{
 
 <script>
 
-/* =====================================================
-   14 SUBJECTS
-===================================================== */
+/* =========================================
+   SUBJECTS
+========================================= */
 
 const SUBJECTS = [
 
-  "Hindi I",
-  "Hindi II",
-  "English I",
-  "English II",
-  "IT",
-  "Biology",
-  "Physics",
-  "Chemistry",
-  "History",
-  "Geography",
-  "Economics",
-  "Political Science",
-  "Mathematics",
-  "Sanskrit"
+"Hindi I",
+"Hindi II",
+
+"English I",
+"English II",
+
+"IT",
+
+"Biology",
+"Physics",
+"Chemistry",
+
+"History",
+"Geography",
+"Economics",
+"Political Science",
+
+"Mathematics",
+
+"Sanskrit"
 
 ];
 
-const STORAGE_KEY = "study_tracker_v4";
+
+const STORAGE_KEY =
+"vatatmaj_study_tracker_v4";
 
 
-/* =====================================================
+/* =========================================
    DEFAULT STATE
-===================================================== */
+========================================= */
 
 function defaultState(){
 
-  const status = {};
-  const urgent = {};
+const status = {};
+const urgent = {};
 
-  SUBJECTS.forEach(subject => {
+SUBJECTS.forEach(function(subject){
 
-    status[subject] = "pending";
-    urgent[subject] = false;
+status[subject] = "pending";
+urgent[subject] = false;
 
-  });
+});
 
-  return {
 
-    name:"",
-    className:"",
-    status:status,
-    urgent:urgent,
-    dark:false
+return {
 
-  };
+name:"",
+className:"",
+
+status:status,
+urgent:urgent,
+
+dark:false
+
+};
 
 }
 
 
-/* =====================================================
+/* =========================================
    LOAD DATA
-===================================================== */
-
-let state = loadData();
-
+========================================= */
 
 function loadData(){
 
-  try{
+try{
 
-    const saved =
-      JSON.parse(
-        localStorage.getItem(STORAGE_KEY)
-      );
+const saved =
+JSON.parse(
+localStorage.getItem(STORAGE_KEY)
+);
 
-    if(saved){
+if(saved){
 
-      const fresh =
-        defaultState();
-
-      fresh.name =
-        typeof saved.name === "string"
-        ? saved.name
-        : "";
-
-      fresh.className =
-        typeof saved.className === "string"
-        ? saved.className
-        : "";
-
-      fresh.dark =
-        saved.dark === true;
+const fresh =
+defaultState();
 
 
-      SUBJECTS.forEach(subject => {
-
-        if(
-          saved.status &&
-          saved.status[subject] === "done"
-        ){
-
-          fresh.status[subject] = "done";
-
-        }else{
-
-          fresh.status[subject] = "pending";
-
-        }
+fresh.name =
+saved.name || "";
 
 
-        fresh.urgent[subject] =
-          !!(
-            saved.urgent &&
-            saved.urgent[subject]
-          );
-
-      });
+fresh.className =
+saved.className || "";
 
 
-      return fresh;
-
-    }
-
-  }catch(error){
-
-    console.log("Could not load saved data.");
-
-  }
+fresh.dark =
+!!saved.dark;
 
 
-  return defaultState();
+SUBJECTS.forEach(function(subject){
+
+if(
+saved.status &&
+(
+saved.status[subject] === "done" ||
+saved.status[subject] === "pending"
+)
+){
+
+fresh.status[subject] =
+saved.status[subject];
 
 }
 
 
-/* =====================================================
-   SAVE DATA
-===================================================== */
+if(
+saved.urgent &&
+saved.urgent[subject] === true
+){
+
+fresh.urgent[subject] = true;
+
+}
+
+});
+
+
+return fresh;
+
+}
+
+}catch(error){
+
+console.log("Data load error:",error);
+
+}
+
+
+return defaultState();
+
+}
+
+
+let state =
+loadData();
+
+
+/* =========================================
+   SAVE
+========================================= */
 
 function saveData(){
 
-  try{
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(state)
-    );
-
-  }catch(error){
-
-    console.log("Could not save data.");
-
-  }
+localStorage.setItem(
+STORAGE_KEY,
+JSON.stringify(state)
+);
 
 }
 
 
-/* =====================================================
+/* =========================================
    PROFILE
-===================================================== */
+========================================= */
 
 function saveProfile(){
 
-  state.name =
-    document
-      .getElementById("name")
-      .value
-      .trim();
+state.name =
+document
+.getElementById("name")
+.value
+.trim();
 
-  state.className =
-    document
-      .getElementById("className")
-      .value;
 
-  saveData();
+state.className =
+document
+.getElementById("className")
+.value;
 
-  renderAll();
 
-  alert("Profile saved successfully ✅");
+saveData();
+
+renderAll();
+
+alert(
+"Profile saved successfully ✅"
+);
 
 }
 
 
 function saveSettings(){
 
-  state.name =
-    document
-      .getElementById("settingsName")
-      .value
-      .trim();
+state.name =
+document
+.getElementById("settingsName")
+.value
+.trim();
 
-  state.className =
-    document
-      .getElementById("settingsClass")
-      .value;
 
-  saveData();
+state.className =
+document
+.getElementById("settingsClass")
+.value;
 
-  renderAll();
 
-  alert("Changes saved ✅");
+saveData();
+
+renderAll();
+
+alert(
+"Changes saved successfully ✅"
+);
 
 }
 
 
-/* =====================================================
+/* =========================================
    STATUS
-===================================================== */
+========================================= */
 
 function setStatus(subject,status){
 
-  if(!SUBJECTS.includes(subject)){
-    return;
-  }
+state.status[subject] =
+status;
 
-  state.status[subject] = status;
+saveData();
 
-  saveData();
-
-  renderAll();
+renderAll();
 
 }
 
 
 function toggleUrgent(subject){
 
-  if(!SUBJECTS.includes(subject)){
-    return;
-  }
+state.urgent[subject] =
+!state.urgent[subject];
 
-  state.urgent[subject] =
-    !state.urgent[subject];
+saveData();
 
-  saveData();
-
-  renderAll();
+renderAll();
 
 }
 
 
-/* =====================================================
+/* =========================================
    COUNTS
-===================================================== */
+========================================= */
 
 function getCompleted(){
 
-  return SUBJECTS.filter(
-    subject =>
-      state.status[subject] === "done"
-  ).length;
+return SUBJECTS.filter(
+function(subject){
+
+return state.status[subject] === "done";
+
+}
+).length;
 
 }
 
 
 function getPending(){
 
-  return SUBJECTS.filter(
-    subject =>
-      state.status[subject] === "pending"
-  ).length;
+return SUBJECTS.filter(
+function(subject){
+
+return state.status[subject] === "pending";
+
+}
+).length;
 
 }
 
 
 function getUrgent(){
 
-  return SUBJECTS.filter(
-    subject =>
-      state.urgent[subject]
-  ).length;
+return SUBJECTS.filter(
+function(subject){
+
+return state.urgent[subject] === true;
+
+}
+).length;
 
 }
 
 
 function getPercent(){
 
-  return Math.round(
-    getCompleted() /
-    SUBJECTS.length *
-    100
-  );
+return Math.round(
+getCompleted()
+/
+SUBJECTS.length
+*
+100
+);
 
 }
 
 
-/* =====================================================
+/* =========================================
    HOME
-===================================================== */
+========================================= */
 
 function renderHome(){
 
-  const nameInput =
-    document.getElementById("name");
-
-  const classInput =
-    document.getElementById("className");
-
-
-  if(nameInput){
-    nameInput.value =
-      state.name;
-  }
-
-  if(classInput){
-    classInput.value =
-      state.className;
-  }
+document
+.getElementById("name")
+.value =
+state.name;
 
 
-  const hello =
-    document.getElementById("hello");
-
-  if(hello){
-
-    hello.textContent =
-      state.name
-      ? "Hi, " + state.name + "! 👋"
-      : "Hi, Student! 👋";
-
-  }
+document
+.getElementById("className")
+.value =
+state.className;
 
 
-  const completed =
-    getCompleted();
+document
+.getElementById("hello")
+.textContent =
 
-  const pending =
-    getPending();
+state.name
 
-  const urgent =
-    getUrgent();
+? "Hi, "+state.name+"! 👋"
 
-  const percent =
-    getPercent();
+: "Hi, Student! 👋";
 
 
-  document.getElementById(
-    "totalSubjects"
-  ).textContent =
-    SUBJECTS.length;
+const completed =
+getCompleted();
 
 
-  document.getElementById(
-    "completedCount"
-  ).textContent =
-    completed;
+const pending =
+getPending();
 
 
-  document.getElementById(
-    "pendingCount"
-  ).textContent =
-    pending;
+const urgent =
+getUrgent();
 
 
-  document.getElementById(
-    "urgentCount"
-  ).textContent =
-    urgent;
+const percent =
+getPercent();
 
 
-  document.getElementById(
-    "percent"
-  ).textContent =
-    percent + "%";
+document
+.getElementById("totalSubjects")
+.textContent =
+SUBJECTS.length;
 
 
-  document.getElementById(
-    "overallBar"
-  ).style.width =
-    percent + "%";
+document
+.getElementById("completedCount")
+.textContent =
+completed;
 
 
-  document.getElementById(
-    "remainingText"
-  ).textContent =
-    pending === 0
-    ? "🎉 Saara kaam complete ho gaya!"
-    : pending +
-      " subject ka kaam abhi baki hai.";
+document
+.getElementById("pendingCount")
+.textContent =
+pending;
 
 
-  renderWorkList();
-  renderUrgent();
+document
+.getElementById("urgentCount")
+.textContent =
+urgent;
+
+
+document
+.getElementById("percent")
+.textContent =
+percent+"%";
+
+
+document
+.getElementById("overallBar")
+.style.width =
+percent+"%";
+
+
+document
+.getElementById("remainingText")
+.textContent =
+
+pending === 0
+
+? "🎉 Saara kaam complete ho gaya!"
+
+: pending+" subjects ka kaam abhi baki hai.";
+
+
+renderWorkList();
+
+renderUrgent();
 
 }
 
 
-/* =====================================================
+/* =========================================
    WORK LIST
-===================================================== */
+========================================= */
 
 function renderWorkList(){
 
-  const box =
-    document.getElementById("workList");
-
-  if(!box){
-    return;
-  }
+const box =
+document.getElementById("workList");
 
 
-  box.innerHTML =
-    SUBJECTS.map(subject => {
-
-      const done =
-        state.status[subject] === "done";
-
-      const pending =
-        state.status[subject] === "pending";
-
-      const urgent =
-        state.urgent[subject];
+box.innerHTML = "";
 
 
-      return `
+SUBJECTS.forEach(function(subject){
 
-        <div class="work">
-
-          <div class="workTop">
-
-            <div class="subjectName">
-              ${escapeHTML(subject)}
-            </div>
-
-            ${
-              urgent
-              ? `<span class="orange">⚡ Urgent</span>`
-              : ""
-            }
-
-          </div>
+const done =
+state.status[subject] === "done";
 
 
-          <div class="workButtons">
-
-            <button
-              class="workBtn done ${done ? "active" : ""}"
-              onclick="setStatus('${esc(subject)}','done')">
-
-              ✅ Work Done
-
-            </button>
+const pending =
+state.status[subject] === "pending";
 
 
-            <button
-              class="workBtn pending ${pending ? "active" : ""}"
-              onclick="setStatus('${esc(subject)}','pending')">
-
-              ❌ Pending
-
-            </button>
-
-          </div>
+const urgent =
+state.urgent[subject];
 
 
-          <button
-            class="urgentBtn ${urgent ? "active" : ""}"
-            onclick="toggleUrgent('${esc(subject)}')">
+const work =
+document.createElement("div");
 
-            ${
-              urgent
-              ? "⚡ Remove from Urgent"
-              : "⚡ Mark as Urgent"
-            }
 
-          </button>
+work.className =
+"work";
 
-        </div>
 
-      `;
+const top =
+document.createElement("div");
 
-    }).join("");
+
+top.className =
+"workTop";
+
+
+const name =
+document.createElement("div");
+
+
+name.className =
+"subjectName";
+
+
+name.textContent =
+subject;
+
+
+top.appendChild(name);
+
+
+if(urgent){
+
+const urgentText =
+document.createElement("span");
+
+
+urgentText.className =
+"orange";
+
+
+urgentText.textContent =
+"⚡ Urgent";
+
+
+top.appendChild(urgentText);
 
 }
 
 
-/* =====================================================
-   URGENT
-======
+work.appendChild(top);
+
+
+/* BUTTON AREA */
+
+const buttons =
+document.createElement("div");
+
+
+buttons.className =
+"workButtons";
+
+
+const doneButton =
+document.createElement("button");
+
+
+doneButton.className =
+"workBtn done"+(done?" active":"");
+
+
+doneButton.textContent =
+"✅ Work Done";
+
+
+doneButton.onclick =
+function(){
+
+setStatus(
+subject,
+"done"
+);
+
+};
+
+
+const pendingButton =
+document.createElement("button");
+
+
+pendingButton.className =
+"workBtn pending"+(pending?" active":"");
+
+
+pendingButton.textContent =
+"❌ Pending";
+
+
+pendingButton.onclick =
+function(){
+
+setStatus(
+subject,
+"pending"
+);
+
+};
+
+
+buttons.appendChild(doneButton);
+
+buttons.appendChild(pendingButton);
+
+work.appendChild(buttons);
+
+
+/* URGENT BUTTON */
+
+const urgentButton =
+document.createElement("button");
+
+
+urgentButton.className =
+"urgentBtn"+(urgent?" active":"");
+
+
+urgentButton.textContent =
+
+urgent
+
+? "⚡ Remove from Urgent"
+
+: "⚡ Mark as Urgent";
+
+
+urgentButton.onclick =
+function(){
+
+toggleUrgent(subject);
+
+};
+
+
+work.appendChild(urgentButton);
+
+
+box.appendChild(work);
+
+});
+
+}
+
+
+/* =========================================
+   URGENT SECTION
+========================================= */
+
+function renderUrgent(){
+
+const box =
+document.getElementById("urgentList");
+
+
+const urgentSubjects =
+SUBJECTS.filter(function(subject){
+
+return state.urgent[subject];
+
+});
+
+
+if(!urgentSubjects.length){
+
+box.innerHTML =
+
+'<div class="empty">'+
+'🎉 Abhi koi urgent work nahi hai.'+
+'</div>';
+
+return;
+
+}
+
+
+box.innerHTML = "";
+
+
+urgentSubjects.forEach(function(subject){
+
+const item =
+document.createElement("div");
+
+
+item.className =
+"urgentItem";
+
+
+const row =
+document.createElement("div");
+
+
+row.className =
+"row";
+
+
+const title =
+document.createElement("b");
+
+
+title.textContent =
+"⚡ "+subject;
+
+
+const status =
+document.createElement("span");
+
+
+status.textContent =
+
+state.status[subject] === "done"
+
+? "✅ Done"
+
+: "❌ Pending";
+
+
+row.appendChild(title);
+
+row.appendChild(status);
+
+item.appendChild(row);
+
+box.appendChild(item);
+
+});
+
+}
+
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+function renderDashboard(){
+
+const done =
+getCompleted();
+
+
+const pending =
+getPending();
+
+
+const urgent =
+getUrgent();
+
+
+const percent =
+getPercent();
+
+
+document
+.getElementById("dashDone")
+.textContent =
+done;
+
+
+document
+.getElementById("dashPending")
+.textContent =
+pending;
+
+
+document
+.getElementById("dashUrgent")
+.textContent =
+urgent;
+
+
+document
+.getElementById("dashPercent")
+.textContent =
+percent+"%";
+
+
+document
+.getElementById("dashBar")
+.style.width =
+percent+"%";
+
+
+document
+.getElementById("dashRemaining")
+.textContent =
+
+pending === 0
+
+? "🎉 Saara kaam complete ho gaya!"
+
+: "Abhi "+pending+
+" subjects ka kaam baki hai. "+
+urgent+
+" urgent hain.";
+
+
+const box =
+document.getElementById("dashUrgentList");
+
+
+const urgentSubjects =
+SUBJECTS.filter(function(subject){
+
+return state.urgent[subject];
+
+});
+
+
+if(!urgentSubjects.length){
+
+box.innerHTML =
+'<div class="empty">'+
+'Koi urgent work nahi hai.'+
+'</div>';
+
+return;
+
+}
+
+
+box.innerHTML = "";
+
+
+urgentSubjects.forEach(function(subject){
+
+const item =
+document.createElement("div");
+
+
+item.className =
+"urgentItem";
+
+
+const title =
+document.createElement("b");
+
+
+title.textContent =
+"⚡ "+subject;
+
+
+const info =
+document.createElement("div");
+
+
+info.className =
+"sub";
+
+
+info.textContent =
+
+state.status[subject] === "done"
+
+? "Completed"
+
+: "Pending — Do this first";
+
+
+item.appendChild(title);
+
+item.appendChild(info);
+
+box.appendChild(item);
+
+});
+
+}
+
+
+/* =========================================
+   SETTINGS
+========================================= */
+
+function renderSettings(){
+
+document
+.getElementById("settingsName")
+.value =
+state.name;
+
+
+document
+.getElementById("settingsClass")
+.value =
+state.className || "9";
+
+
+const box =
+document.getElementById("subjectNames");
+
+
+box.innerHTML = "";
+
+
+SUBJECTS.forEach(function(subject,index){
+
+const line =
+document.createElement("div");
+
+
+line.className =
+"subjectLine";
+
+
+line.textContent =
+(index+1)+". "+subject;
+
+
+box.appendChild(line);
+
+});
+
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+function go(id,button){
+
+document
+.querySelectorAll(".screen")
+.forEach(function(screen){
+
+screen.classList.remove("active");
+
+});
+
+
+const selectedScreen =
+document.getElementById(id);
+
+
+if(selectedScreen){
+
+selectedScreen.classList.add("active");
+
+}
+
+
+document
+.querySelectorAll(".bottom button")
+.forEach(function(btn){
+
+btn.classList.remove("active");
+
+});
+
+
+button.classList.add("active");
+
+
+if(id === "home"){
+
+renderHome();
+
+}
+
+
+if(id === "dashboard"){
+
+renderDashboard();
+
+}
+
+
+if(id === "settings"){
+
+renderSettings();
+
+}
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================================
